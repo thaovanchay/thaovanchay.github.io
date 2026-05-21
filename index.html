@@ -1364,11 +1364,15 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
       z-index: 999;
-      display: flex;
+      display: none; /* Hidden on desktop */
       padding: 12px 24px;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
+    }
+
+    .btn-text-short {
+      display: none;
     }
 
     .mobile-call-info {
@@ -1519,6 +1523,51 @@
       .lightbox-next { right: 10px; top: auto; bottom: -60px; transform: none; }
       .lightbox-close { top: 10px; right: 10px; width: 40px; height: 40px; }
       .lightbox-content { max-width: 95%; }
+      .mobile-call-bar {
+        display: flex; /* Show floating call bar only on screens <= 768px */
+      }
+    }
+
+    @media (max-width: 580px) {
+      .btn-text-full {
+        display: none;
+      }
+      .btn-text-short {
+        display: inline;
+      }
+      .mobile-call-bar {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px 16px;
+      }
+      .mobile-call-info {
+        width: 100%;
+        justify-content: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 6px;
+        gap: 8px;
+      }
+      .mobile-call-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.95rem;
+      }
+      .mobile-call-number {
+        font-size: 0.95rem;
+      }
+      .mobile-call-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+      }
+      .mobile-action-btn {
+        justify-content: center;
+        padding: 8px 4px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        white-space: nowrap;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1535,23 +1584,8 @@
       .btn-primary, .btn-secondary {
         width: 100%;
       }
-      .about-images {
-        grid-template-columns: 1fr;
-      }
-      .about-img-main {
-        grid-column: span 1;
-      }
       .about-features {
         grid-template-columns: 1fr;
-      }
-      .mobile-call-bar {
-        padding: 8px 12px;
-      }
-      .mobile-call-info {
-        gap: 8px;
-      }
-      .mobile-call-number {
-        font-size: 0.95rem;
       }
     }
   </style>
@@ -1637,7 +1671,7 @@
         <div class="about-content">
           <div class="about-tag">Về chúng tôi</div>
           <h2 class="about-headline">Nơi Hội Tụ Tinh Hoa Ẩm Thực Chay Thuần Khiết</h2>
-          <p class="about-text">Tọa lạc tại trung tâm Buôn Ma Thuột, **Thảo Vân Chay** là điểm đến lý tưởng cho những ai yêu mến ẩm thực chay thanh lành. Món ăn của chúng tôi được chế biến hoàn toàn từ nguồn nguyên liệu rau củ, nấm, hạt tự nhiên, giữ trọn vẹn hương vị thanh đạm, không sử dụng phụ gia hóa chất có hại.</p>
+          <p class="about-text">Tọa lạc tại trung tâm Buôn Ma Thuột, <strong style="color: var(--accent);">Thảo Vân Chay</strong> là điểm đến lý tưởng cho những ai yêu mến ẩm thực chay thanh lành. Món ăn của chúng tôi được chế biến hoàn toàn từ nguồn nguyên liệu rau củ, nấm, hạt tự nhiên, giữ trọn vẹn hương vị thanh đạm, không sử dụng phụ gia hóa chất có hại.</p>
           <p class="about-text">Với không gian mở rộng rãi, hiện đại nhưng ấm cúng, Thảo Vân Chay không chỉ phục vụ bữa ăn gia đình hằng ngày mà còn là không gian yên bình để thư giãn, thanh lọc cơ thể.</p>
           
           <div class="about-features">
@@ -1840,10 +1874,22 @@
       </div>
     </div>
     <div class="mobile-call-actions">
-      <a href="tel:0917003898" class="mobile-action-btn btn-call">Gọi Quán</a>
-      <a href="https://zalo.me/0917003898" target="_blank" class="mobile-action-btn btn-zalo">Nhắn Zalo</a>
-      <a href="https://shopeefood.vn/dak-lak/quan-thao-van-chay-pham-ngu-lao?source_url=foody_ordernow_pc" target="_blank" class="mobile-action-btn btn-shopee">ShopeeFood</a>
-      <a href="https://food.grab.com/vn/vi/restaurant/th%E1%BA%A3o-v%C3%A2n-chay-delivery/5-C3DKBENAMAVEV2?" target="_blank" class="mobile-action-btn btn-grab">GrabFood</a>
+      <a href="tel:0917003898" class="mobile-action-btn btn-call">
+        <span class="btn-text-full">Gọi Quán</span>
+        <span class="btn-text-short">Gọi</span>
+      </a>
+      <a href="https://zalo.me/0917003898" target="_blank" class="mobile-action-btn btn-zalo">
+        <span class="btn-text-full">Nhắn Zalo</span>
+        <span class="btn-text-short">Zalo</span>
+      </a>
+      <a href="https://shopeefood.vn/dak-lak/quan-thao-van-chay-pham-ngu-lao?source_url=foody_ordernow_pc" target="_blank" class="mobile-action-btn btn-shopee">
+        <span class="btn-text-full">ShopeeFood</span>
+        <span class="btn-text-short">Shopee</span>
+      </a>
+      <a href="https://food.grab.com/vn/vi/restaurant/th%E1%BA%A3o-v%C3%A2n-chay-delivery/5-C3DKBENAMAVEV2?" target="_blank" class="mobile-action-btn btn-grab">
+        <span class="btn-text-full">GrabFood</span>
+        <span class="btn-text-short">Grab</span>
+      </a>
     </div>
   </div>
 
