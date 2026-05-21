@@ -1,0 +1,23 @@
+# Ignore everything by default to prevent uploading sensitive business or personal files
+*
+
+# Allow directories to be traversed so Git can search inside them
+!*/
+
+# Exclude specific sensitive folders from ever being traversed
+Baemin, foody/
+Dan tri/
+In ấn, photo/
+Menu/
+Nhân sự, hàng hóa/
+TVC face/
+scratch/
+.tempmediaStorage/
+
+# Whitelist the website code and git configuration
+!index.html
+!.gitignore
+
+# Whitelist the image assets folder and all its contents
+!Hình/
+!Hình/**

@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Thảo Vân Chay - Nhà Hàng Chay Thanh Tịnh Buôn Ma Thuột</title>
+  <meta name="description" content="Thảo Vân Chay phục vụ ẩm thực chay thuần khiết, thanh đạm và bổ dưỡng tại Buôn Ma Thuột. Menu đa dạng với các món ăn gia đình, lẩu chay đặc sắc và thức uống thơm ngon.">
+  <meta name="keywords" content="thảo vân chay, quán chay buôn ma thuột, buffet chay buôn ma thuột, ăn chay bmt, nhà hàng chay đắk lắk, lẩu chay buôn ma thuột">
+  <meta property="og:title" content="Thảo Vân Chay - Hương Vị Thuần Chay Từ Tâm">
+  <meta property="og:description" content="Ẩm thực chay thuần khiết, bổ dưỡng và thanh tịnh tại 250 Phạm Ngũ Lão, Buôn Ma Thuột.">
+  <meta property="og:image" content="Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Variables - Core Design System */
+    :root {
+      /* Palette */
+      --primary: #1e3f20;          /* Forest Green */
+      --primary-rgb: 30, 63, 32;
+      --primary-light: #4d7a5b;    /* Sage Green */
+      --primary-dark: #122613;
+      --accent: #c5a880;           /* Soft Gold */
+      --accent-hover: #b3946b;
+      --text: #2c352e;             /* Soft Black */
+      --text-muted: #5e6b61;
+      --bg: #fcfbfa;               /* Soft Ivory Off-White */
+      --card-bg: #ffffff;
+      --border: #e9e7e2;
+      --shadow: 0 8px 30px rgba(30, 63, 32, 0.05);
+      --shadow-lg: 0 16px 40px rgba(30, 63, 32, 0.08);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --radius-lg: 24px;
+      --font-title: 'Playfair Display', serif;
+      --font-body: 'Outfit', sans-serif;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode Override */
+    @media (prefers-color-scheme: dark) {
+      :root.auto-theme {
+        --text: #e1e7e2;
+        --text-muted: #9caaa0;
+        --bg: #0c0f0d;
+        --card-bg: #141a15;
+        --border: #212c23;
+        --shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    /* Manual Dark Mode class */
+    :root.dark-theme {
+      --text: #e1e7e2;
+      --text-muted: #9caaa0;
+      --bg: #0c0f0d;
+      --card-bg: #141a15;
+      --border: #212c23;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Base Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: var(--transition);
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--radius-sm);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      background: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* Scrollbar Customization */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-light);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Layout Utility Containers */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 12px;
+      position: relative;
+    }
+    :root.dark-theme .section-title,
+    :root.auto-theme .section-title {
+      color: var(--accent);
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background-color: var(--accent);
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      font-size: 1.1rem;
+    }
+
+    /* === HEADER & NAVIGATION === */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: rgba(var(--primary-rgb), 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      padding: 8px 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #ffffff;
+    }
+
+    .logo-text span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      padding: 6px 0;
+      opacity: 0.9;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--accent);
+      opacity: 1;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--accent);
+      color: var(--primary-dark);
+      transform: scale(1.05);
+    }
+
+    .theme-toggle svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .btn-book-nav {
+      background-color: var(--accent);
+      color: var(--primary-dark);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(197, 168, 128, 0.25);
+    }
+
+    .btn-book-nav:hover {
+      background-color: #ffffff;
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background-color: rgba(255, 255, 255, 0.1);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .mobile-menu-btn span {
+      width: 22px;
+      height: 2px;
+      background-color: #ffffff;
+      transition: var(--transition);
+    }
+
+    /* Mobile Nav Drawer overlay */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100%;
+      background-color: var(--primary-dark);
+      z-index: 1001;
+      padding: 80px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+      transition: 0.4s ease-in-out;
+    }
+
+    .mobile-nav.open {
+      right: 0;
+    }
+
+    .mobile-nav-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .mobile-nav-link {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .mobile-nav-link:hover {
+      color: var(--accent);
+    }
+
+    .mobile-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: none;
+    }
+
+    /* === HERO SECTION === */
+    .hero {
+      position: relative;
+      height: 90vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-align: center;
+      background: linear-gradient(rgba(18, 38, 19, 0.8), rgba(18, 38, 19, 0.5)), url('Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg') no-repeat center center/cover;
+      padding-top: 70px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: 4rem;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      font-weight: 700;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      margin-bottom: 36px;
+      opacity: 0.95;
+      font-weight: 300;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--primary-dark);
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35);
+    }
+
+    .btn-primary:hover {
+      background-color: #ffffff;
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: #ffffff;
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2px solid #ffffff;
+    }
+
+    .btn-secondary:hover {
+      background-color: #ffffff;
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* === ABOUT & SPECIAL BUFFET === */
+    .about {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-images {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .about-img-main {
+      grid-column: span 2;
+      box-shadow: var(--shadow-lg);
+      transform: rotate(-1deg);
+      border-radius: var(--radius);
+    }
+
+    .about-img-sub {
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+
+    .about-img-sub:hover {
+      transform: scale(1.05) translateY(-5px);
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .about-tag {
+      font-size: 0.9rem;
+      color: var(--primary-light);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .about-headline {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+    :root.dark-theme .about-headline,
+    :root.auto-theme .about-headline {
+      color: var(--accent);
+    }
+
+    .about-text {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(77, 122, 91, 0.1);
+      color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--primary);
+    }
+    :root.dark-theme .feature-title,
+    :root.auto-theme .feature-title {
+      color: var(--accent);
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* === INTERACTIVE MENU === */
+    .menu-section {
+      background-color: var(--bg);
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    /* Main Food vs Drink Tabs */
+    .menu-tabs {
+      display: flex;
+      gap: 12px;
+      background-color: var(--border);
+      padding: 6px;
+      border-radius: 50px;
+    }
+
+    .menu-tab-btn {
+      padding: 12px 36px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .menu-tab-btn.active {
+      background-color: var(--primary);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+    :root.dark-theme .menu-tab-btn.active,
+    :root.auto-theme .menu-tab-btn.active {
+      background-color: var(--accent);
+      color: var(--primary-dark);
+    }
+
+    /* Search & Toggle Box */
+    .search-filter-box {
+      width: 100%;
+      max-width: 800px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .search-wrapper {
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 20px 14px 48px;
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      background-color: var(--card-bg);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 4px rgba(77, 122, 91, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: 18px;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      width: 20px;
+      height: 20px;
+    }
+
+    /* App Price Toggle Switch */
+    .toggle-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .toggle-label {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    /* iOS Styled Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 52px;
+      height: 28px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--border);
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary-light);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Category Pill Bubbles */
+    .category-pills {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      max-width: 1000px;
+      overflow-x: auto;
+      padding: 8px 4px 12px;
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .category-pills::-webkit-scrollbar {
+      display: none; /* Safari & Chrome */
+    }
+
+    .category-pill {
+      white-space: nowrap;
+      padding: 8px 18px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background-color: var(--card-bg);
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .category-pill.active {
+      background-color: var(--primary-light);
+      color: #ffffff;
+      border-color: var(--primary-light);
+    }
+
+    /* Menu Food Grid Card layout */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .menu-card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-light);
+    }
+
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: var(--accent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .menu-card:hover::before {
+      opacity: 1;
+    }
+
+    .menu-card-top {
+      margin-bottom: 16px;
+    }
+
+    .menu-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .menu-card-category {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-light);
+      background-color: rgba(77, 122, 91, 0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .menu-card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .menu-card-price-box {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .menu-card-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .price-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    :root.dark-theme .price-value,
+    :root.auto-theme .price-value {
+      color: var(--accent);
+    }
+
+    /* App-specific comparison price styles */
+    .app-price-details {
+      display: none;
+      padding-top: 8px;
+      margin-top: 8px;
+      border-top: 1px dashed var(--border);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .app-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .app-price-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .app-logo {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+
+    .app-val {
+      font-weight: 600;
+    }
+
+    .grab-val { color: #00b14f; }
+    .shopeefood-val { color: #ee4d2d; }
+
+    /* Direct app ordering buttons and cards action */
+    .global-delivery-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 800px;
+      margin-top: 12px;
+      background-color: rgba(var(--primary-rgb), 0.03);
+      border: 1px dashed var(--accent);
+      padding: 16px;
+      border-radius: var(--radius);
+      text-align: center;
+    }
+    
+    .delivery-prompt {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    
+    .delivery-buttons {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .delivery-btn {
+      padding: 10px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .delivery-btn.shopee-global {
+      background-color: #ee4d2d;
+      color: #ffffff;
+    }
+    .delivery-btn.shopee-global:hover {
+      background-color: #ff5722;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(238, 77, 45, 0.2);
+    }
+    
+    .delivery-btn.grab-global {
+      background-color: #00b14f;
+      color: #ffffff;
+    }
+    .delivery-btn.grab-global:hover {
+      background-color: #00c257;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 177, 79, 0.2);
+    }
+
+    .menu-card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      border-top: 1px dashed var(--border);
+      padding-top: 12px;
+    }
+
+    .card-action-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background-color: var(--bg);
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .card-action-btn:hover {
+      border-color: currentColor;
+      background-color: var(--card-bg);
+      transform: translateY(-1px);
+    }
+
+    .card-action-btn.shopee-btn {
+      color: #ee4d2d;
+    }
+    .card-action-btn.shopee-btn:hover {
+      background-color: rgba(238, 77, 45, 0.05);
+      border-color: #ee4d2d;
+    }
+
+    .card-action-btn.grab-btn {
+      color: #00b14f;
+    }
+    .card-action-btn.grab-btn:hover {
+      background-color: rgba(0, 177, 79, 0.05);
+      border-color: #00b14f;
+    }
+
+    .btn-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .shopee-dot {
+      background-color: #ee4d2d;
+    }
+    .grab-dot {
+      background-color: #00b14f;
+    }
+
+    .menu-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      background-color: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px dashed var(--border);
+    }
+
+    /* === VISUAL MENU GALLERY === */
+    .gallery-section {
+      padding: 100px 0;
+      background-color: var(--bg);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      background-color: var(--card-bg);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(30, 63, 32, 0.8), rgba(0,0,0,0));
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 16px;
+      color: #ffffff;
+      font-weight: 600;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    /* === LIGHTBOX MODAL DIALOG === */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(12, 15, 13, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-caption {
+      color: #ffffff;
+      margin-top: 16px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .lightbox-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: var(--transition);
+    }
+
+    .lightbox-btn:hover {
+      background-color: var(--accent);
+      color: var(--primary-dark);
+    }
+
+    .lightbox-prev {
+      left: -80px;
+    }
+
+    .lightbox-next {
+      right: -80px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 50px;
+      height: 50px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: var(--transition);
+    }
+
+    .lightbox-close:hover {
+      background-color: #ff4d4d;
+      color: #ffffff;
+    }
+
+    /* === CONTACT & MAP === */
+    .contact-section {
+      padding: 100px 0;
+      background-color: var(--bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 64px;
+      align-items: stretch;
+    }
+
+    .contact-info-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .contact-card:hover {
+      transform: translateX(5px);
+      border-color: var(--accent);
+    }
+
+    .contact-card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(197, 168, 128, 0.1);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-card-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .contact-card-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      color: var(--primary);
+    }
+    :root.dark-theme .contact-card-title,
+    :root.auto-theme .contact-card-title {
+      color: var(--accent);
+    }
+
+    .contact-card-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .contact-card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 8px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+    :root.dark-theme .contact-card-btn,
+    :root.auto-theme .contact-card-btn {
+      background-color: var(--accent);
+      color: var(--primary-dark);
+    }
+
+    .contact-card-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .map-container {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      height: 100%;
+      min-height: 400px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* === FOOTER === */
+    footer {
+      background-color: var(--primary-dark);
+      color: #ffffff;
+      padding: 60px 0 100px; /* Space at bottom for floating mobile bar */
+      border-top: 2px solid var(--accent);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo span {
+      color: var(--accent);
+    }
+
+    .footer-about-text {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+
+    .footer-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-link-item {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.95rem;
+    }
+
+    .footer-link-item:hover {
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    .footer-info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+    }
+
+    /* === STICKY FLOATING MOBILE CALL BAR === */
+    .mobile-call-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(var(--primary-rgb), 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+      z-index: 999;
+      display: flex;
+      padding: 12px 24px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mobile-call-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #ffffff;
+    }
+
+    .mobile-call-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    .mobile-call-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-call-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .mobile-call-number {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    .mobile-call-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mobile-action-btn {
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mobile-action-btn.btn-call {
+      background-color: var(--accent);
+      color: var(--primary-dark);
+    }
+
+    .mobile-action-btn.btn-zalo {
+      background-color: #0068ff;
+      color: #ffffff;
+    }
+
+    .mobile-action-btn.btn-shopee {
+      background-color: #ee4d2d;
+      color: #ffffff;
+    }
+
+    .mobile-action-btn.btn-grab {
+      background-color: #00b14f;
+      color: #ffffff;
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    /* === RESPONSIVE LAYOUTS === */
+    @media (max-width: 1024px) {
+      .lightbox-prev { left: -50px; }
+      .lightbox-next { right: -50px; }
+    }
+
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .map-container {
+        min-height: 350px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: flex;
+      }
+      .hero-title {
+        font-size: 2.8rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .search-filter-box {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .toggle-wrapper {
+        justify-content: flex-start;
+      }
+      .lightbox-btn {
+        width: 40px;
+        height: 40px;
+      }
+      .lightbox-prev { left: 10px; top: auto; bottom: -60px; transform: none; }
+      .lightbox-next { right: 10px; top: auto; bottom: -60px; transform: none; }
+      .lightbox-close { top: 10px; right: 10px; width: 40px; height: 40px; }
+      .lightbox-content { max-width: 95%; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .hero-desc {
+        font-size: 1rem;
+      }
+      .hero-cta {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .btn-primary, .btn-secondary {
+        width: 100%;
+      }
+      .about-images {
+        grid-template-columns: 1fr;
+      }
+      .about-img-main {
+        grid-column: span 1;
+      }
+      .about-features {
+        grid-template-columns: 1fr;
+      }
+      .mobile-call-bar {
+        padding: 8px 12px;
+      }
+      .mobile-call-info {
+        gap: 8px;
+      }
+      .mobile-call-number {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body class="auto-theme">
+
+  <!-- BACKGROUND BACKDROP FOR MOBILE NAVIGATION DRAWER -->
+  <div class="mobile-backdrop" id="mobile-backdrop"></div>
+
+  <!-- FIXED NAVIGATION HEADER -->
+  <header id="main-header">
+    <div class="container header-container">
+      <a href="#" class="logo-link">
+        <img src="Hình/LOGO - THẢO VÂN - PNG.png" alt="Logo Thảo Vân Chay" class="logo-img" onerror="this.src='Hình/LOGO - THẢO VÂN - JPG-01.jpg'">
+        <div class="logo-text">Thảo Vân <span>Chay</span></div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav>
+        <a href="#" class="nav-link">Trang Chủ</a>
+        <a href="#about" class="nav-link">Giới Thiệu</a>
+        <a href="#menu" class="nav-link">Thực Đơn</a>
+        <a href="#gallery" class="nav-link">Menu Ảnh</a>
+        <a href="#contact" class="nav-link">Liên Hệ</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle" id="theme-btn" aria-label="Đổi chế độ sáng tối">
+          <svg viewBox="0 0 24 24" id="sun-icon">
+            <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-.39-1.03 0-1.41s1.03-.39 1.41 0l1.06 1.06c.39.39.39 1.03 0 1.41s-1.03.39-1.41 0l-1.06-1.06zm-12.37 12.37c-.39-.39-.39-1.03 0-1.41s1.03-.39 1.41 0l1.06 1.06c.39.39.39 1.03 0 1.41s-1.03.39-1.41 0l-1.06-1.06z"/>
+          </svg>
+          <svg viewBox="0 0 24 24" id="moon-icon" style="display:none;">
+            <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.7 3.3-8.8 8-9.8.7-.2 1.4.3 1.5 1s-.3 1.4-1 1.5c-3.4.7-6 3.7-6 7.3 0 4.1 3.4 7.5 7.5 7.5 3.6 0 6.6-2.6 7.3-6 .2-.7.8-1.2 1.5-1 .7.2 1.2.8 1 1.5-1.1 4.7-5.2 8-9.9 8z"/>
+          </svg>
+        </button>
+
+        <a href="#contact" class="btn-book-nav">Liên Hệ Ngay</a>
+
+        <!-- Mobile Menu Trigger -->
+        <button class="mobile-menu-btn" id="menu-open-btn" aria-label="Mở menu di động">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="menu-close-btn" aria-label="Đóng menu">✕</button>
+    <a href="#" class="mobile-nav-link" onclick="toggleMobileNav()">Trang Chủ</a>
+    <a href="#about" class="mobile-nav-link" onclick="toggleMobileNav()">Giới Thiệu</a>
+    <a href="#menu" class="mobile-nav-link" onclick="toggleMobileNav()">Thực Đơn</a>
+    <a href="#gallery" class="mobile-nav-link" onclick="toggleMobileNav()">Menu Ảnh</a>
+    <a href="#contact" class="mobile-nav-link" onclick="toggleMobileNav()">Liên Hệ</a>
+  </div>
+
+  <!-- HERO WELCOME SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-subtitle">Nhà Hàng Chay Buôn Ma Thuột</div>
+      <h1 class="hero-title">Thảo Vân Chay</h1>
+      <p class="hero-desc">Không gian thanh tịnh cùng tinh hoa ẩm thực chay thanh đạm, thơm ngon, tinh khiết, mang lại sức khỏe và an lạc trọn vẹn cho bạn.</p>
+      <div class="hero-cta">
+        <a href="#menu" class="btn-primary">Xem Thực Đơn</a>
+        <a href="#about" class="btn-secondary">Tìm Hiểu Thêm</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT & BUFFET SHOWCASE SECTION -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-images">
+          <img src="Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg" alt="Không gian Thảo Vân Chay" class="about-img-main">
+          <img src="Hình/Không gian/IMG_20210205_101239.jpg" alt="Tiệc Buffet Chay Thảo Vân" class="about-img-sub">
+          <img src="Hình/Không gian/ABJJf51HyWUbqB1CSio6VpyvacLajwk97N5JsQoVKW2.jpg" alt="Không gian sân vườn Thảo Vân Chay" class="about-img-sub">
+        </div>
+
+        <div class="about-content">
+          <div class="about-tag">Về chúng tôi</div>
+          <h2 class="about-headline">Nơi Hội Tụ Tinh Hoa Ẩm Thực Chay Thuần Khiết</h2>
+          <p class="about-text">Tọa lạc tại trung tâm Buôn Ma Thuột, **Thảo Vân Chay** là điểm đến lý tưởng cho những ai yêu mến ẩm thực chay thanh lành. Món ăn của chúng tôi được chế biến hoàn toàn từ nguồn nguyên liệu rau củ, nấm, hạt tự nhiên, giữ trọn vẹn hương vị thanh đạm, không sử dụng phụ gia hóa chất có hại.</p>
+          <p class="about-text">Với không gian mở rộng rãi, hiện đại nhưng ấm cúng, Thảo Vân Chay không chỉ phục vụ bữa ăn gia đình hằng ngày mà còn là không gian yên bình để thư giãn, thanh lọc cơ thể.</p>
+          
+          <div class="about-features">
+            <div class="feature-item">
+              <div class="feature-icon">🌿</div>
+              <div>
+                <h3 class="feature-title">Đồ Ăn Tươi Sạch</h3>
+                <p class="feature-desc">Nguyên liệu được chọn lọc tươi ngon mỗi ngày từ nông trại và siêu thị địa phương.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🌳</div>
+              <div>
+                <h3 class="feature-title">Không Gian</h3>
+                <p class="feature-desc">Không gian sân vườn giúp bạn tận hưởng trọn vẹn ẩm thực trong lòng thiên nhiên.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE MENU SECTION -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <h2 class="section-title">Khám Phá Thực Đơn</h2>
+      <p class="section-desc">Hãy chọn nhóm Món Ăn hoặc Thức Uống và dễ dàng tìm kiếm món bạn yêu thích với hệ thống tìm kiếm thông minh tự động lọc cực nhanh.</p>
+
+      <div class="menu-controls">
+        <!-- Food vs Drink Tabs -->
+        <div class="menu-tabs">
+          <button class="menu-tab-btn active" id="tab-food" onclick="changeMenuTab('food')">Món Ăn Chay</button>
+          <button class="menu-tab-btn" id="tab-drink" onclick="changeMenuTab('drink')">Nước Uống & Bar</button>
+        </div>
+
+        <!-- Search Bar and Delivery Price Toggle -->
+        <div class="search-filter-box">
+          <div class="search-wrapper">
+            <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" id="menu-search" class="search-input" placeholder="Tìm tên món chay (ví dụ: lẩu, cơm, súp...)" oninput="filterMenu()">
+          </div>
+
+          <div class="toggle-wrapper">
+            <span class="toggle-label">Xem so sánh giá App (Grab/Shopee)</span>
+            <label class="switch">
+              <input type="checkbox" id="price-toggle" onchange="toggleDeliveryPrices()">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+
+
+        <!-- Category Pill Filters (populated dynamically) -->
+        <div class="category-pills" id="category-pills">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Menu Items Grid -->
+      <div class="menu-grid" id="menu-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGINAL VISUAL MENU LIGHTBOX SECTION -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Ảnh menu giấy</h2>
+      <p class="section-desc">Bạn muốn xem cuốn menu giấy chính thức của Thảo Vân Chay? Hãy click vào các trang ảnh menu bên dưới để phóng to và lướt xem nhé.</p>
+
+      <div class="gallery-grid" id="menu-gallery-grid">
+        <!-- Populated dynamically by JS (Screenshot 76 to 95) -->
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX SLIDER DIALOG -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+      <img src="" alt="Menu Phóng To" class="lightbox-img" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption">Trang Menu</div>
+      <button class="lightbox-btn lightbox-prev" onclick="changeLightboxImage(-1)">❮</button>
+      <button class="lightbox-btn lightbox-next" onclick="changeLightboxImage(1)">❯</button>
+    </div>
+  </div>
+
+  <!-- CONTACT & LOCATIONS MAP SECTION -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Liên Hệ & Bản Đồ</h2>
+      <p class="section-desc">Ghé thăm Thảo Vân Chay để tận hưởng bữa ăn ấm cúng, hoặc liên hệ đặt mâm cỗ chay, tiệc sinh nhật trước qua điện thoại, Zalo hay Fanpage.</p>
+
+      <div class="contact-grid">
+        <div class="contact-info-cards">
+          <!-- Phone Card -->
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="contact-card-title">Điện Thoại / Hotline</h3>
+              <p class="contact-card-text">0917 003 898 (Nhấp để gọi trực tiếp đặt bàn)</p>
+              <a href="tel:0917003898" class="contact-card-btn">Gọi Ngay</a>
+            </div>
+          </div>
+
+          <!-- Zalo Chat Card -->
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="contact-card-title">Kết Nối Zalo</h3>
+              <p class="contact-card-text">Nhắn tin Zalo trực tiếp hỗ trợ giải đáp thực đơn và nhận tiệc.</p>
+              <a href="https://zalo.me/0917003898" target="_blank" class="contact-card-btn">Chat Zalo</a>
+            </div>
+          </div>
+
+          <!-- Facebook Messenger Card -->
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2c-5.52 0-10 4.14-10 9.24 0 2.91 1.45 5.51 3.73 7.21.2.15.31.39.31.64l.02 2.1c.01.53.53.9 1.02.72l2.37-.88c.2-.07.41-.06.6.02 1.2.49 2.52.76 3.93.76 5.52 0 10-4.14 10-9.24S17.52 2 12 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="contact-card-title">Facebook Fanpage</h3>
+              <p class="contact-card-text">Theo dõi trang Facebook chính thức để cập nhật món mới và ưu đãi.</p>
+              <a href="https://www.facebook.com/thaovanchay.vn/" target="_blank" class="contact-card-btn">Mở Facebook</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Styled Responsive Google Maps Embed -->
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3892.0910403309653!2d108.027543!3d12.6939817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31721d9192ad0b1b%3A0xf04ecb3191c11e0b!2sThao%20Van%20Vegetarian%20Restaurant!5e0!3m2!1sen!2s!4v1716281000000!5m2!1sen!2s" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+          <div style="text-align: center; margin-top: 16px;">
+            <a href="https://www.google.com/maps/place/Thao+Van+Vegetarian+Restaurant/@12.6939817,108.027543,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d9192ad0b1b:0xf04ecb3191c11e0b!8m2!3d12.6939817!4d108.0301179!16s%2Fg%2F11r10pr81w?hl=en&entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="contact-card-btn" style="display: inline-block;">Đường đi trên Google Maps ➔</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIXED FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">Thảo Vân <span>Chay</span></div>
+          <p class="footer-about-text">Thảo Vân Chay đem lại những mâm cỗ chay thanh mát, bổ dưỡng từ tâm, giúp nuôi dưỡng sức khỏe lành mạnh, bình an tâm hồn cho cả gia đình bạn.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Giờ Hoạt Động</h4>
+          <div class="footer-links">
+            <div class="footer-info-row">⏱️ 07:00 – 20:00 hàng ngày</div>
+            <div class="footer-info-row">📅 Mở cửa từ Thứ Hai – Chủ Nhật</div>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Thông Tin Quán</h4>
+          <div class="footer-links">
+            <div class="footer-info-row">📍 <a href="https://www.google.com/maps/place/Thao+Van+Vegetarian+Restaurant/@12.6939817,108.027543,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d9192ad0b1b:0xf04ecb3191c11e0b!8m2!3d12.6939817!4d108.0301179!16s%2Fg%2F11r10pr81w?hl=en&entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="color: inherit; text-decoration: underline;">250 Phạm Ngũ Lão, Cư Ê Bur, Buôn Ma Thuột</a></div>
+            <div class="footer-info-row">📞 Điện thoại: 0917 003 898</div>
+            <div class="footer-info-row">📧 Fanpage: facebook.com/thaovanchay.vn</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Thảo Vân Chay. Tất cả các quyền được bảo lưu. Thiết kế và phát triển bởi Antigravity.</div>
+        <div>Ẩm thực chay vì sức khỏe và sự bình an.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING MOBILE STICKY CALL & BOOK BAR -->
+  <div class="mobile-call-bar">
+    <div class="mobile-call-info">
+      <div class="mobile-call-icon">📞</div>
+      <div class="mobile-call-text">
+        <span class="mobile-call-label">Gọi đặt bàn</span>
+        <span class="mobile-call-number">0917 003 898</span>
+      </div>
+    </div>
+    <div class="mobile-call-actions">
+      <a href="tel:0917003898" class="mobile-action-btn btn-call">Gọi Quán</a>
+      <a href="https://zalo.me/0917003898" target="_blank" class="mobile-action-btn btn-zalo">Nhắn Zalo</a>
+      <a href="https://shopeefood.vn/dak-lak/quan-thao-van-chay-pham-ngu-lao?source_url=foody_ordernow_pc" target="_blank" class="mobile-action-btn btn-shopee">ShopeeFood</a>
+      <a href="https://food.grab.com/vn/vi/restaurant/th%E1%BA%A3o-v%C3%A2n-chay-delivery/5-C3DKBENAMAVEV2?" target="_blank" class="mobile-action-btn btn-grab">GrabFood</a>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC ENGINE -->
+  <script>
+    // Core database compiled from local excel/word
+    const foods = [
+      { id: 1, name: "Cà ri bánh mì", category: "Khai vị", price:{ "Nhỏ": 40000, "Lớn": 75000 }, grab:{ "Nhỏ": 48000, "Lớn": 84000 }, shopeefood :{ "Nhỏ": 48000, "Lớn": 84000 } },      { id: 2, name: "Súp đậu gà", category: "Khai vị", price:{ "Nhỏ": 35000, "Lớn": 70000 }, grab:{ "Nhỏ": 42000, "Lớn": 74000 }, shopeefood :{ "Nhỏ": 36000, "Lớn": 74000 } },      { id: 3, name: "Cháo Thảo Vân", category: "Khai vị", price:{ "Nhỏ": 30000, "Lớn": 65000 }, grab:{ "Nhỏ": 36000, "Lớn": 74000 }, shopeefood :{ "Nhỏ": 42000, "Lớn": 74000 } },      { id: 4, name: "Bánh mì xíu mại", category: "Khai vị", price: 35000, grab: 45000, shopeefood : 42000 },      { id: 5, name: "Cuốn Thảo Vân", category: "Khai vị", price: 10000, grab: 12000, shopeefood : 12000 },      { id: 6, name: "Há cảo may mắn", category: "Khai vị", price: 55000, grab: 67000, shopeefood : 67000 },      { id: 7, name: "Nem trái cây", category: "Khai vị", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 8, name: "Nem vuông", category: "Khai vị", price: 55000, grab: 68000, shopeefood : 68000 },      
+      { id: 9, name: "Hoành thánh chiên", category: "Món chiên", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 10, name: "Chả chiên giòn", category: "Món chiên", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 11, name: "Dồi chiên chay", category: "Món chiên", price: 55000, grab: 74000, shopeefood : 74000 },      { id: 12, name: "Khoai tây chiên", category: "Món chiên", price: 35000, grab: 42000, shopeefood : 42000 },
+      { id: 13, name: "Rau luộc thập cẩm + kho quẹt", category: "Salad", price: 49000, grab: 66000, shopeefood : 66000 },      { id: 14, name: "Salad trộn dầu giấm", category: "Salad", price: 44000, grab: 60000, shopeefood : 60000 },      { id: 15, name: "Nấm đút lò phô mai", category: "Salad", price: 62000, grab: 95000, shopeefood : 95000 },      { id: 16, name: "Salad rau mầm dinh dưỡng", category: "Salad", price: 49000, grab: 49000, shopeefood : 49000 },
+      { id: 17, name: "Nấm hàu xào xả ớt", category: "Món xào", price: 65000, grab: 95000, shopeefood : 95000 },      { id: 18, name: "Rau muống xào tỏi chay", category: "Món xào", price: 37000, grab: 52000, shopeefood : 52000 },      { id: 19, name: "Chả quế xào chua ngọt", category: "Món xào", price: 57000, grab: 84000, shopeefood : 65000 },      { id: 20, name: "Rau xào tỏi theo mùa", category: "Món xào", price: 44000, grab: 60000, shopeefood : 60000 },      { id: 21, name: "Bí đỏ xào tỏi", category: "Món xào", price: 44000, grab: 60000, shopeefood : 60000 },
+      { id: 22, name: "Đạm kho chả quế", category: "Món kho", price: 65000, grab: 75000, shopeefood : 75000 },      { id: 23, name: "Đạm kho tiêu tộ", category: "Món kho", price: 60000, grab: 72000, shopeefood : 59000 },      { id: 24, name: "Kho Thảo Vân", category: "Món kho", price: 65000, grab: 75000, shopeefood : 75000 },      { id: 25, name: "Chả lụa kho tộ", category: "Món kho", price: 60000, grab: 72000, shopeefood : 72000 },      { id: 26, name: "Nấm đùi gà kho gừng", category: "Món kho", price: 60000, grab: 72000, shopeefood : 72000 },
+      { id: 27, name: "Đậu hủ bậc thang độc quyền", category: "Món đậu hủ", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 28, name: "Đậu hủ chiên mắm hành chay", category: "Món đậu hủ", price: 50000, grab: 60000, shopeefood : 60000 },      { id: 29, name: "Đậu hủ sốt nấm hương", category: "Món đậu hủ", price: 50000, grab: 64000, shopeefood : 64000 },      { id: 30, name: "Đậu hủ xả ớt đậm đà", category: "Món đậu hủ", price: 55000, grab: 64000, shopeefood : 64000 },
+      { id: 31, name: "Gỏi nấm hàu đặc biệt", category: "Món gỏi", price: 85000, grab: 88000, shopeefood : 88000 },      { id: 32, name: "Gỏi nấm bào ngư", category: "Món gỏi", price: 70000, grab: 82000, shopeefood : 82000 },      { id: 33, name: "Gỏi đậu rồng tôm chay", category: "Món gỏi", price: 70000, grab: 82000, shopeefood : 82000 },      { id: 34, name: "Gỏi rong biển thanh mát", category: "Món gỏi", price: 70000, grab: 82000, shopeefood : 82000 },      { id: 35, name: "Gỏi củ hủ dừa", category: "Món gỏi", price: 75000, grab: 82000, shopeefood : 82000 },      { id: 36, name: "Gỏi rau má", category: "Món gỏi", price: 60000, grab: 72000, shopeefood : 72000 },      { id: 37, name: "Gỏi ngó sen chay", category: "Món gỏi", price: 70000, grab: 76000, shopeefood : 76000 },
+      { id: 38, name: "Nấm rang muối Hồng Kông", category: "Rau & Nấm", price: 65000, grab: 74000, shopeefood : 74000 },      { id: 39, name: "Rau củ chiên giòn", category: "Rau & Nấm", price: 65000, grab: 70000, shopeefood : 70000 },
+      { id: 40, name: "Cơm chiên Thảo Vân", category: "Món cơm", price: 65000, grab: 75000, shopeefood : 75000 },      { id: 41, name: "Cơm chiên dương châu", category: "Món cơm", price: 65000, grab: 70000, shopeefood : 75000 },      { id: 42, name: "Cơm chiên muối ớt", category: "Món cơm", price: 65000, grab: 75000, shopeefood : 75000 },      { id: 43, name: "Cơm ngũ sắc", category: "Món cơm", price: 60000, grab: 70000, shopeefood : 70000 },
+      { id: 44, name: "Mì spaghetti", category: "Mì & Miến", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 45, name: "Mì xào giòn", category: "Mì & Miến", price: 60000, grab: 72000, shopeefood : 72000 },      { id: 46, name: "Mì xào mềm", category: "Mì & Miến", price: 50000, grab: 60000, shopeefood : 45000 },      { id: 47, name: "Miến xào", category: "Mì & Miến", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 48, name: "Nui xào kiểu Italia", category: "Mì & Miến", price: 55000, grab: 69000, shopeefood : 68000 },      { id: 49, name: "Mì nấm tiềm thuốc bắc", category: "Mì & Miến", price: 55000, grab: 72000, shopeefood : 72000 },      { id: 50, name: "Hủ tiếu áp chảo giòn tan", category: "Mì & Miến", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 51, name: "Bún gạo xào kiểu Singapore", category: "Mì & Miến", price: 55000, grab: 68000, shopeefood : 68000 },
+      { id: 52, name: "Bí đỏ nướng", category: "Món nướng", price: 65000, grab: 57000, shopeefood : 57000 },      { id: 53, name: "Cà tím nướng rẻ quạt", category: "Món nướng", price: 50000, grab: 60000, shopeefood : 60000 },      { id: 54, name: "Cà tím nướng sốt Oval", category: "Món nướng", price: 50000, grab: 60000, shopeefood : 60000 },      { id: 55, name: "Nấm bào ngư nướng sa tế cay", category: "Món nướng", price: 50000, grab: 68000, shopeefood : 68000 },
+      { id: 56, name: "Lẩu riêu cua", category: "Món lẩu", price: 179000, grab: 198000, shopeefood : 198000 },      { id: 57, name: "Lẩu nấm thập cẩm thanh ngọt", category: "Món lẩu", price: 179000, grab: 198000, shopeefood : 198000 },      { id: 58, name: "Lẩu kim chi", category: "Món lẩu", price: 179000, grab: 198000, shopeefood : 198000 },      { id: 59, name: "Lẩu thái chua cay", category: "Món lẩu", price: 179000, grab: 219000, shopeefood : 219000 },      { id: 60, name: "Lẩu nấm thập tam vị đặc biệt", category: "Món lẩu", price: 195000, grab: 235000, shopeefood : 195000 },
+      { id: 61, name: "Canh chua nam bộ thanh nhiệt", category: "Món canh", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 62, name: "Canh rong biển đậu hủ non", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 63, name: "Canh rau tập tàng thanh đạm", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 64, name: "Canh khổ qua nhồi đậu hủ", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 65, name: "Canh khoai mỡ tím thơm ngon", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 66, name: "Canh ngũ quả bồi bổ sức khỏe", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 67, name: "Canh bí đỏ đậu phộng", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },
+      { id: 68, name: "Măng tây xào đậu gà", category: "Món mới", price: 60000, grab: 60000, shopeefood : 60000 },      { id: 69, name: "Hủ tiếu áp chảo", category: "Món mới", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 70, name: "Phở áp chảo", category: "Món mới", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 71, name: "Cải thìa sốt dầu hào", category: "Món mới", price: 55000, grab: 44000, shopeefood : 44000 }    ];
+
+    const drinks = [
+      { id: 101, name: "Cà phê đen đá / đen nóng truyền thống", category: "Cà phê", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 102, name: "Cà phê sữa đá / sữa nóng Đắk Lắk", category: "Cà phê", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 103, name: "Cà phê phin truyền thống đen sữa phin", category: "Cà phê", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 104, name: "Bạc xỉu đá / bạc xỉu nóng đậm đà", category: "Cà phê", price: 25000, grab: 25000, shopeefood : 25000 },      { id: 105, name: "Cacao sữa đá / cacao nóng béo thơm", category: "Cà phê", price: 25000, grab: 25000, shopeefood : 25000 },
+      { id: 106, name: "Latte bọt mịn pha máy", category: "Cà phê pha máy", price: 20000, grab: 25000, shopeefood : 25000 },      { id: 107, name: "Latte macchiato 3 tầng pha máy", category: "Cà phê pha máy", price: 25000, grab: 25000, shopeefood : 25000 },      { id: 108, name: "Cappuchino bọt kem pha máy", category: "Cà phê pha máy", price: 25000, grab: 25000, shopeefood : 25000 },      { id: 109, name: "Espresso nguyên chất pha máy đậm đà", category: "Cà phê pha máy", price: 20000, grab: 20000, shopeefood : 20000 },
+      { id: 110, name: "Mojito Blue", category: "Mojito", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 111, name: "Mojito chanh", category: "Mojito", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 112, name: "Mojito đào", category: "Mojito", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 113, name: "Mojito việt quất", category: "Mojito", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 114, name: "Mojito phúc bồn tử", category: "Mojito", price: 25000, grab: 30000, shopeefood : 30000 },
+      { id: 115, name: "Trà sữa truyền thống", category: "Trà", price: 25000, grab: 32000, shopeefood : 32000 },      { id: 116, name: "Trà đào", category: "Trà", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 117, name: "Trà đào cam sả", category: "Trà", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 118, name: "Trà trái cây nhiệt đới", category: "Trà", price: 32000, grab: 36000, shopeefood : 36000 },      { id: 119, name: "Trà thảo mộc nóng/đá", category: "Trà", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 120, name: "Trà lipton cam tươi nguyên quả", category: "Trà", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 121, name: "Trà lipton chanh", category: "Trà", price: 35000, grab: 30000, shopeefood : 30000 },      { id: 122, name: "Trà gừng ấm áp giải cảm", category: "Trà", price: 20000, grab: 24000, shopeefood : 24000 },      { id: 123, name: "Trà la hán quả mát gan giải độc", category: "Trà", price: 25000, grab: 24000, shopeefood : 24000 },
+      { id: 124, name: "Chanh sả nha đam", category: "Đặc biệt", price: 30000, grab: 36000, shopeefood : 36000 },      { id: 125, name: "Lô hội mật ong chanh", category: "Đặc biệt", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 126, name: "Trà sữa than tre", category: "Đặc biệt", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 127, name: "Sữa tươi trân châu đường đen", category: "Đặc biệt", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 128, name: "Sữa tươi trân châu than tre", category: "Đặc biệt", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 129, name: "Tắc chanh ép", category: "Đặc biệt", price: 25000, grab: 25000, shopeefood : 25000 },
+      { id: 130, name: "Nước ép cam và cà rốt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 131, name: "Nước ép cam vắt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 132, name: "Cam vắt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 133, name: "Cam sữa", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 134, name: "Cam mật ong rừng", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 135, name: "Nước ép thơm (dứa)", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 136, name: "Nước ép cà rốt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 137, name: "Nước ép ổi tươi", category: "Trái cây", price: 30000, grab: 32000, shopeefood : 30000 },      { id: 138, name: "Nước ép táo đỏ", category: "Trái cây", price: 300000, grab: 32000, shopeefood : 30000 },      { id: 139, name: "Nước ép chanh dây", category: "Trái cây", price: 25000, grab: 32000, shopeefood : 30000 },      { id: 140, name: "Nước chanh tươi", category: "Trái cây", price: 25000, grab: 24000, shopeefood : 20000 },      { id: 141, name: "Nước chanh muối", category: "Trái cây", price: 25000, grab: 25000, shopeefood : 20000 },      { id: 142, name: "Nước chanh mật ong", category: "Trái cây", price: 25000, grab: 24000, shopeefood : 20000 },
+      { id: 143, name: "Sinh tố dâu tây", category: "Sinh tố", price: 35000, grab: 36000, shopeefood : 36000 },      { id: 144, name: "Sinh tố bơ sáp béo ngậy ngọt lịm", category: "Sinh tố", price: 30000, grab: 32000, shopeefood : 32000 },      { id: 145, name: "Sinh tố xoài chín vàng mọng dẻo ngon", category: "Sinh tố", price: 30000, grab: 32000, shopeefood : 32000 },      { id: 146, name: "Sinh tố dừa tươi béo mát lạnh sánh đặc", category: "Sinh tố", price: 30000, grab: 32000, shopeefood : 32000 },      { id: 147, name: "Sinh tố cà chua dưỡng da trắng hồng", category: "Sinh tố", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 148, name: "Sinh tố sapuche (hồng xiêm) bùi bùi béo ngọt", category: "Sinh tố", price: 30000, grab: 36000, shopeefood : 36000 },
+      { id: 149, name: "Yaourt dâu tây", category: "Yaourt", price: 25000, grab: 25000, shopeefood : 25000 },      { id: 150, name: "Yaourt cam tươi", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 151, name: "Yaourt việt quất", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 152, name: "Yaourt phúc bồn tử", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 25000 },      { id: 153, name: "Yaourttrái cây nhiệt đới", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 154, name: "Yaourt nha đam", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 20000 },      { id: 155, name: "Yaourt sữa chua đá", category: "Yaourt", price: 20000, grab: 24000, shopeefood : 20000 },
+      { id: 156, name: "Bò húc", category: "Nước giải khát", price: 18000, grab: 18000, shopeefood : 18000 },      { id: 157, name: "Pepsi", category: "Nước giải khát", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 158, name: "Coca-Cola", category: "Nước giải khát", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 159, name: "Nước suối", category: "Nước giải khát", price: 10000, grab: 10000, shopeefood : 10000 },      { id: 160, name: "Revive", category: "Nước giải khát", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 161, name: "Sting", category: "Nước giải khát", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 162, name: "Sprite", category: "Nước giải khát", price: 15000, grab: 15000, shopeefood : 15000 }    ];
+
+    // Global App States
+    let currentTab = 'food'; // 'food' or 'drink'
+    let activeCategory = 'Tất cả';
+    let showDelivery = false;
+
+    // Helper functions
+    function removeAccents(str) {
+      return str.normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/đ/g, "d")
+                .replace(/Đ/g, "D");
+    }
+
+    function formatNumber(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // Header scroll background behavior
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('main-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile Navigation Drawer actions
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileBackdrop = document.getElementById('mobile-backdrop');
+    
+    document.getElementById('menu-open-btn').addEventListener('click', toggleMobileNav);
+    document.getElementById('menu-close-btn').addEventListener('click', toggleMobileNav);
+    mobileBackdrop.addEventListener('click', toggleMobileNav);
+
+    function toggleMobileNav() {
+      const isOpen = mobileNav.classList.contains('open');
+      if (isOpen) {
+        mobileNav.classList.remove('open');
+        mobileBackdrop.style.display = 'none';
+      } else {
+        mobileNav.classList.add('open');
+        mobileBackdrop.style.display = 'block';
+      }
+    }
+
+    // Light/Dark Theme Switch Engine
+    const themeBtn = document.getElementById('theme-btn');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const rootEl = document.documentElement;
+
+    themeBtn.addEventListener('click', () => {
+      if (rootEl.classList.contains('dark-theme')) {
+        rootEl.classList.remove('dark-theme');
+        rootEl.classList.add('light-theme');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+        localStorage.setItem('tvc-theme', 'light');
+      } else {
+        rootEl.classList.remove('light-theme');
+        rootEl.classList.add('dark-theme');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        localStorage.setItem('tvc-theme', 'dark');
+      }
+      rootEl.classList.remove('auto-theme');
+    });
+
+    // Check cached theme on load
+    const cachedTheme = localStorage.getItem('tvc-theme');
+    if (cachedTheme === 'dark') {
+      rootEl.classList.remove('auto-theme');
+      rootEl.classList.add('dark-theme');
+      sunIcon.style.display = 'none';
+      moonIcon.style.display = 'block';
+    } else if (cachedTheme === 'light') {
+      rootEl.classList.remove('auto-theme');
+      rootEl.classList.add('light-theme');
+      sunIcon.style.display = 'block';
+      moonIcon.style.display = 'none';
+    }
+
+    // Toggle Delivery prices visibility state
+    function toggleDeliveryPrices() {
+      showDelivery = document.getElementById('price-toggle').checked;
+      const appDetails = document.querySelectorAll('.app-price-details');
+      appDetails.forEach(detail => {
+        detail.style.display = showDelivery ? 'block' : 'none';
+      });
+    }
+
+    // Change current Active Tab (Food vs Drink)
+    function changeMenuTab(tab) {
+      currentTab = tab;
+      activeCategory = 'Tất cả';
+      
+      // Update Tab button visuals
+      const btnFood = document.getElementById('tab-food');
+      const btnDrink = document.getElementById('tab-drink');
+      
+      if (tab === 'food') {
+        btnFood.classList.add('active');
+        btnDrink.classList.remove('active');
+      } else {
+        btnDrink.classList.add('active');
+        btnFood.classList.remove('active');
+      }
+
+      // Re-populate filters and items
+      buildCategoryPills();
+      filterMenu();
+    }
+
+    // Build unique category bubbles based on currently loaded items
+    function buildCategoryPills() {
+      const items = currentTab === 'food' ? foods : drinks;
+      const categories = ['Tất cả', ...new Set(items.map(i => i.category))];
+      
+      const pillsContainer = document.getElementById('category-pills');
+      pillsContainer.innerHTML = '';
+      
+      categories.forEach(cat => {
+        const pill = document.createElement('button');
+        pill.className = `category-pill ${cat === activeCategory ? 'active' : ''}`;
+        pill.textContent = cat;
+        pill.onclick = () => {
+          activeCategory = cat;
+          
+          // Update visual active classes
+          document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          
+          filterMenu();
+        };
+        pillsContainer.appendChild(pill);
+      });
+    }
+
+    // Filter Items dynamically in UI based on Search input and active category
+    function filterMenu() {
+      const query = removeAccents(document.getElementById('menu-search').value.toLowerCase().trim());
+      const items = currentTab === 'food' ? foods : drinks;
+      const grid = document.getElementById('menu-grid');
+      
+      grid.innerHTML = '';
+      
+      const filtered = items.filter(item => {
+        const matchesCategory = activeCategory === 'Tất cả' || item.category === activeCategory;
+        const normalizedName = removeAccents(item.name.toLowerCase());
+        const matchesSearch = normalizedName.includes(query);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="menu-empty">Không tìm thấy món ăn nào khớp với từ khóa tìm kiếm. Bạn hãy thử từ khóa khác nhé!</div>`;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'menu-card';
+        
+        // Build pricing layouts (handles single prices or structured sizes)
+        let priceHtml = '';
+        if (typeof item.price === 'number') {
+          priceHtml = `
+            <div class="menu-card-price-row">
+              <span class="price-label">Giá tại quán:</span>
+              <span class="price-value">${formatNumber(item.price)} đ</span>
+            </div>
+          `;
+        } else {
+          priceHtml = Object.entries(item.price).map(([size, pr]) => `
+            <div class="menu-card-price-row">
+              <span class="price-label">Giá (${size}):</span>
+              <span class="price-value">${formatNumber(pr)} đ</span>
+            </div>
+          `).join('');
+        }
+
+        // Build App specific deliveries
+        let appHtml = '';
+        if (item.grab || item.shopeefood ) {
+          appHtml = `<div class="app-price-details" style="display: ${showDelivery ? 'block' : 'none'}">`;
+          
+          if (item.grab) {
+            if (typeof item.grab === 'number') {
+              appHtml += `
+                <div class="app-price-row">
+                  <span class="app-brand">🟢 GrabFood:</span>
+                  <span class="app-val grab-val">${formatNumber(item.grab)} đ</span>
+                </div>
+              `;
+            } else {
+              appHtml += Object.entries(item.grab).map(([size, pr]) => `
+                <div class="app-price-row">
+                  <span class="app-brand">🟢 Grab (${size}):</span>
+                  <span class="app-val grab-val">${formatNumber(pr)} đ</span>
+                </div>
+              `).join('');
+            }
+          }
+          
+          if (item.shopeefood ) {
+            if (typeof item.shopeefood  === 'number') {
+              appHtml += `
+                <div class="app-price-row">
+                  <span class="app-brand">🍊 ShopeeFood:</span>
+                  <span class="app-val shopeefood-val">${formatNumber(item.shopeefood )} đ</span>
+                </div>
+              `;
+            } else {
+              appHtml += Object.entries(item.shopeefood ).map(([size, pr]) => `
+                <div class="app-price-row">
+                  <span class="app-brand">🍊 Shopee (${size}):</span>
+                  <span class="app-val shopeefood-val">${formatNumber(pr)} đ</span>
+                </div>
+              `).join('');
+            }
+          }
+          
+          appHtml += `</div>`;
+        }
+
+        card.innerHTML = `
+          <div class="menu-card-top">
+            <div class="menu-card-header">
+              <span class="menu-card-category">${item.category}</span>
+            </div>
+            <h3 class="menu-card-title">${item.name}</h3>
+          </div>
+          <div class="menu-card-price-box">
+            ${priceHtml}
+            ${appHtml}
+          </div>
+          <div class="menu-card-actions">
+            <a href="https://shopeefood.vn/dak-lak/quan-thao-van-chay-pham-ngu-lao?source_url=foody_ordernow_pc" target="_blank" class="card-action-btn shopee-btn" title="Đặt ShopeeFood">
+              <span class="btn-dot shopee-dot"></span> ShopeeFood
+            </a>
+            <a href="https://food.grab.com/vn/vi/restaurant/th%E1%BA%A3o-v%C3%A2n-chay-delivery/5-C3DKBENAMAVEV2?" target="_blank" class="card-action-btn grab-btn" title="Đặt GrabFood">
+              <span class="btn-dot grab-dot"></span> GrabFood
+            </a>
+          </div>
+        `;
+        
+        grid.appendChild(card);
+      });
+    }
+
+    // === ORIGINAL IMAGE MENU LIGHTBOX ENGINE ===
+    const screenshotsCount = 20; // Screenshot 76 to 95
+    const screenshotStart = 76;
+    let currentLightboxIdx = 0;
+
+    function buildGalleryGrid() {
+      const container = document.getElementById('menu-gallery-grid');
+      container.innerHTML = '';
+      
+      for (let i = 0; i < screenshotsCount; i++) {
+        const num = screenshotStart + i;
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.onclick = () => openLightbox(i);
+        
+        item.innerHTML = `
+          <img src="Hình/ảnh menu/Screenshot (${num}).png" alt="Trang menu ${i + 1}" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <div class="gallery-overlay">Trang ${i + 1}</div>
+        `;
+        container.appendChild(item);
+      }
+    }
+
+    function openLightbox(idx) {
+      currentLightboxIdx = idx;
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      const cap = document.getElementById('lightbox-caption');
+      
+      const num = screenshotStart + idx;
+      img.src = `Hình/ảnh menu/Screenshot (${num}).png`;
+      cap.textContent = `Trang Menu Số ${idx + 1} / ${screenshotsCount}`;
+      
+      lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Lock scrolling
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+      document.body.style.overflow = 'auto'; // Unlock scroll
+    }
+
+    function changeLightboxImage(dir) {
+      currentLightboxIdx += dir;
+      if (currentLightboxIdx >= screenshotsCount) {
+        currentLightboxIdx = 0; // Wrap around to first
+      } else if (currentLightboxIdx < 0) {
+        currentLightboxIdx = screenshotsCount - 1; // Wrap around to last
+      }
+      
+      const img = document.getElementById('lightbox-img');
+      const cap = document.getElementById('lightbox-caption');
+      const num = screenshotStart + currentLightboxIdx;
+      
+      img.src = `Hình/ảnh menu/Screenshot (${num}).png`;
+      cap.textContent = `Trang Menu Số ${currentLightboxIdx + 1} / ${screenshotsCount}`;
+    }
+
+    // Keyboard support for Lightbox
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox.style.display === 'flex') {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') changeLightboxImage(1);
+        if (e.key === 'ArrowLeft') changeLightboxImage(-1);
+      }
+    });
+
+    // Initialize application on page load
+    window.onload = () => {
+      buildCategoryPills();
+      filterMenu();
+      buildGalleryGrid();
+    };
+  </script>
+</body>
+</html>
