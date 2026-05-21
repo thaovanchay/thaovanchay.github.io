@@ -1502,6 +1502,24 @@
       .mobile-menu-btn {
         display: flex;
       }
+      .btn-book-nav {
+        display: none; /* Hide redundant desktop CTA button on mobile */
+      }
+      .header-container {
+        height: 56px; /* Ultra-sleek, slim header height */
+      }
+      .logo-img {
+        height: 36px; /* Smaller, cleaner logo */
+      }
+      .logo-text {
+        font-size: 1.15rem; /* Symmetrical one-line text size */
+      }
+      header {
+        padding: 0;
+      }
+      header.scrolled {
+        padding: 0;
+      }
       .hero-title {
         font-size: 2.8rem;
       }
@@ -1537,23 +1555,32 @@
       }
       .mobile-call-bar {
         flex-direction: column;
-        gap: 8px;
-        padding: 10px 16px;
+        gap: 6px;
+        padding: 6px 12px; /* Super compact padding */
       }
       .mobile-call-info {
         width: 100%;
         justify-content: center;
         border-bottom: 1px solid rgba(255,255,255,0.1);
-        padding-bottom: 6px;
-        gap: 8px;
+        padding-bottom: 4px;
+        gap: 6px;
       }
       .mobile-call-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 0.95rem;
+        width: 24px; /* Slimmer icon container */
+        height: 24px;
+        font-size: 0.8rem;
+      }
+      .mobile-call-text {
+        flex-direction: row; /* Horizontal layout! */
+        align-items: center;
+        gap: 4px;
+      }
+      .mobile-call-label {
+        font-size: 0.75rem;
+        margin-bottom: 0;
       }
       .mobile-call-number {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
       }
       .mobile-call-actions {
         width: 100%;
@@ -1563,7 +1590,7 @@
       }
       .mobile-action-btn {
         justify-content: center;
-        padding: 8px 4px;
+        padding: 6px 2px; /* Super slim button padding */
         font-size: 0.75rem;
         font-weight: 700;
         white-space: nowrap;
