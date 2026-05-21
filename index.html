@@ -1554,33 +1554,10 @@
         display: inline;
       }
       .mobile-call-bar {
-        flex-direction: column;
-        gap: 6px;
-        padding: 6px 12px; /* Super compact padding */
+        padding: 8px 12px; /* Extremely thin, compact padding */
       }
       .mobile-call-info {
-        width: 100%;
-        justify-content: center;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-        padding-bottom: 4px;
-        gap: 6px;
-      }
-      .mobile-call-icon {
-        width: 24px; /* Slimmer icon container */
-        height: 24px;
-        font-size: 0.8rem;
-      }
-      .mobile-call-text {
-        flex-direction: row; /* Horizontal layout! */
-        align-items: center;
-        gap: 4px;
-      }
-      .mobile-call-label {
-        font-size: 0.75rem;
-        margin-bottom: 0;
-      }
-      .mobile-call-number {
-        font-size: 0.85rem;
+        display: none; /* Hide the call text completely on mobile phones */
       }
       .mobile-call-actions {
         width: 100%;
@@ -1590,7 +1567,7 @@
       }
       .mobile-action-btn {
         justify-content: center;
-        padding: 6px 2px; /* Super slim button padding */
+        padding: 8px 2px; /* Slim and modern button spacing */
         font-size: 0.75rem;
         font-weight: 700;
         white-space: nowrap;
@@ -1751,11 +1728,18 @@
               <span class="slider"></span>
             </label>
           </div>
+        <!-- Global App Ordering Buttons (Desktop & Tablet) -->
+        <div class="global-delivery-links" id="desktop-delivery-links">
+          <div class="delivery-prompt">Ấn để truy cập cửa hàng đặt món trực tuyến chính thức của Thảo Vân Chay:</div>
+          <div class="delivery-buttons">
+            <a href="https://shopeefood.vn/dak-lak/quan-thao-van-chay-pham-ngu-lao?source_url=foody_ordernow_pc" target="_blank" class="delivery-btn shopee-global">
+              🍊 Đặt món trên ShopeeFood
+            </a>
+            <a href="https://food.grab.com/vn/vi/restaurant/th%E1%BA%A3o-v%C3%A2n-chay-delivery/5-C3DKBENAMAVEV2?" target="_blank" class="delivery-btn grab-global">
+              🟢 Đặt món trên GrabFood
+            </a>
+          </div>
         </div>
-
-
-
-        <!-- Category Pill Filters (populated dynamically) -->
         <div class="category-pills" id="category-pills">
           <!-- Populated by JS -->
         </div>
