@@ -1021,6 +1021,47 @@
       border: 1px dashed var(--border);
     }
 
+    /* Expand/Collapse Button Container */
+    .menu-expand-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+      width: 100%;
+    }
+
+    .btn-expand-menu {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      border: 2px solid var(--primary-light);
+      background-color: transparent;
+      color: var(--primary-light);
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    :root.dark-theme .btn-expand-menu,
+    :root.auto-theme .btn-expand-menu {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-expand-menu:hover {
+      background-color: var(--primary-light);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    :root.dark-theme .btn-expand-menu:hover,
+    :root.auto-theme .btn-expand-menu:hover {
+      background-color: var(--accent);
+      color: var(--primary-dark);
+    }
+
     /* === VISUAL MENU GALLERY === */
     .gallery-section {
       padding: 100px 0;
@@ -1750,6 +1791,9 @@
       <div class="menu-grid" id="menu-grid">
         <!-- Populated by JS -->
       </div>
+
+      <!-- Expand/Collapse Button Container -->
+      <div class="menu-expand-container" id="menu-expand-container"></div>
     </div>
   </section>
 
@@ -1939,6 +1983,7 @@
     let currentTab = 'food'; // 'food' or 'drink'
     let activeCategory = 'Tất cả';
     let showDelivery = false;
+    let isMenuExpanded = false;
 
     // Helper functions
     function removeAccents(str) {
@@ -2031,6 +2076,7 @@
     function changeMenuTab(tab) {
       currentTab = tab;
       activeCategory = 'Tất cả';
+      isMenuExpanded = false; // Reset expansion on tab change
       
       // Update Tab button visuals
       const btnFood = document.getElementById('tab-food');
@@ -2063,6 +2109,7 @@
         pill.textContent = cat;
         pill.onclick = () => {
           activeCategory = cat;
+          isMenuExpanded = false; // Reset expansion on category change
           
           // Update visual active classes
           document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
@@ -2079,6 +2126,7 @@
       const query = removeAccents(document.getElementById('menu-search').value.toLowerCase().trim());
       const items = currentTab === 'food' ? foods : drinks;
       const grid = document.getElementById('menu-grid');
+      const expandContainer = document.getElementById('menu-expand-container');
       
       grid.innerHTML = '';
       
@@ -2091,10 +2139,20 @@
 
       if (filtered.length === 0) {
         grid.innerHTML = `<div class="menu-empty">Không tìm thấy món ăn nào khớp với từ khóa tìm kiếm. Bạn hãy thử từ khóa khác nhé!</div>`;
+        expandContainer.innerHTML = '';
         return;
       }
 
-      filtered.forEach(item => {
+      // Check if search query is active
+      const isSearching = query.length > 0;
+      const showExpandButton = filtered.length > 3 && !isSearching;
+      
+      // Determine array slices
+      const itemsToShow = showExpandButton && !isMenuExpanded 
+        ? filtered.slice(0, 3) 
+        : filtered;
+
+      itemsToShow.forEach(item => {
         const card = document.createElement('div');
         card.className = 'menu-card';
         
@@ -2183,6 +2241,35 @@
         
         grid.appendChild(card);
       });
+
+      // Render expand/collapse button
+      if (showExpandButton) {
+        if (!isMenuExpanded) {
+          expandContainer.innerHTML = `
+            <button class="btn-expand-menu" onclick="toggleMenuExpansion(true)">
+              <span>Xem thêm thực đơn</span> 🗎
+            </button>
+          `;
+        } else {
+          expandContainer.innerHTML = `
+            <button class="btn-expand-menu" onclick="toggleMenuExpansion(false)">
+              <span>Thu gọn thực đơn</span> 🗎
+            </button>
+          `;
+        }
+      } else {
+        expandContainer.innerHTML = '';
+      }
+    }
+
+    // Toggle menu expansion with smooth scroll back to menu head
+    function toggleMenuExpansion(expand) {
+      isMenuExpanded = expand;
+      filterMenu();
+      
+      if (!expand) {
+        document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
     // === ORIGINAL IMAGE MENU LIGHTBOX ENGINE ===
