@@ -613,15 +613,18 @@
     /* Search & Toggle Box */
     .search-filter-box {
       width: 100%;
-      max-width: 800px;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
+      max-width: 1100px;
+      display: flex;
+      flex-wrap: wrap;
       gap: 20px;
       align-items: center;
+      justify-content: space-between;
     }
 
     .search-wrapper {
       position: relative;
+      flex: 1;
+      min-width: 280px;
     }
 
     .search-input {
@@ -652,12 +655,22 @@
       height: 20px;
     }
 
+    /* App Actions Wrapper */
+    .app-actions-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
     /* App Price Toggle Switch */
     .toggle-wrapper {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 12px;
+      padding-right: 16px;
+      border-right: 1px solid var(--border);
     }
 
     .toggle-label {
@@ -889,35 +902,6 @@
     .shopeefood-val { color: #ee4d2d; }
 
     /* Direct app ordering buttons and cards action */
-    .global-delivery-links {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      max-width: 800px;
-      margin-top: 12px;
-      background-color: rgba(var(--primary-rgb), 0.03);
-      border: 1px dashed var(--accent);
-      padding: 16px;
-      border-radius: var(--radius);
-      text-align: center;
-    }
-    
-    .delivery-prompt {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-    
-    .delivery-buttons {
-      display: flex;
-      gap: 16px;
-      width: 100%;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    
     .delivery-btn {
       padding: 10px 24px;
       border-radius: var(--radius-sm);
@@ -928,6 +912,12 @@
       gap: 8px;
       transition: var(--transition);
       box-shadow: var(--shadow-sm);
+      text-decoration: none;
+    }
+
+    .delivery-btn.compact {
+      padding: 8px 16px;
+      font-size: 0.85rem;
     }
     
     .delivery-btn.shopee-global {
@@ -1568,11 +1558,23 @@
         font-size: 2rem;
       }
       .search-filter-box {
-        grid-template-columns: 1fr;
-        gap: 16px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .app-actions-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
       }
       .toggle-wrapper {
         justify-content: flex-start;
+        border-right: none;
+        padding-right: 0;
+        margin-bottom: 8px;
+      }
+      .delivery-btn.compact {
+        width: 100%;
+        justify-content: center;
       }
       .lightbox-btn {
         width: 40px;
@@ -1762,23 +1764,19 @@
             <input type="text" id="menu-search" class="search-input" placeholder="Tìm tên món chay (ví dụ: lẩu, cơm, súp...)" oninput="filterMenu()">
           </div>
 
-          <div class="toggle-wrapper">
-            <span class="toggle-label">Xem so sánh giá App (Grab/Shopee)</span>
-            <label class="switch">
-              <input type="checkbox" id="price-toggle" onchange="toggleDeliveryPrices()">
-              <span class="slider"></span>
-            </label>
-          </div>
-        </div>
-        <!-- Global App Ordering Buttons (Desktop & Tablet) -->
-        <div class="global-delivery-links" id="desktop-delivery-links">
-          <div class="delivery-prompt">Ấn để truy cập cửa hàng đặt món trực tuyến chính thức của Thảo Vân Chay:</div>
-          <div class="delivery-buttons">
-            <a href="https://shopeefood.vn/dak-lak/quan-thao-van-chay-pham-ngu-lao?source_url=foody_ordernow_pc" target="_blank" class="delivery-btn shopee-global">
-              🍊 Đặt món trên ShopeeFood
+          <div class="app-actions-wrapper">
+            <div class="toggle-wrapper">
+              <span class="toggle-label">So sánh giá App</span>
+              <label class="switch">
+                <input type="checkbox" id="price-toggle" onchange="toggleDeliveryPrices()">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <a href="https://shopeefood.vn/dak-lak/quan-thao-van-chay-pham-ngu-lao?source_url=foody_ordernow_pc" target="_blank" class="delivery-btn shopee-global compact" title="Đặt trên ShopeeFood">
+              🍊 ShopeeFood
             </a>
-            <a href="https://food.grab.com/vn/vi/restaurant/th%E1%BA%A3o-v%C3%A2n-chay-delivery/5-C3DKBENAMAVEV2?" target="_blank" class="delivery-btn grab-global">
-              🟢 Đặt món trên GrabFood
+            <a href="https://food.grab.com/vn/vi/restaurant/th%E1%BA%A3o-v%C3%A2n-chay-delivery/5-C3DKBENAMAVEV2?" target="_blank" class="delivery-btn grab-global compact" title="Đặt trên GrabFood">
+              🟢 GrabFood
             </a>
           </div>
         </div>
