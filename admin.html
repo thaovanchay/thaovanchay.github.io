@@ -687,24 +687,6 @@ Thảo Vân Chay, Café & Restaurant
           ctx.drawImage(offCanvas, logoX, logoY);
           // ------------------------------------------
 
-          // Draw custom text "Thảo Vân chay" below the logo (Slide Format)
-          const fontSize = canvas.width * 0.022; // Smaller font
-          ctx.font = `bold ${fontSize}px "Outfit", sans-serif`;
-          ctx.textAlign = "center";
-          ctx.textBaseline = "top";
-          
-          const textX = logoX + (logoWidth / 2);
-          const textY = logoY + logoHeight + (padding * 0.2); // Closer to logo
-          
-          // Jade Green outline
-          ctx.strokeStyle = "#00A86B"; // Xanh lá ngọc chuẩn
-          ctx.lineWidth = fontSize * 0.15;
-          ctx.strokeText("Thảo Vân chay", textX, textY);
-          
-          // Solid white fill
-          ctx.fillStyle = "#ffffff";
-          ctx.fillText("Thảo Vân chay", textX, textY);
-          
           // Convert final composed canvas to Blob
           canvas.toBlob((blob) => {
             if (blob) resolve(blob);
