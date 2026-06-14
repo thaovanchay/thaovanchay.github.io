@@ -708,11 +708,16 @@ Thảo Vân Chay, Café & Restaurant
       };
       
       img.onerror = () => {
-        console.warn("Original image CORS blocked. Cannot watermark. Falling back to direct URL.");
+        console.warn("Lỗi tải ảnh: Link bạn dán không phải là định dạng ảnh hợp lệ (.jpg, .png) hoặc bị chặn bảo mật gắt gao. Bỏ qua đóng dấu logo.");
         resolve(null); 
       };
       
-      img.src = imageUrl;
+      // Bypass strict CORS for external images using a reliable proxy
+      if (imageUrl.startsWith('http') && !imageUrl.includes('oaidalleapiprodscus')) {
+        img.src = `https://api.allorigins.win/raw?url=${encodeURIComponent(imageUrl)}`;
+      } else {
+        img.src = imageUrl;
+      }
     });
   }
 
