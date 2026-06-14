@@ -710,9 +710,9 @@ Thảo Vân Chay, Café & Restaurant
         resolve(null); 
       };
       
-      // Bypass strict CORS for external images using a reliable proxy
+      // Bypass strict CORS for external images using a reliable image proxy
       if (imageUrl.startsWith('http') && !imageUrl.includes('oaidalleapiprodscus')) {
-        img.src = `https://corsproxy.io/?${encodeURIComponent(imageUrl)}`;
+        img.src = `https://images.weserv.nl/?url=${encodeURIComponent(imageUrl)}`;
       } else {
         img.src = imageUrl;
       }
