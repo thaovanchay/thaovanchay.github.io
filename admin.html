@@ -712,7 +712,7 @@ Thảo Vân Chay, Café & Restaurant
       
       // Bypass strict CORS for external images using a reliable proxy
       if (imageUrl.startsWith('http') && !imageUrl.includes('oaidalleapiprodscus')) {
-        img.src = `https://api.allorigins.win/raw?url=${encodeURIComponent(imageUrl)}`;
+        img.src = `https://corsproxy.io/?${encodeURIComponent(imageUrl)}`;
       } else {
         img.src = imageUrl;
       }
