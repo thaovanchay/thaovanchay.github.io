@@ -642,6 +642,80 @@ Thảo Vân Chay, Café & Restaurant
     }
   });
 
+  // Utility: Process image, add watermark logo and text, return Blob
+  async function processWatermark(imageUrl) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "Anonymous"; // Allow canvas reading
+      
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        
+        // Draw original AI or provided image
+        ctx.drawImage(img, 0, 0);
+
+        // Logo configuration
+        const logoWidth = canvas.width * 0.15; // 15% of image width
+        const padding = canvas.width * 0.05;
+        
+        const logo = new Image();
+        logo.crossOrigin = "Anonymous";
+        // Fetch logo directly from GitHub raw to bypass local file CORS constraints
+        logo.src = "https://raw.githubusercontent.com/levu5cms/thaovanchay/main/H%C3%ACnh/LOGO%20-%20TH%E1%BA%A2O%20V%C3%82N%20-%20PNG.png";
+        
+        logo.onload = () => {
+          const logoRatio = logo.height / logo.width;
+          const logoHeight = logoWidth * logoRatio;
+          
+          // Position Top-Right corner
+          const logoX = canvas.width - logoWidth - padding;
+          const logoY = padding;
+          
+          ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
+
+          // Draw custom text "Thảo Vân chay" below the logo (Slide Format)
+          const fontSize = canvas.width * 0.035;
+          ctx.font = `bold ${fontSize}px "Outfit", sans-serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "top";
+          
+          const textX = logoX + (logoWidth / 2);
+          const textY = logoY + logoHeight + (padding * 0.2);
+          
+          // Teal outline
+          ctx.strokeStyle = "#00B0A4";
+          ctx.lineWidth = fontSize * 0.12;
+          ctx.strokeText("Thảo Vân chay", textX, textY);
+          
+          // Solid white fill
+          ctx.fillStyle = "#ffffff";
+          ctx.fillText("Thảo Vân chay", textX, textY);
+          
+          // Convert final composed canvas to Blob
+          canvas.toBlob((blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error("Lỗi Canvas toBlob"));
+          }, 'image/jpeg', 0.95);
+        };
+        
+        logo.onerror = () => {
+          console.warn("Logo load failed. Proceeding without logo.");
+          canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.95);
+        };
+      };
+      
+      img.onerror = () => {
+        console.warn("Original image CORS blocked. Cannot watermark. Falling back to direct URL.");
+        resolve(null); 
+      };
+      
+      img.src = imageUrl;
+    });
+  }
+
   // Call Facebook Graph API to publish or schedule
   btnPublish.addEventListener('click', async () => {
     const pageId = fbPageIdInput.value.trim();
@@ -668,10 +742,20 @@ Thảo Vân Chay, Café & Restaurant
       formData.append("access_token", token);
       
       if (imageUrl) {
-        // If image exists, post to /photos with caption
-        url = `https://graph.facebook.com/v20.0/${pageId}/photos`;
-        formData.append("url", imageUrl);
-        formData.append("caption", content);
+        // Attempt to watermark image via HTML5 Canvas
+        const watermarkedBlob = await processWatermark(imageUrl);
+        
+        if (watermarkedBlob) {
+          // If canvas composite successful, upload Blob file via "source"
+          url = `https://graph.facebook.com/v20.0/${pageId}/photos`;
+          formData.append("source", watermarkedBlob, "watermarked.jpg");
+          formData.append("caption", content);
+        } else {
+          // If canvas composite fails (e.g. strict CORS image), fallback to URL linking
+          url = `https://graph.facebook.com/v20.0/${pageId}/photos`;
+          formData.append("url", imageUrl);
+          formData.append("caption", content);
+        }
       } else {
         // If text only
         formData.append("message", content);
