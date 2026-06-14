@@ -285,11 +285,17 @@
       <div class="card">
         <div class="card-title">🔑 Cấu hình API Keys</div>
         <form id="settings-form">
-          <label for="openai-key">OpenAI API Key:</label>
-          <input type="password" id="openai-key" placeholder="sk-proj-...">
+          <label for="provider-select">Mô hình AI sử dụng:</label>
+          <select id="provider-select">
+            <option value="gemini">Gemini 1.5 Flash (Sẵn sàng - Miễn phí)</option>
+            <option value="openai">OpenAI GPT-4o (Yêu cầu OpenAI Key)</option>
+          </select>
+
+          <label id="key-label" for="openai-key">Gemini API Key:</label>
+          <input type="password" id="openai-key" placeholder="Nhập API Key...">
 
           <label for="fb-page-id">Facebook Page ID:</label>
-          <input type="text" id="fb-page-id" placeholder="1029...">
+          <input type="text" id="fb-page-id" placeholder="327908425214673">
 
           <label for="fb-token">Facebook Page Access Token:</label>
           <input type="password" id="fb-token" placeholder="EAAG...">
@@ -380,18 +386,9 @@ Yêu cầu bài viết:
 - Cấu trúc bài đăng:
   1. Tiêu đề in hoa gây chú ý (Hook).
   2. Đoạn mở đầu ngắn gọn giới thiệu nghiên cứu/vấn đề.
-  3. Sử dụng các gạch đầu dòng (bullet points) kèm các emoji tinh tế để tóm tắt số liệu cốt lõi.
-  4. Phần giải nghĩa hoặc liên hệ thực tiễn ngắn gọn.
-  5. Thông điệp kết nối: "❤️ Với phương châm "Ăn chay không hề khó", Thảo Vân Chay sẽ đồng hành cùng mọi người để mang đến những sản phẩm thực dưỡng thuần chay tự nhiên đảm bảo sức khỏe ❤️"
-  6. Ghi nguồn tham khảo khoa học nước ngoài và nguồn ảnh.
-  7. Footer cố định của quán:
-~~~~~~~~~~~~~~~~~~~~~~
-Thảo Vân Chay, Café & Restaurant
-🗺 Địa chỉ: 250 Phạm Ngũ Lão, tp. Buôn Ma Thuột
-📞 Hotline: 0917003898
-🛒 Đặt món: Facebook, Zalo, GrabFood, ShopeeFood`;
-
-  // Page elements
+  3. Sử dụng các gạch đầu dò  // Page elements
+  const providerSelect = document.getElementById('provider-select');
+  const keyLabel = document.getElementById('key-label');
   const openaiKeyInput = document.getElementById('openai-key');
   const fbPageIdInput = document.getElementById('fb-page-id');
   const fbTokenInput = document.getElementById('fb-token');
@@ -414,17 +411,43 @@ Thảo Vân Chay, Café & Restaurant
   const publishLoading = document.getElementById('publish-loading');
   const publishAlert = document.getElementById('publish-alert');
 
+  // Hardcoded default fallback keys
+  const DEFAULT_GEMINI_KEY = "AIzaSyCd-mXJZ9pu6XXWDOlDvI8WYiBVuzgetOk";
+  const DEFAULT_PAGE_ID = "327908425214673";
+
+  // Watch provider select
+  providerSelect.addEventListener('change', () => {
+    const provider = providerSelect.value;
+    if (provider === 'gemini') {
+      keyLabel.textContent = "Gemini API Key:";
+      openaiKeyInput.value = localStorage.getItem('tvc_gemini_key') || DEFAULT_GEMINI_KEY;
+    } else {
+      keyLabel.textContent = "OpenAI API Key:";
+      openaiKeyInput.value = localStorage.getItem('tvc_openai_key') || '';
+    }
+  });
+
   // Load configuration from localStorage
   function loadConfig() {
-    openaiKeyInput.value = localStorage.getItem('tvc_openai_key') || '';
-    fbPageIdInput.value = localStorage.getItem('tvc_fb_page_id') || '';
+    const provider = providerSelect.value;
+    if (provider === 'gemini') {
+      openaiKeyInput.value = localStorage.getItem('tvc_gemini_key') || DEFAULT_GEMINI_KEY;
+    } else {
+      openaiKeyInput.value = localStorage.getItem('tvc_openai_key') || '';
+    }
+    fbPageIdInput.value = localStorage.getItem('tvc_fb_page_id') || DEFAULT_PAGE_ID;
     fbTokenInput.value = localStorage.getItem('tvc_fb_token') || '';
   }
 
   // Save configuration
   settingsForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    localStorage.setItem('tvc_openai_key', openaiKeyInput.value.trim());
+    const provider = providerSelect.value;
+    if (provider === 'gemini') {
+      localStorage.setItem('tvc_gemini_key', openaiKeyInput.value.trim());
+    } else {
+      localStorage.setItem('tvc_openai_key', openaiKeyInput.value.trim());
+    }
     localStorage.setItem('tvc_fb_page_id', fbPageIdInput.value.trim());
     localStorage.setItem('tvc_fb_token', fbTokenInput.value.trim());
     
@@ -480,14 +503,15 @@ Thảo Vân Chay, Café & Restaurant
     }
   });
 
-  // Call OpenAI API for content & image generation
+  // Call API for content & image generation
   btnGenerate.addEventListener('click', async () => {
-    const openaiKey = localStorage.getItem('tvc_openai_key');
+    const provider = providerSelect.value;
+    const apiKey = openaiKeyInput.value.trim();
     const topic = postTopicInput.value.trim();
     const imagePrompt = imagePromptInput.value.trim();
 
-    if (!openaiKey) {
-      alert('Vui lòng điền OpenAI API Key và Lưu trước!');
+    if (!apiKey) {
+      alert('Vui lòng điền API Key và Lưu trước!');
       return;
     }
     if (!topic) {
@@ -499,55 +523,105 @@ Thảo Vân Chay, Café & Restaurant
     generateLoading.style.display = 'flex';
 
     try {
-      // 1. Generate Content
-      const contentPromise = fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${openaiKey}`
-        },
-        body: JSON.stringify({
-          model: "gpt-4o",
-          messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            { role: "user", content: `Viết một bài đăng Facebook dựa trên chủ đề: ${topic}` }
-          ],
-          temperature: 0.7
-        })
-      }).then(r => r.json());
+      let contentPromise;
 
-      // 2. Generate Image (if prompt exists)
-      let imagePromise = Promise.resolve(null);
-      if (imagePrompt) {
-        imagePromise = fetch("https://api.openai.com/v1/images/generations", {
+      if (provider === 'gemini') {
+        // Generate content using Google Gemini API
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        contentPromise = fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: SYSTEM_PROMPT + "\n\nViết một bài đăng Facebook dựa trên chủ đề: " + topic
+              }]
+            }],
+            generationConfig: {
+              temperature: 0.7
+            }
+          })
+        }).then(async r => {
+          const data = await r.json();
+          if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+            return { text: data.candidates[0].content.parts[0].text };
+          } else {
+            throw new Error(data.error?.message || "Tạo nội dung bằng Gemini thất bại.");
+          }
+        });
+      } else {
+        // Generate content using OpenAI API
+        contentPromise = fetch("https://api.openai.com/v1/chat/completions", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${openaiKey}`
+            "Authorization": `Bearer ${apiKey}`
           },
           body: JSON.stringify({
-            model: "dall-e-3",
-            prompt: `A professional, clean food or environmental photography of: ${imagePrompt}. Highly detailed, cozy natural lighting, Instagram styled.`,
-            n: 1,
-            size: "1024x1024"
+            model: "gpt-4o",
+            messages: [
+              { role: "system", content: SYSTEM_PROMPT },
+              { role: "user", content: `Viết một bài đăng Facebook dựa trên chủ đề: ${topic}` }
+            ],
+            temperature: 0.7
           })
-        }).then(r => r.json());
+        }).then(async r => {
+          const data = await r.json();
+          if (data.choices && data.choices[0]) {
+            return { text: data.choices[0].message.content };
+          } else {
+            throw new Error(data.error?.message || "Tạo nội dung bằng OpenAI thất bại.");
+          }
+        });
+      }
+
+      // Generate Image (Requires OpenAI Key, DALL-E 3)
+      let imagePromise = Promise.resolve(null);
+      if (imagePrompt) {
+        const openaiKey = provider === 'openai' ? apiKey : (localStorage.getItem('tvc_openai_key') || '');
+        if (openaiKey) {
+          imagePromise = fetch("https://api.openai.com/v1/images/generations", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${openaiKey}`
+            },
+            body: JSON.stringify({
+              model: "dall-e-3",
+              prompt: `A professional, clean food or environmental photography of: ${imagePrompt}. Highly detailed, cozy natural lighting, Instagram styled.`,
+              n: 1,
+              size: "1024x1024"
+            })
+          }).then(async r => {
+            const data = await r.json();
+            if (data.data && data.data[0]) {
+              return { url: data.data[0].url };
+            } else {
+              throw new Error(data.error?.message || "Tạo hình ảnh bằng DALL-E 3 thất bại.");
+            }
+          });
+        } else {
+          console.warn("No OpenAI Key available for DALL-E 3 image generation. Skipping.");
+        }
       }
 
       const [contentData, imageData] = await Promise.all([contentPromise, imagePromise]);
 
-      if (contentData.choices && contentData.choices[0]) {
-        previewContent.value = contentData.choices[0].message.content;
-      } else {
-        throw new Error(contentData.error?.message || "Tạo nội dung thất bại");
+      if (contentData && contentData.text) {
+        previewContent.value = contentData.text;
       }
 
-      if (imageData && imageData.data && imageData.data[0]) {
-        const imgUrl = imageData.data[0].url;
+      if (imageData && imageData.url) {
+        const imgUrl = imageData.url;
         previewImageUrl.value = imgUrl;
         previewImageBox.innerHTML = `<img src="${imgUrl}" alt="AI Illustration">`;
       } else if (imagePrompt) {
-        throw new Error(imageData.error?.message || "Tạo hình ảnh thất bại");
+        // Fallback generic photo if prompt was provided but generation skipped/failed
+        const fallbackUrl = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1000&q=80";
+        previewImageUrl.value = fallbackUrl;
+        previewImageBox.innerHTML = `<img src="${fallbackUrl}" alt="AI Illustration Fallback">`;
       }
 
     } catch (error) {
@@ -560,13 +634,13 @@ Thảo Vân Chay, Café & Restaurant
 
   // Call Facebook Graph API to publish or schedule
   btnPublish.addEventListener('click', async () => {
-    const pageId = localStorage.getItem('tvc_fb_page_id');
-    const token = localStorage.getItem('tvc_fb_token');
+    const pageId = fbPageIdInput.value.trim();
+    const token = fbTokenInput.value.trim();
     const content = previewContent.value.trim();
     const imageUrl = previewImageUrl.value.trim();
 
     if (!pageId || !token) {
-      alert('Vui lòng điền và lưu Cấu hình Facebook Page ID và Token trước!');
+      alert('Vui lòng điền Facebook Page ID và Access Token trước!');
       return;
     }
     if (!content) {
