@@ -624,14 +624,12 @@ Thảo Vân Chay, Café & Restaurant
       }
 
       if (imageData && imageData.url) {
-        const imgUrl = imageData.url;
-        previewImageUrl.value = imgUrl;
-        previewImageBox.innerHTML = `<img src="${imgUrl}" alt="AI Illustration">`;
+        previewImageUrl.value = imageData.url;
+        previewImageUrl.dispatchEvent(new Event('input'));
       } else if (imagePrompt) {
         // Fallback generic photo if prompt was provided but generation skipped/failed
-        const fallbackUrl = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1000&q=80";
-        previewImageUrl.value = fallbackUrl;
-        previewImageBox.innerHTML = `<img src="${fallbackUrl}" alt="AI Illustration Fallback">`;
+        previewImageUrl.value = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1000&q=80";
+        previewImageUrl.dispatchEvent(new Event('input'));
       }
 
     } catch (error) {
@@ -800,10 +798,17 @@ Thảo Vân Chay, Café & Restaurant
   });
 
   // Watch Image URL input field
-  previewImageUrl.addEventListener('input', () => {
+  previewImageUrl.addEventListener('input', async () => {
     const url = previewImageUrl.value.trim();
     if (url) {
-      previewImageBox.innerHTML = `<img src="${url}" alt="AI Illustration">`;
+      previewImageBox.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text-muted)"><div class="spinner"></div><br>Đang tải và đóng dấu logo...</div>`;
+      const blob = await processWatermark(url);
+      if (blob) {
+        const objectUrl = URL.createObjectURL(blob);
+        previewImageBox.innerHTML = `<img src="${objectUrl}" alt="Watermarked Illustration" style="max-width: 100%; border-radius: 6px;">`;
+      } else {
+        previewImageBox.innerHTML = `<img src="${url}" alt="AI Illustration">`;
+      }
     } else {
       previewImageBox.innerHTML = `<div class="preview-placeholder">Ảnh minh họa AI sẽ hiển thị ở đây</div>`;
     }
