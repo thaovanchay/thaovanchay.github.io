@@ -656,8 +656,8 @@ Thảo Vân Chay, Café & Restaurant
         ctx.drawImage(img, 0, 0);
 
         // Logo configuration
-        const logoWidth = canvas.width * 0.15; // 15% of image width
-        const padding = canvas.width * 0.05;
+        const logoWidth = canvas.width * 0.08; // 8% of image width (smaller)
+        const padding = canvas.width * 0.025; // 2.5% padding (higher and closer to the edge)
         
         const logo = new Image();
         logo.crossOrigin = "Anonymous";
@@ -668,24 +668,24 @@ Thảo Vân Chay, Café & Restaurant
           const logoRatio = logo.height / logo.width;
           const logoHeight = logoWidth * logoRatio;
           
-          // Position Top-Right corner
+          // Position Top-Right corner (higher)
           const logoX = canvas.width - logoWidth - padding;
           const logoY = padding;
           
           ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
 
           // Draw custom text "Thảo Vân chay" below the logo (Slide Format)
-          const fontSize = canvas.width * 0.035;
+          const fontSize = canvas.width * 0.022; // Smaller font
           ctx.font = `bold ${fontSize}px "Outfit", sans-serif`;
           ctx.textAlign = "center";
           ctx.textBaseline = "top";
           
           const textX = logoX + (logoWidth / 2);
-          const textY = logoY + logoHeight + (padding * 0.2);
+          const textY = logoY + logoHeight + (padding * 0.2); // Closer to logo
           
-          // Teal outline
-          ctx.strokeStyle = "#00B0A4";
-          ctx.lineWidth = fontSize * 0.12;
+          // Jade Green outline
+          ctx.strokeStyle = "#00A86B"; // Xanh lá ngọc chuẩn
+          ctx.lineWidth = fontSize * 0.15;
           ctx.strokeText("Thảo Vân chay", textX, textY);
           
           // Solid white fill
