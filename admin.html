@@ -287,11 +287,11 @@
         <form id="settings-form">
           <label for="provider-select">Mô hình AI sử dụng:</label>
           <select id="provider-select">
-            <option value="gemini">Gemini 1.5 Flash (Sẵn sàng - Miễn phí)</option>
+            <option value="minimax">VNPAY Minimax 2.7 (Mặc định)</option>
             <option value="openai">OpenAI GPT-4o (Yêu cầu OpenAI Key)</option>
           </select>
 
-          <label id="key-label" for="openai-key">Gemini API Key:</label>
+          <label id="key-label" for="openai-key">Minimax API Key:</label>
           <input type="password" id="openai-key" placeholder="Nhập API Key...">
 
           <label for="fb-page-id">Facebook Page ID:</label>
@@ -386,7 +386,18 @@ Yêu cầu bài viết:
 - Cấu trúc bài đăng:
   1. Tiêu đề in hoa gây chú ý (Hook).
   2. Đoạn mở đầu ngắn gọn giới thiệu nghiên cứu/vấn đề.
-  3. Sử dụng các gạch đầu dò  // Page elements
+  3. Sử dụng các gạch đầu dòng (bullet points) kèm các emoji tinh tế để tóm tắt số liệu cốt lõi.
+  4. Phần giải nghĩa hoặc liên hệ thực tiễn ngắn gọn.
+  5. Thông điệp kết nối: "❤️ Với phương châm \"Ăn chay không hề khó\", Thảo Vân Chay sẽ đồng hành cùng mọi người để mang đến những sản phẩm thực dưỡng thuần chay tự nhiên đảm bảo sức khỏe ❤️"
+  6. Ghi nguồn tham khảo khoa học nước ngoài và nguồn ảnh.
+  7. Footer cố định của quán:
+~~~~~~~~~~~~~~~~~~~~~~
+Thảo Vân Chay, Café & Restaurant
+🗺 Địa chỉ: 250 Phạm Ngũ Lão, tp. Buôn Ma Thuột
+📞 Hotline: 0917003898
+🛒 Đặt món: Facebook, Zalo, GrabFood, ShopeeFood`;
+
+  // Page elements
   const providerSelect = document.getElementById('provider-select');
   const keyLabel = document.getElementById('key-label');
   const openaiKeyInput = document.getElementById('openai-key');
@@ -412,15 +423,15 @@ Yêu cầu bài viết:
   const publishAlert = document.getElementById('publish-alert');
 
   // Hardcoded default fallback keys
-  const DEFAULT_GEMINI_KEY = "";
+  const DEFAULT_MINIMAX_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJ1c2VyTmFtZVwiOlwidnVsXCIsXCJlbWFpbFwiOlwidnVsXCIsXCJ1c2VyRnVsbE5hbWVcIjpcIlbFqSwgTMOqXCJ9IiwiaWF0IjoxNzczNjQ0ODAwLCJleHAiOjE3NzM2NjI4MDB9.ymO7TPstdDQFxX339-Q3XR7xtvCixtPK1-ywHYP9zV0";
   const DEFAULT_PAGE_ID = "327908425214673";
 
   // Watch provider select
   providerSelect.addEventListener('change', () => {
     const provider = providerSelect.value;
-    if (provider === 'gemini') {
-      keyLabel.textContent = "Gemini API Key:";
-      openaiKeyInput.value = localStorage.getItem('tvc_gemini_key') || DEFAULT_GEMINI_KEY;
+    if (provider === 'minimax') {
+      keyLabel.textContent = "Minimax API Key:";
+      openaiKeyInput.value = localStorage.getItem('tvc_minimax_key') || DEFAULT_MINIMAX_KEY;
     } else {
       keyLabel.textContent = "OpenAI API Key:";
       openaiKeyInput.value = localStorage.getItem('tvc_openai_key') || '';
@@ -430,8 +441,8 @@ Yêu cầu bài viết:
   // Load configuration from localStorage
   function loadConfig() {
     const provider = providerSelect.value;
-    if (provider === 'gemini') {
-      openaiKeyInput.value = localStorage.getItem('tvc_gemini_key') || DEFAULT_GEMINI_KEY;
+    if (provider === 'minimax') {
+      openaiKeyInput.value = localStorage.getItem('tvc_minimax_key') || DEFAULT_MINIMAX_KEY;
     } else {
       openaiKeyInput.value = localStorage.getItem('tvc_openai_key') || '';
     }
@@ -443,8 +454,8 @@ Yêu cầu bài viết:
   settingsForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const provider = providerSelect.value;
-    if (provider === 'gemini') {
-      localStorage.setItem('tvc_gemini_key', openaiKeyInput.value.trim());
+    if (provider === 'minimax') {
+      localStorage.setItem('tvc_minimax_key', openaiKeyInput.value.trim());
     } else {
       localStorage.setItem('tvc_openai_key', openaiKeyInput.value.trim());
     }
@@ -525,30 +536,29 @@ Yêu cầu bài viết:
     try {
       let contentPromise;
 
-      if (provider === 'gemini') {
-        // Generate content using Google Gemini API
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+      if (provider === 'minimax') {
+        // Generate content using VNPAY Minimax API
+        const url = `https://genai.vnpay.vn/aigateway/llm_minimax/v1/chat/completions`;
         contentPromise = fetch(url, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
           },
           body: JSON.stringify({
-            contents: [{
-              parts: [{
-                text: SYSTEM_PROMPT + "\n\nViết một bài đăng Facebook dựa trên chủ đề: " + topic
-              }]
-            }],
-            generationConfig: {
-              temperature: 0.7
-            }
+            model: "v_minimax27",
+            messages: [
+              { role: "system", content: SYSTEM_PROMPT },
+              { role: "user", content: `Viết một bài đăng Facebook dựa trên chủ đề: ${topic}` }
+            ],
+            temperature: 0.7
           })
         }).then(async r => {
           const data = await r.json();
-          if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-            return { text: data.candidates[0].content.parts[0].text };
+          if (data.choices && data.choices[0]) {
+            return { text: data.choices[0].message.content };
           } else {
-            throw new Error(data.error?.message || "Tạo nội dung bằng Gemini thất bại.");
+            throw new Error(data.error?.message || "Tạo nội dung bằng Minimax thất bại.");
           }
         });
       } else {
