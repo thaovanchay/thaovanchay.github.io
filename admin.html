@@ -660,9 +660,7 @@ Thảo Vân Chay, Café & Restaurant
         const padding = canvas.width * 0.025; // 2.5% padding (higher and closer to the edge)
         
         const logo = new Image();
-        logo.crossOrigin = "Anonymous";
-        // Fetch logo directly from GitHub raw to bypass local file CORS constraints
-        logo.src = "https://raw.githubusercontent.com/levu5cms/thaovanchay/main/H%C3%ACnh/LOGO%20-%20TH%E1%BA%A2O%20V%C3%82N%20-%20PNG.png";
+        // Remove crossOrigin to use same-origin relative path naturally
         
         logo.onload = () => {
           const logoRatio = logo.height / logo.width;
@@ -672,7 +670,22 @@ Thảo Vân Chay, Café & Restaurant
           const logoX = canvas.width - logoWidth - padding;
           const logoY = padding;
           
-          ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
+          // --- Convert logo to pure white (Tinting) ---
+          const offCanvas = document.createElement('canvas');
+          offCanvas.width = logoWidth;
+          offCanvas.height = logoHeight;
+          const offCtx = offCanvas.getContext('2d');
+          
+          // Draw original golden logo
+          offCtx.drawImage(logo, 0, 0, logoWidth, logoHeight);
+          // Change blend mode and fill with white
+          offCtx.globalCompositeOperation = "source-in";
+          offCtx.fillStyle = "#ffffff";
+          offCtx.fillRect(0, 0, logoWidth, logoHeight);
+          
+          // Draw the white logo onto the main canvas
+          ctx.drawImage(offCanvas, logoX, logoY);
+          // ------------------------------------------
 
           // Draw custom text "Thảo Vân chay" below the logo (Slide Format)
           const fontSize = canvas.width * 0.022; // Smaller font
@@ -703,6 +716,9 @@ Thảo Vân Chay, Café & Restaurant
           console.warn("Logo load failed. Proceeding without logo.");
           canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.95);
         };
+        
+        // Assign src AFTER defining onload/onerror to prevent cache race conditions
+        logo.src = "H%C3%ACnh/LOGO%20-%20TH%E1%BA%A2O%20V%C3%82N%20-%20PNG.png";
       };
       
       img.onerror = () => {
