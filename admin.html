@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Thảo Vân Chay Automation</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #1e3f20;
+      --primary-light: #4d7a5b;
+      --primary-dark: #122613;
+      --accent: #c5a880;
+      --bg: #141a15;
+      --card-bg: #1a221b;
+      --text: #e1e7e2;
+      --text-muted: #9caaa0;
+      --border: #253327;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent);
+      font-size: 2rem;
+    }
+
+    h1 span {
+      color: #ffffff;
+      font-size: 0.9rem;
+      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr 1.5fr;
+      }
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 16px;
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+      margin-bottom: 16px;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.15);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--primary-dark);
+    }
+
+    .btn-primary:hover {
+      background-color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-danger {
+      background-color: #d9534f;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #c9302c;
+    }
+
+    .alert {
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .alert-success {
+      background-color: rgba(77, 122, 91, 0.2);
+      border: 1px solid var(--primary-light);
+      color: #a3cfb2;
+      display: block;
+    }
+
+    .alert-error {
+      background-color: rgba(217, 83, 79, 0.2);
+      border: 1px solid #d9534f;
+      color: #f2dede;
+      display: block;
+    }
+
+    .image-preview {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      border: 1px dashed var(--border);
+      background-color: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .image-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .preview-placeholder {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .status-draft { background-color: #f0ad4e; color: #fff; }
+    .status-approved { background-color: #5cb85c; color: #fff; }
+    .status-published { background-color: #0275d8; color: #fff; }
+
+    /* Spinner */
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border-left-color: var(--primary-dark);
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Thảo Vân Chay 🌿 <span>Hệ thống Biên soạn & Đăng bài Facebook Tự động</span></h1>
+    <a href="index.html" class="btn btn-secondary" style="width: auto;">⬅ Quay lại Trang Chủ Menu</a>
+  </header>
+
+  <div class="grid">
+    <!-- LEFT COLUMN: SETTINGS & DRAFT CREATION -->
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <!-- Credentials Settings Card -->
+      <div class="card">
+        <div class="card-title">🔑 Cấu hình API Keys</div>
+        <form id="settings-form">
+          <label for="openai-key">OpenAI API Key:</label>
+          <input type="password" id="openai-key" placeholder="sk-proj-...">
+
+          <label for="fb-page-id">Facebook Page ID:</label>
+          <input type="text" id="fb-page-id" placeholder="1029...">
+
+          <label for="fb-token">Facebook Page Access Token:</label>
+          <input type="password" id="fb-token" placeholder="EAAG...">
+
+          <button type="submit" class="btn btn-secondary">💾 Lưu cấu hình</button>
+        </form>
+        <div id="settings-alert" class="alert" style="margin-top: 12px;"></div>
+      </div>
+
+      <!-- Generator Card -->
+      <div class="card">
+        <div class="card-title">✍️ Biên soạn bài viết mới</div>
+        <label for="post-topic">Chủ đề khoa học / môi trường:</label>
+        <textarea id="post-topic" placeholder="Ví dụ: Tác động của vi nhựa từ túi lọc trà đối với sức khỏe con người..."></textarea>
+
+        <label for="image-prompt">Mô tả ảnh minh họa (DALL-E 3):</label>
+        <input type="text" id="image-prompt" placeholder="Ví dụ: A close-up aesthetic photo of a porcelain tea cup with steam, organic tones...">
+
+        <button id="btn-generate" class="btn btn-primary">✨ Tạo bài viết & Ảnh AI</button>
+        <div id="generate-loading" class="loading-text">
+          <div class="spinner"></div> Đang gọi AI soạn bài và vẽ ảnh...
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: PREVIEW & PUBLISH CONTROL -->
+    <div class="card">
+      <div class="card-title">👁️ Bản xem trước & Đăng bài</div>
+      
+      <div id="post-preview-area">
+        <div class="grid" style="grid-template-columns: 1fr; gap: 16px; margin-bottom: 20px;">
+          <div>
+            <label for="preview-content">Nội dung bài viết (Có thể chỉnh sửa tại đây trước khi đăng):</label>
+            <textarea id="preview-content" style="height: 350px;" placeholder="Bài viết do AI soạn thảo sẽ hiển thị ở đây..."></textarea>
+          </div>
+          
+          <div>
+            <label>Hình ảnh minh họa:</label>
+            <div class="image-preview" id="preview-image-box">
+              <div class="preview-placeholder">Ảnh minh họa AI sẽ hiển thị ở đây</div>
+            </div>
+            <label for="preview-image-url">Image URL:</label>
+            <input type="text" id="preview-image-url" placeholder="https://...">
+          </div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+
+        <div class="card-title" style="font-size: 1.1rem; margin-bottom: 12px;">📅 Tùy chọn Phát hành</div>
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+          <div>
+            <label for="publish-mode">Chế độ đăng bài:</label>
+            <select id="publish-mode">
+              <option value="now">🚀 Đăng trực tiếp ngay lập tức</option>
+              <option value="schedule">📅 Lên lịch đăng bài tự động</option>
+            </select>
+          </div>
+          
+          <div id="schedule-time-box" style="display: none;">
+            <label for="schedule-time">Thời gian lên lịch:</label>
+            <select id="schedule-time">
+              <!-- JS will auto populate the next Mon/Wed/Fri 8:00 AM -->
+            </select>
+          </div>
+        </div>
+
+        <button id="btn-publish" class="btn btn-primary" style="background-color: #5cb85c; color: white;">🚀 Thực hiện Đăng / Lên lịch</button>
+        <div id="publish-loading" class="loading-text">
+          <div class="spinner"></div> Đang gửi dữ liệu đến Facebook API...
+        </div>
+        <div id="publish-alert" class="alert" style="margin-top: 16px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Brand Template Footer
+  const BRAND_FOOTER = `\n\n❤️ Với phương châm "Ăn chay không hề khó", Thảo Vân Chay sẽ đồng hành cùng mọi người để mang đến những sản phẩm thực dưỡng thuần chay tự nhiên đảm bảo sức khỏe ❤️\n\n~~~~~~~~~~~~~~~~~~~~~~\nThảo Vân Chay, Café & Restaurant\n🗺 Địa chỉ: 250 Phạm Ngũ Lão, tp. Buôn Ma Thuột\n📞 Hotline: 0917003898\n🛒 Đặt món: Facebook, Zalo, GrabFood, ShopeeFood`;
+
+  const SYSTEM_PROMPT = `Bạn là một nhà báo khoa học và chuyên gia sáng tạo nội dung cho thương hiệu "Thảo Vân Chay" (thaovanchay.vn).
+Nhiệm vụ của bạn là viết một bài đăng Facebook hấp dẫn bằng tiếng Việt về lối sống thuần chay, khoa học thực phẩm chay (Food Tech) hoặc tác động môi trường.
+
+KHÔNG viết bài về công thức nấu ăn. Hãy viết về các dữ liệu khoa học, nghiên cứu thực tế, tác động môi trường hoặc xu hướng công nghệ thực phẩm chay.
+
+Yêu cầu bài viết:
+- Giọng văn: Thân thiện, khoa học, khách quan, truyền cảm hứng tích cực, tránh giáo điều hay phán xét.
+- Cấu trúc bài đăng:
+  1. Tiêu đề in hoa gây chú ý (Hook).
+  2. Đoạn mở đầu ngắn gọn giới thiệu nghiên cứu/vấn đề.
+  3. Sử dụng các gạch đầu dòng (bullet points) kèm các emoji tinh tế để tóm tắt số liệu cốt lõi.
+  4. Phần giải nghĩa hoặc liên hệ thực tiễn ngắn gọn.
+  5. Thông điệp kết nối: "❤️ Với phương châm "Ăn chay không hề khó", Thảo Vân Chay sẽ đồng hành cùng mọi người để mang đến những sản phẩm thực dưỡng thuần chay tự nhiên đảm bảo sức khỏe ❤️"
+  6. Ghi nguồn tham khảo khoa học nước ngoài và nguồn ảnh.
+  7. Footer cố định của quán:
+~~~~~~~~~~~~~~~~~~~~~~
+Thảo Vân Chay, Café & Restaurant
+🗺 Địa chỉ: 250 Phạm Ngũ Lão, tp. Buôn Ma Thuột
+📞 Hotline: 0917003898
+🛒 Đặt món: Facebook, Zalo, GrabFood, ShopeeFood`;
+
+  // Page elements
+  const openaiKeyInput = document.getElementById('openai-key');
+  const fbPageIdInput = document.getElementById('fb-page-id');
+  const fbTokenInput = document.getElementById('fb-token');
+  const settingsForm = document.getElementById('settings-form');
+  const settingsAlert = document.getElementById('settings-alert');
+
+  const postTopicInput = document.getElementById('post-topic');
+  const imagePromptInput = document.getElementById('image-prompt');
+  const btnGenerate = document.getElementById('btn-generate');
+  const generateLoading = document.getElementById('generate-loading');
+
+  const previewContent = document.getElementById('preview-content');
+  const previewImageBox = document.getElementById('preview-image-box');
+  const previewImageUrl = document.getElementById('preview-image-url');
+
+  const publishMode = document.getElementById('publish-mode');
+  const scheduleTimeBox = document.getElementById('schedule-time-box');
+  const scheduleTimeSelect = document.getElementById('schedule-time');
+  const btnPublish = document.getElementById('btn-publish');
+  const publishLoading = document.getElementById('publish-loading');
+  const publishAlert = document.getElementById('publish-alert');
+
+  // Load configuration from localStorage
+  function loadConfig() {
+    openaiKeyInput.value = localStorage.getItem('tvc_openai_key') || '';
+    fbPageIdInput.value = localStorage.getItem('tvc_fb_page_id') || '';
+    fbTokenInput.value = localStorage.getItem('tvc_fb_token') || '';
+  }
+
+  // Save configuration
+  settingsForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    localStorage.setItem('tvc_openai_key', openaiKeyInput.value.trim());
+    localStorage.setItem('tvc_fb_page_id', fbPageIdInput.value.trim());
+    localStorage.setItem('tvc_fb_token', fbTokenInput.value.trim());
+    
+    showAlert(settingsAlert, 'alert-success', 'Đã lưu cấu hình API Keys thành công!');
+  });
+
+  function showAlert(element, cssClass, message) {
+    element.className = `alert ${cssClass}`;
+    element.textContent = message;
+    element.style.display = 'block';
+    setTimeout(() => {
+      element.style.display = 'none';
+    }, 4000);
+  }
+
+  // Populate Schedule Dates: Next Monday, Wednesday, Friday at 8:00 AM
+  function populateScheduleOptions() {
+    scheduleTimeSelect.innerHTML = '';
+    const now = new Date();
+    
+    // Find next 5 schedule slots
+    let candidate = new Date(now);
+    candidate.setHours(8, 0, 0, 0);
+    
+    if (now.getHours() >= 8) {
+      candidate.setDate(candidate.getDate() + 1);
+    }
+    
+    let count = 0;
+    while (count < 5) {
+      const day = candidate.getDay();
+      if (day === 1 || day === 3 || day === 5) {
+        const option = document.createElement('option');
+        const weekdayNames = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+        const formattedDate = `${weekdayNames[day]}, ngày ${candidate.getDate()}/${candidate.getMonth() + 1}/${candidate.getFullYear()} lúc 08:00 AM`;
+        
+        option.value = Math.floor(candidate.getTime() / 1000); // Unix timestamp
+        option.textContent = formattedDate;
+        scheduleTimeSelect.appendChild(option);
+        count++;
+      }
+      candidate.setDate(candidate.getDate() + 1);
+    }
+  }
+
+  // Show/Hide scheduling block based on dropdown
+  publishMode.addEventListener('change', () => {
+    if (publishMode.value === 'schedule') {
+      scheduleTimeBox.style.display = 'block';
+      populateScheduleOptions();
+    } else {
+      scheduleTimeBox.style.display = 'none';
+    }
+  });
+
+  // Call OpenAI API for content & image generation
+  btnGenerate.addEventListener('click', async () => {
+    const openaiKey = localStorage.getItem('tvc_openai_key');
+    const topic = postTopicInput.value.trim();
+    const imagePrompt = imagePromptInput.value.trim();
+
+    if (!openaiKey) {
+      alert('Vui lòng điền OpenAI API Key và Lưu trước!');
+      return;
+    }
+    if (!topic) {
+      alert('Vui lòng nhập chủ đề bài viết.');
+      return;
+    }
+
+    btnGenerate.disabled = true;
+    generateLoading.style.display = 'flex';
+
+    try {
+      // 1. Generate Content
+      const contentPromise = fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${openaiKey}`
+        },
+        body: JSON.stringify({
+          model: "gpt-4o",
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            { role: "user", content: `Viết một bài đăng Facebook dựa trên chủ đề: ${topic}` }
+          ],
+          temperature: 0.7
+        })
+      }).then(r => r.json());
+
+      // 2. Generate Image (if prompt exists)
+      let imagePromise = Promise.resolve(null);
+      if (imagePrompt) {
+        imagePromise = fetch("https://api.openai.com/v1/images/generations", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${openaiKey}`
+          },
+          body: JSON.stringify({
+            model: "dall-e-3",
+            prompt: `A professional, clean food or environmental photography of: ${imagePrompt}. Highly detailed, cozy natural lighting, Instagram styled.`,
+            n: 1,
+            size: "1024x1024"
+          })
+        }).then(r => r.json());
+      }
+
+      const [contentData, imageData] = await Promise.all([contentPromise, imagePromise]);
+
+      if (contentData.choices && contentData.choices[0]) {
+        previewContent.value = contentData.choices[0].message.content;
+      } else {
+        throw new Error(contentData.error?.message || "Tạo nội dung thất bại");
+      }
+
+      if (imageData && imageData.data && imageData.data[0]) {
+        const imgUrl = imageData.data[0].url;
+        previewImageUrl.value = imgUrl;
+        previewImageBox.innerHTML = `<img src="${imgUrl}" alt="AI Illustration">`;
+      } else if (imagePrompt) {
+        throw new Error(imageData.error?.message || "Tạo hình ảnh thất bại");
+      }
+
+    } catch (error) {
+      alert("Đã xảy ra lỗi trong quá trình tạo: " + error.message);
+    } finally {
+      btnGenerate.disabled = false;
+      generateLoading.style.display = 'none';
+    }
+  });
+
+  // Call Facebook Graph API to publish or schedule
+  btnPublish.addEventListener('click', async () => {
+    const pageId = localStorage.getItem('tvc_fb_page_id');
+    const token = localStorage.getItem('tvc_fb_token');
+    const content = previewContent.value.trim();
+    const imageUrl = previewImageUrl.value.trim();
+
+    if (!pageId || !token) {
+      alert('Vui lòng điền và lưu Cấu hình Facebook Page ID và Token trước!');
+      return;
+    }
+    if (!content) {
+      alert('Vui lòng tạo hoặc điền nội dung bài viết trước khi đăng.');
+      return;
+    }
+
+    btnPublish.disabled = true;
+    publishLoading.style.display = 'flex';
+
+    try {
+      let url = `https://graph.facebook.com/v20.0/${pageId}/feed`;
+      const formData = new FormData();
+      
+      formData.append("access_token", token);
+      
+      if (imageUrl) {
+        // If image exists, post to /photos with caption
+        url = `https://graph.facebook.com/v20.0/${pageId}/photos`;
+        formData.append("url", imageUrl);
+        formData.append("caption", content);
+      } else {
+        // If text only
+        formData.append("message", content);
+      }
+
+      // If scheduled mode
+      if (publishMode.value === 'schedule') {
+        const timeVal = scheduleTimeSelect.value;
+        formData.append("published", "false");
+        formData.append("scheduled_publish_time", timeVal);
+      }
+
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData
+      });
+      
+      const result = await response.json();
+
+      if (result.id || result.post_id) {
+        const fbId = result.id || result.post_id;
+        const msg = publishMode.value === 'schedule' 
+          ? `Đã lên lịch đăng bài thành công! Bài viết sẽ tự động đăng vào đúng khung giờ bạn chọn.`
+          : `Đã đăng bài thành công lên Facebook! ID Bài đăng: ${fbId}`;
+        
+        showAlert(publishAlert, 'alert-success', msg);
+      } else {
+        throw new Error(result.error?.message || "Lỗi API Facebook");
+      }
+
+    } catch (error) {
+      showAlert(publishAlert, 'alert-error', "Thất bại: " + error.message);
+    } finally {
+      btnPublish.disabled = false;
+      publishLoading.style.display = 'none';
+    }
+  });
+
+  // Watch Image URL input field
+  previewImageUrl.addEventListener('input', () => {
+    const url = previewImageUrl.value.trim();
+    if (url) {
+      previewImageBox.innerHTML = `<img src="${url}" alt="AI Illustration">`;
+    } else {
+      previewImageBox.innerHTML = `<div class="preview-placeholder">Ảnh minh họa AI sẽ hiển thị ở đây</div>`;
+    }
+  });
+
+  // Initialize
+  window.onload = () => {
+    loadConfig();
+    populateScheduleOptions();
+  };
+</script>
+
+</body>
+</html>
