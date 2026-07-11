@@ -17,6 +17,7 @@
   <link rel="canonical" href="https://levu5cms.github.io/thaovanchay/">
   <link rel="icon" type="image/png" href="Hình/LOGO - THẢO VÂN - PNG.png">
   <link rel="apple-touch-icon" href="Hình/LOGO - THẢO VÂN - PNG.png">
+  <link rel="preload" as="image" href="Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg">
 
   <!-- Structured data for Google (Restaurant rich result) -->
   <script type="application/ld+json">
@@ -1672,6 +1673,428 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ===== Anchor offset for fixed header ===== */
+    section[id] {
+      scroll-margin-top: 84px;
+    }
+
+    /* ===== Active nav link (scrollspy) ===== */
+    .nav-link.active {
+      color: var(--accent);
+    }
+
+    /* ===== Open / Closed status badge ===== */
+    .open-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(6px);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .open-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+      animation: pulseDot 2s infinite;
+    }
+    .open-status.closed .open-dot {
+      background: #f87171;
+      animation: none;
+      box-shadow: none;
+    }
+    @keyframes pulseDot {
+      0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+    }
+
+    /* ===== Scroll reveal ===== */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .menu-card {
+        animation: cardIn 0.45s ease both;
+      }
+      @keyframes cardIn {
+        from { opacity: 0; transform: translateY(14px); }
+        to { opacity: 1; transform: none; }
+      }
+    }
+
+    /* ===== Order buttons on menu cards ===== */
+    .menu-card-order {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .order-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 10px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--primary);
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .order-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    /* ===== Floating cart button ===== */
+    .fab-cart {
+      position: fixed;
+      right: 20px;
+      bottom: 24px;
+      z-index: 1200;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 50px;
+      background: var(--primary);
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+    }
+    .fab-cart:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+    }
+    .cart-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 5px;
+      border-radius: 50px;
+      background: var(--accent);
+      color: var(--primary-dark);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* ===== Back to top ===== */
+    .back-to-top {
+      position: fixed;
+      right: 26px;
+      bottom: 88px;
+      z-index: 1150;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
+    /* ===== Cart drawer ===== */
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 2500;
+    }
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(430px, 100vw);
+      background: var(--card-bg);
+      z-index: 2600;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(105%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
+    }
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-header h3 {
+      font-family: var(--font-title);
+      color: var(--primary);
+      font-size: 1.3rem;
+    }
+    :root.dark-theme .cart-header h3,
+    :root.auto-theme .cart-header h3 {
+      color: var(--accent);
+    }
+    .cart-close {
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 22px;
+    }
+    .cart-empty {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 40px 10px;
+      line-height: 1.8;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    .cart-item-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .cart-item-size {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .cart-item-price {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    .cart-qty {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .qty-btn:hover {
+      border-color: var(--primary-light);
+      color: var(--primary-light);
+    }
+    .qty-num {
+      min-width: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .cart-footer {
+      padding: 14px 22px 18px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+    }
+    .cart-total-row strong {
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+    :root.dark-theme .cart-total-row strong,
+    :root.auto-theme .cart-total-row strong {
+      color: var(--accent);
+    }
+    .order-form input[type="text"],
+    .order-form input[type="tel"] {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card-bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+    }
+    .order-form input:focus {
+      outline: 2px solid var(--primary-light);
+      border-color: transparent;
+    }
+    .order-type-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 10px;
+      font-size: 0.92rem;
+    }
+    .order-type-row label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .order-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .order-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 6px 0 10px;
+      line-height: 1.5;
+    }
+    .order-send-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .order-send-btn {
+      padding: 12px 8px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      color: #ffffff;
+    }
+    .order-send-btn:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+    .send-zalo { background: #0068ff; }
+    .send-messenger { background: #a334fa; }
+    .send-call { background: var(--primary); }
+    .send-copy { background: var(--accent); color: var(--primary-dark); }
+    .cart-clear {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* ===== Toast ===== */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 110px;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--primary-dark);
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      z-index: 3000;
+      box-shadow: var(--shadow-lg);
+      max-width: 90vw;
+      text-align: center;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ===== Facebook feed section ===== */
+    .fb-section {
+      padding: 90px 0;
+      background: var(--bg);
+    }
+    .fb-embed-card {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      text-align: center;
+    }
+    .fb-embed {
+      display: flex;
+      justify-content: center;
+      min-height: 320px;
+      margin-bottom: 16px;
+    }
+    .fb-open-btn {
+      display: inline-block;
+    }
+
+    /* ===== Floating elements on mobile (above bottom call bar) ===== */
+    @media (max-width: 992px) {
+      .fab-cart {
+        right: 14px;
+        bottom: 86px;
+        padding: 13px 16px;
+      }
+      .fab-cart-label {
+        display: none;
+      }
+      .back-to-top {
+        display: none;
+      }
+      .toast {
+        bottom: 150px;
+      }
+    }
   </style>
 </head>
 <body class="auto-theme">
@@ -1693,6 +2116,7 @@
         <a href="#about" class="nav-link">Giới Thiệu</a>
         <a href="#menu" class="nav-link">Thực Đơn</a>
         <a href="#gallery" class="nav-link">Menu Ảnh</a>
+        <a href="#tintuc" class="nav-link">Tin Tức</a>
         <a href="#contact" class="nav-link">Liên Hệ</a>
       </nav>
 
@@ -1726,6 +2150,7 @@
     <a href="#about" class="mobile-nav-link" onclick="toggleMobileNav()">Giới Thiệu</a>
     <a href="#menu" class="mobile-nav-link" onclick="toggleMobileNav()">Thực Đơn</a>
     <a href="#gallery" class="mobile-nav-link" onclick="toggleMobileNav()">Menu Ảnh</a>
+    <a href="#tintuc" class="mobile-nav-link" onclick="toggleMobileNav()">Tin Tức</a>
     <a href="#contact" class="mobile-nav-link" onclick="toggleMobileNav()">Liên Hệ</a>
   </div>
 
@@ -1733,6 +2158,7 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-subtitle">Nhà Hàng Chay Buôn Ma Thuột</div>
+      <div class="open-status"><span class="open-dot"></span><span class="open-status-text">Đang mở cửa · 07:00–20:00</span></div>
       <h1 class="hero-title">Thảo Vân Chay</h1>
       <p class="hero-desc">Không gian thanh tịnh cùng tinh hoa ẩm thực chay thanh đạm, thơm ngon, tinh khiết, mang lại sức khỏe và an lạc trọn vẹn cho bạn.</p>
       <div class="hero-cta">
@@ -1748,8 +2174,8 @@
       <div class="about-grid">
         <div class="about-images">
           <img src="Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg" alt="Không gian Thảo Vân Chay" class="about-img-main">
-          <img src="Hình/Không gian/IMG_20210205_101239.jpg" alt="Tiệc Buffet Chay Thảo Vân" class="about-img-sub">
-          <img src="Hình/Không gian/ABJJf51HyWUbqB1CSio6VpyvacLajwk97N5JsQoVKW2.jpg" alt="Không gian sân vườn Thảo Vân Chay" class="about-img-sub">
+          <img src="Hình/Không gian/IMG_20210205_101239.jpg" alt="Tiệc Buffet Chay Thảo Vân" class="about-img-sub" loading="lazy">
+          <img src="Hình/Không gian/ABJJf51HyWUbqB1CSio6VpyvacLajwk97N5JsQoVKW2.jpg" alt="Không gian sân vườn Thảo Vân Chay" class="about-img-sub" loading="lazy">
         </div>
 
         <div class="about-content">
@@ -1853,6 +2279,18 @@
       <button class="lightbox-btn lightbox-next" onclick="changeLightboxImage(1)">❯</button>
     </div>
   </div>
+
+  <!-- FACEBOOK FANPAGE FEED SECTION -->
+  <section class="fb-section" id="tintuc">
+    <div class="container">
+      <h2 class="section-title">Tin Tức Từ Fanpage</h2>
+      <p class="section-desc">Món mới, khuyến mãi và hoạt động mỗi ngày của Thảo Vân Chay — cập nhật trực tiếp từ trang Facebook chính thức.</p>
+      <div class="fb-embed-card">
+        <div class="fb-embed" id="fb-embed"></div>
+        <a href="https://www.facebook.com/thaovanchay.vn/" target="_blank" class="btn-primary fb-open-btn">Mở Fanpage Facebook</a>
+      </div>
+    </div>
+  </section>
 
   <!-- CONTACT & LOCATIONS MAP SECTION -->
   <section class="contact-section" id="contact">
@@ -1983,6 +2421,55 @@
     </div>
   </div>
 
+  <!-- FLOATING CART BUTTON -->
+  <button class="fab-cart" id="fab-cart" aria-label="Mở giỏ hàng đặt món" onclick="toggleCart()">
+    🛒 <span class="fab-cart-label">Giỏ hàng</span>
+    <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
+  </button>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="back-to-top" aria-label="Lên đầu trang" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- CART OVERLAY + ORDER DRAWER -->
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart(false)"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Giỏ hàng đặt món">
+    <div class="cart-header">
+      <h3>🛒 Giỏ Hàng Đặt Món</h3>
+      <button class="cart-close" onclick="toggleCart(false)" aria-label="Đóng giỏ hàng">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total-row"><span>Tạm tính:</span><strong id="cart-total">0 đ</strong></div>
+      <div class="order-form">
+        <div class="order-type-row">
+          <label><input type="radio" name="order-type" value="Tự đến lấy" checked> Tự đến lấy</label>
+          <label><input type="radio" name="order-type" value="Giao tận nơi"> Giao tận nơi</label>
+        </div>
+        <div id="order-address-wrap" style="display:none;">
+          <input type="text" id="order-address" placeholder="Địa chỉ nhận hàng...">
+        </div>
+        <div class="order-2col">
+          <input type="text" id="order-name" placeholder="Tên của bạn">
+          <input type="tel" id="order-phone" placeholder="Số điện thoại">
+        </div>
+        <input type="text" id="order-note" placeholder="Ghi chú (ít cay, thêm cơm...)">
+      </div>
+      <p class="order-hint">Đơn hàng sẽ được <strong>tự động sao chép</strong> — bạn chỉ cần <strong>dán vào khung chat</strong> rồi bấm gửi.</p>
+      <div class="order-send-row">
+        <button class="order-send-btn send-zalo" onclick="sendOrder('zalo')">💬 Gửi qua Zalo</button>
+        <button class="order-send-btn send-messenger" onclick="sendOrder('messenger')">💬 Gửi Messenger</button>
+      </div>
+      <div class="order-send-row">
+        <button class="order-send-btn send-call" onclick="sendOrder('call')">📞 Gọi đặt trực tiếp</button>
+        <button class="order-send-btn send-copy" onclick="copyOrder()">📋 Sao chép đơn</button>
+      </div>
+      <button class="cart-clear" onclick="clearCart()">Xóa toàn bộ giỏ hàng</button>
+    </div>
+  </aside>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast" role="status"></div>
+
   <!-- JAVASCRIPT LOGIC ENGINE -->
   <script>
     // Core database compiled from local excel/word
@@ -2008,9 +2495,9 @@
       { id: 110, name: "Mojito Blue", category: "Mojito", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 111, name: "Mojito chanh", category: "Mojito", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 112, name: "Mojito đào", category: "Mojito", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 113, name: "Mojito việt quất", category: "Mojito", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 114, name: "Mojito phúc bồn tử", category: "Mojito", price: 25000, grab: 30000, shopeefood : 30000 },
       { id: 115, name: "Trà sữa truyền thống", category: "Trà", price: 25000, grab: 32000, shopeefood : 32000 },      { id: 116, name: "Trà đào", category: "Trà", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 117, name: "Trà đào cam sả", category: "Trà", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 118, name: "Trà trái cây nhiệt đới", category: "Trà", price: 32000, grab: 36000, shopeefood : 36000 },      { id: 119, name: "Trà thảo mộc nóng/đá", category: "Trà", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 120, name: "Trà lipton cam tươi nguyên quả", category: "Trà", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 121, name: "Trà lipton chanh", category: "Trà", price: 35000, grab: 30000, shopeefood : 30000 },      { id: 122, name: "Trà gừng ấm áp giải cảm", category: "Trà", price: 20000, grab: 24000, shopeefood : 24000 },      { id: 123, name: "Trà la hán quả mát gan giải độc", category: "Trà", price: 25000, grab: 24000, shopeefood : 24000 },
       { id: 124, name: "Chanh sả nha đam", category: "Đặc biệt", price: 30000, grab: 36000, shopeefood : 36000 },      { id: 125, name: "Lô hội mật ong chanh", category: "Đặc biệt", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 126, name: "Trà sữa than tre", category: "Đặc biệt", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 127, name: "Sữa tươi trân châu đường đen", category: "Đặc biệt", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 128, name: "Sữa tươi trân châu than tre", category: "Đặc biệt", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 129, name: "Tắc chanh ép", category: "Đặc biệt", price: 25000, grab: 25000, shopeefood : 25000 },
-      { id: 130, name: "Nước ép cam và cà rốt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 131, name: "Nước ép cam vắt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 132, name: "Cam vắt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 133, name: "Cam sữa", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 134, name: "Cam mật ong rừng", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 135, name: "Nước ép thơm (dứa)", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 136, name: "Nước ép cà rốt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 137, name: "Nước ép ổi tươi", category: "Trái cây", price: 30000, grab: 32000, shopeefood : 30000 },      { id: 138, name: "Nước ép táo đỏ", category: "Trái cây", price: 300000, grab: 32000, shopeefood : 30000 },      { id: 139, name: "Nước ép chanh dây", category: "Trái cây", price: 25000, grab: 32000, shopeefood : 30000 },      { id: 140, name: "Nước chanh tươi", category: "Trái cây", price: 25000, grab: 24000, shopeefood : 20000 },      { id: 141, name: "Nước chanh muối", category: "Trái cây", price: 25000, grab: 25000, shopeefood : 20000 },      { id: 142, name: "Nước chanh mật ong", category: "Trái cây", price: 25000, grab: 24000, shopeefood : 20000 },
+      { id: 130, name: "Nước ép cam và cà rốt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 131, name: "Nước ép cam vắt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 132, name: "Cam vắt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 133, name: "Cam sữa", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 134, name: "Cam mật ong rừng", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 135, name: "Nước ép thơm (dứa)", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 136, name: "Nước ép cà rốt", category: "Trái cây", price: 30000, grab: 36000, shopeefood : 30000 },      { id: 137, name: "Nước ép ổi tươi", category: "Trái cây", price: 30000, grab: 32000, shopeefood : 30000 },      { id: 138, name: "Nước ép táo đỏ", category: "Trái cây", price: 30000, grab: 32000, shopeefood : 30000 },      { id: 139, name: "Nước ép chanh dây", category: "Trái cây", price: 25000, grab: 32000, shopeefood : 30000 },      { id: 140, name: "Nước chanh tươi", category: "Trái cây", price: 25000, grab: 24000, shopeefood : 20000 },      { id: 141, name: "Nước chanh muối", category: "Trái cây", price: 25000, grab: 25000, shopeefood : 20000 },      { id: 142, name: "Nước chanh mật ong", category: "Trái cây", price: 25000, grab: 24000, shopeefood : 20000 },
       { id: 143, name: "Sinh tố dâu tây", category: "Sinh tố", price: 35000, grab: 36000, shopeefood : 36000 },      { id: 144, name: "Sinh tố bơ sáp béo ngậy ngọt lịm", category: "Sinh tố", price: 30000, grab: 32000, shopeefood : 32000 },      { id: 145, name: "Sinh tố xoài chín vàng mọng dẻo ngon", category: "Sinh tố", price: 30000, grab: 32000, shopeefood : 32000 },      { id: 146, name: "Sinh tố dừa tươi béo mát lạnh sánh đặc", category: "Sinh tố", price: 30000, grab: 32000, shopeefood : 32000 },      { id: 147, name: "Sinh tố cà chua dưỡng da trắng hồng", category: "Sinh tố", price: 30000, grab: 30000, shopeefood : 30000 },      { id: 148, name: "Sinh tố sapuche (hồng xiêm) bùi bùi béo ngọt", category: "Sinh tố", price: 30000, grab: 36000, shopeefood : 36000 },
-      { id: 149, name: "Yaourt dâu tây", category: "Yaourt", price: 25000, grab: 25000, shopeefood : 25000 },      { id: 150, name: "Yaourt cam tươi", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 151, name: "Yaourt việt quất", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 152, name: "Yaourt phúc bồn tử", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 25000 },      { id: 153, name: "Yaourttrái cây nhiệt đới", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 154, name: "Yaourt nha đam", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 20000 },      { id: 155, name: "Yaourt sữa chua đá", category: "Yaourt", price: 20000, grab: 24000, shopeefood : 20000 },
+      { id: 149, name: "Yaourt dâu tây", category: "Yaourt", price: 25000, grab: 25000, shopeefood : 25000 },      { id: 150, name: "Yaourt cam tươi", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 151, name: "Yaourt việt quất", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 152, name: "Yaourt phúc bồn tử", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 25000 },      { id: 153, name: "Yaourt trái cây nhiệt đới", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 30000 },      { id: 154, name: "Yaourt nha đam", category: "Yaourt", price: 25000, grab: 30000, shopeefood : 20000 },      { id: 155, name: "Yaourt sữa chua đá", category: "Yaourt", price: 20000, grab: 24000, shopeefood : 20000 },
       { id: 156, name: "Bò húc", category: "Nước giải khát", price: 18000, grab: 18000, shopeefood : 18000 },      { id: 157, name: "Pepsi", category: "Nước giải khát", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 158, name: "Coca-Cola", category: "Nước giải khát", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 159, name: "Nước suối", category: "Nước giải khát", price: 10000, grab: 10000, shopeefood : 10000 },      { id: 160, name: "Revive", category: "Nước giải khát", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 161, name: "Sting", category: "Nước giải khát", price: 15000, grab: 15000, shopeefood : 15000 },      { id: 162, name: "Sprite", category: "Nước giải khát", price: 15000, grab: 15000, shopeefood : 15000 }    ];
 
     // Global App States
@@ -2252,6 +2739,16 @@
           appHtml += `</div>`;
         }
 
+        // Order buttons: one button, or one per size for sized items
+        let orderHtml = '';
+        if (typeof item.price === 'number') {
+          orderHtml = `<button class="order-btn" type="button">＋ Đặt món này</button>`;
+        } else {
+          orderHtml = Object.keys(item.price).map(size =>
+            `<button class="order-btn" type="button" data-size="${size}">＋ Size ${size}</button>`
+          ).join('');
+        }
+
         card.innerHTML = `
           <div class="menu-card-top">
             <div class="menu-card-header">
@@ -2263,6 +2760,7 @@
             ${priceHtml}
             ${appHtml}
           </div>
+          <div class="menu-card-order">${orderHtml}</div>
           <div class="menu-card-actions">
             <a href="https://shopeefood.vn/dak-lak/quan-thao-van-chay-pham-ngu-lao?source_url=foody_ordernow_pc" target="_blank" class="card-action-btn shopee-btn" title="Đặt ShopeeFood">
               <span class="btn-dot shopee-dot"></span> ShopeeFood
@@ -2272,8 +2770,11 @@
             </a>
           </div>
         `;
-        
+
         grid.appendChild(card);
+        card.querySelectorAll('.order-btn').forEach(btn => {
+          btn.addEventListener('click', () => addToCart(item, btn.dataset.size || null));
+        });
       });
 
       // Render expand/collapse button
@@ -2374,11 +2875,239 @@
       }
     });
 
+    // === CART / ORDER ENGINE ===
+    let cart = [];
+    try { cart = JSON.parse(localStorage.getItem('tvc_cart') || '[]'); } catch (e) { cart = []; }
+
+    function saveCart() {
+      localStorage.setItem('tvc_cart', JSON.stringify(cart));
+      updateCartBadge();
+    }
+
+    function addToCart(item, size) {
+      const key = size ? item.id + '|' + size : String(item.id);
+      const unitPrice = size ? item.price[size] : item.price;
+      const found = cart.find(c => c.key === key);
+      if (found) {
+        found.qty += 1;
+      } else {
+        cart.push({ key, id: item.id, name: item.name, size: size || '', price: unitPrice, qty: 1 });
+      }
+      saveCart();
+      renderCart();
+      showToast(`Đã thêm "${item.name}${size ? ' (' + size + ')' : ''}" vào giỏ 🛒`);
+    }
+
+    function changeQty(key, delta) {
+      const it = cart.find(c => c.key === key);
+      if (!it) return;
+      it.qty += delta;
+      if (it.qty <= 0) cart = cart.filter(c => c.key !== key);
+      saveCart();
+      renderCart();
+    }
+
+    function clearCart() {
+      cart = [];
+      saveCart();
+      renderCart();
+    }
+
+    function cartTotal() {
+      return cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+    }
+
+    function updateCartBadge() {
+      const count = cart.reduce((sum, c) => sum + c.qty, 0);
+      const badge = document.getElementById('cart-badge');
+      badge.textContent = count;
+      badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+
+    function renderCart() {
+      const list = document.getElementById('cart-items');
+      if (cart.length === 0) {
+        list.innerHTML = '<div class="cart-empty">Giỏ hàng đang trống.<br>Bấm nút <strong>＋ Đặt món</strong> trong thực đơn để chọn món nhé!</div>';
+      } else {
+        list.innerHTML = cart.map(c => `
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${c.name}${c.size ? ` <span class="cart-item-size">(${c.size})</span>` : ''}</div>
+              <div class="cart-item-price">${formatNumber(c.price)} đ / phần</div>
+            </div>
+            <div class="cart-qty">
+              <button class="qty-btn" onclick="changeQty('${c.key}', -1)" aria-label="Giảm">−</button>
+              <span class="qty-num">${c.qty}</span>
+              <button class="qty-btn" onclick="changeQty('${c.key}', 1)" aria-label="Tăng">＋</button>
+            </div>
+          </div>`).join('');
+      }
+      document.getElementById('cart-total').textContent = formatNumber(cartTotal()) + ' đ';
+    }
+
+    function toggleCart(open) {
+      const drawer = document.getElementById('cart-drawer');
+      const overlay = document.getElementById('cart-overlay');
+      const show = open === undefined ? !drawer.classList.contains('open') : open;
+      drawer.classList.toggle('open', show);
+      overlay.style.display = show ? 'block' : 'none';
+      document.body.style.overflow = show ? 'hidden' : 'auto';
+      if (show) renderCart();
+    }
+
+    function composeOrderText() {
+      const name = document.getElementById('order-name').value.trim();
+      const phone = document.getElementById('order-phone').value.trim();
+      const orderType = document.querySelector('input[name="order-type"]:checked').value;
+      const address = document.getElementById('order-address').value.trim();
+      const note = document.getElementById('order-note').value.trim();
+
+      const lines = ['🌿 ĐƠN ĐẶT MÓN — THẢO VÂN CHAY', ''];
+      cart.forEach((c, i) => {
+        lines.push(`${i + 1}. ${c.name}${c.size ? ' (' + c.size + ')' : ''} x${c.qty} = ${formatNumber(c.price * c.qty)} đ`);
+      });
+      lines.push('', `💰 Tạm tính: ${formatNumber(cartTotal())} đ`);
+      lines.push(`🧾 Hình thức: ${orderType}`);
+      if (orderType === 'Giao tận nơi' && address) lines.push(`📍 Địa chỉ giao: ${address}`);
+      if (name) lines.push(`👤 Khách hàng: ${name}`);
+      if (phone) lines.push(`📞 SĐT: ${phone}`);
+      if (note) lines.push(`✏️ Ghi chú: ${note}`);
+      return lines.join('\n');
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) { /* bỏ qua */ }
+      document.body.removeChild(ta);
+    }
+
+    function copyOrder() {
+      if (cart.length === 0) { showToast('Giỏ hàng đang trống!'); return; }
+      copyText(composeOrderText());
+      showToast('Đã sao chép đơn hàng! 📋');
+    }
+
+    function sendOrder(channel) {
+      if (cart.length === 0) { showToast('Giỏ hàng đang trống!'); return; }
+      copyText(composeOrderText());
+      if (channel === 'zalo') {
+        window.open('https://zalo.me/0917003898', '_blank');
+        showToast('Đã sao chép đơn — DÁN vào khung chat Zalo rồi gửi nhé!');
+      } else if (channel === 'messenger') {
+        window.open('https://m.me/thaovanchay.vn', '_blank');
+        showToast('Đã sao chép đơn — DÁN vào Messenger rồi gửi nhé!');
+      } else if (channel === 'call') {
+        window.location.href = 'tel:0917003898';
+      }
+    }
+
+    // Toggle address input when delivery type changes
+    document.querySelectorAll('input[name="order-type"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const isDelivery = document.querySelector('input[name="order-type"]:checked').value === 'Giao tận nơi';
+        document.getElementById('order-address-wrap').style.display = isDelivery ? 'block' : 'none';
+      });
+    });
+
+    // === TOAST ===
+    let toastTimer = null;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    // === OPEN / CLOSED STATUS (07:00 - 20:00) ===
+    function updateOpenStatus() {
+      const now = new Date();
+      const minutes = now.getHours() * 60 + now.getMinutes();
+      const isOpen = minutes >= 7 * 60 && minutes < 20 * 60;
+      document.querySelectorAll('.open-status').forEach(el => {
+        el.classList.toggle('closed', !isOpen);
+        el.querySelector('.open-status-text').textContent = isOpen
+          ? 'Đang mở cửa · 07:00–20:00'
+          : 'Đã đóng cửa · Mở lại lúc 07:00';
+      });
+    }
+    setInterval(updateOpenStatus, 60000);
+
+    // === SCROLLSPY + BACK TO TOP ===
+    const spySectionIds = ['about', 'menu', 'gallery', 'tintuc', 'contact'];
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      let currentId = '';
+      spySectionIds.forEach(id => {
+        const sec = document.getElementById(id);
+        if (sec && window.scrollY >= sec.offsetTop - 130) currentId = id;
+      });
+      document.querySelectorAll('nav .nav-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+      });
+      backToTopBtn.classList.toggle('show', window.scrollY > 600);
+    });
+
+    // === SCROLL REVEAL ===
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    function initReveal() {
+      document.querySelectorAll('.section-title, .section-desc, .about-content, .about-images, .contact-card, .gallery-item, .fb-embed-card').forEach(el => {
+        el.classList.add('reveal');
+        revealObserver.observe(el);
+      });
+    }
+
+    // === LIGHTBOX TOUCH SWIPE (mobile) ===
+    let touchStartX = null;
+    const lightboxEl = document.getElementById('lightbox');
+    lightboxEl.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    lightboxEl.addEventListener('touchend', e => {
+      if (touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) changeLightboxImage(dx < 0 ? 1 : -1);
+      touchStartX = null;
+    }, { passive: true });
+
+    // === FACEBOOK PAGE TIMELINE EMBED ===
+    function buildFbEmbed() {
+      const wrap = document.getElementById('fb-embed');
+      if (!wrap) return;
+      const width = Math.max(280, Math.min(500, Math.floor(wrap.clientWidth || 500)));
+      const pageUrl = encodeURIComponent('https://www.facebook.com/thaovanchay.vn');
+      wrap.innerHTML = `<iframe src="https://www.facebook.com/plugins/page.php?href=${pageUrl}&tabs=timeline&width=${width}&height=640&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&locale=vi_VN" width="${width}" height="640" style="border:none;overflow:hidden;max-width:100%;" scrolling="no" frameborder="0" allowfullscreen="true" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Fanpage Thảo Vân Chay"></iframe>`;
+    }
+
     // Initialize application on page load
     window.onload = () => {
       buildCategoryPills();
       filterMenu();
       buildGalleryGrid();
+      updateOpenStatus();
+      updateCartBadge();
+      renderCart();
+      initReveal();
+      buildFbEmbed();
     };
   </script>
 </body>
