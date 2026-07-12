@@ -65,13 +65,13 @@
       --primary-rgb: 34, 51, 42;
       --primary-light: #4a5d50;    /* Soft Ink */
       --primary-dark: #16211b;
-      --accent: #b4643c;           /* Terracotta - đất nung */
-      --accent-hover: #9d5330;
-      --accent-soft: #e0a37e;      /* Clay nhạt - dùng trên nền tối */
+      --accent: #916d28;           /* Antique Bronze - vàng đồng cổ (tham khảo quiquedacosta.es) */
+      --accent-hover: #7a5b20;
+      --accent-soft: #d8b36a;      /* Bronze nhạt - dùng trên nền tối */
       --matcha: #6b7d52;           /* Matcha trầm - nhãn, chi tiết nhỏ */
       --text: #2a2a25;             /* Warm Charcoal */
       --text-muted: #6e6a5e;
-      --bg: #f4efe6;               /* Linen - vải lanh ấm */
+      --bg: #f7f3ec;               /* Linen sáng - thoáng như QD */
       --card-bg: #fdfbf6;
       --border: #e3dccb;
       --shadow: 0 8px 30px rgba(34, 51, 42, 0.06);
@@ -93,7 +93,7 @@
         --bg: #131a15;
         --card-bg: #1b241e;
         --border: #2b352c;
-        --accent: #c97a4e;
+        --accent: #c79b4a;
         --matcha: #93a573;
         --shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
         --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.3);
@@ -107,7 +107,7 @@
       --bg: #131a15;
       --card-bg: #1b241e;
       --border: #2b352c;
-      --accent: #c97a4e;
+      --accent: #c79b4a;
       --matcha: #93a573;
       --shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
       --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.3);
@@ -287,8 +287,10 @@
     }
 
     .nav-link {
-      font-weight: 500;
-      font-size: 1rem;
+      font-weight: 600;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
       position: relative;
       padding: 6px 0;
       opacity: 0.9;
@@ -351,7 +353,7 @@
       border-radius: 50px;
       font-weight: 600;
       font-size: 0.9rem;
-      box-shadow: 0 4px 12px rgba(180, 100, 60, 0.3);
+      box-shadow: 0 4px 12px rgba(145, 109, 40, 0.3);
     }
 
     .btn-book-nav:hover {
@@ -450,13 +452,22 @@
       overflow: hidden;
     }
 
-    /* Ảnh nền tách riêng để chạy hiệu ứng Ken Burns zoom chậm */
-    .hero::before {
-      content: '';
+    /* Slideshow điện ảnh: các lớp ảnh crossfade + Ken Burns */
+    .hero-slides {
       position: absolute;
       inset: 0;
-      background: url('Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg') no-repeat center center/cover;
       z-index: 0;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 2.2s ease-in-out;
+    }
+    .hero-slide.active {
+      opacity: 1;
     }
 
     .hero::after {
@@ -468,7 +479,7 @@
     }
 
     @media (prefers-reduced-motion: no-preference) {
-      .hero::before {
+      .hero-slide {
         animation: kenburns 26s ease-in-out infinite alternate;
       }
       @keyframes kenburns {
@@ -585,14 +596,14 @@
       border-radius: 50px;
       font-weight: 600;
       font-size: 1rem;
-      box-shadow: 0 6px 20px rgba(180, 100, 60, 0.35);
+      box-shadow: 0 6px 20px rgba(145, 109, 40, 0.35);
     }
 
     .btn-primary:hover {
       background-color: var(--accent-hover);
       color: #ffffff;
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(180, 100, 60, 0.45);
+      box-shadow: 0 8px 24px rgba(145, 109, 40, 0.45);
     }
 
     .btn-secondary {
@@ -2315,6 +2326,30 @@
       }
     }
 
+    /* ===== Threshold statement ===== */
+    .statement {
+      padding: 120px 0 110px;
+      background: var(--bg);
+      text-align: center;
+    }
+    .statement-line {
+      font-family: var(--font-title);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(1.7rem, 4vw, 2.9rem);
+      line-height: 1.5;
+      color: var(--primary);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    :root.dark-theme .statement-line,
+    :root.auto-theme .statement-line {
+      color: var(--text);
+    }
+    .statement-line em {
+      color: var(--accent);
+    }
+
     /* ===== Scroll progress bar ===== */
     .scroll-progress {
       position: fixed;
@@ -2384,7 +2419,7 @@
     }
     :root.dark-theme .menu-card-emoji,
     :root.auto-theme .menu-card-emoji {
-      background: rgba(224, 163, 126, 0.12);
+      background: rgba(216, 179, 106, 0.12);
     }
 
     /* ===== CTA banner trước footer ===== */
@@ -2407,7 +2442,7 @@
       content: '';
       position: absolute;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(224, 163, 126, 0.2), transparent 70%);
+      background: radial-gradient(circle, rgba(216, 179, 106, 0.2), transparent 70%);
       pointer-events: none;
     }
     .cta-inner::before {
@@ -2515,6 +2550,11 @@
 
   <!-- HERO WELCOME SECTION -->
   <section class="hero">
+    <div class="hero-slides" aria-hidden="true">
+      <div class="hero-slide active" style="background-image: url('Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('Hình/Hình món ăn Face/Mâm tiệc.PNG')"></div>
+      <div class="hero-slide" style="background-image: url('Hình/Không gian/Khu vực họp mặt.jpg')"></div>
+    </div>
     <div class="hero-content">
       <div class="hero-subtitle">Nhà Hàng Chay Buôn Ma Thuột</div>
       <div class="open-status"><span class="open-dot"></span><span class="open-status-text">Đang mở cửa · 07:00–20:00</span></div>
@@ -2528,6 +2568,14 @@
     <a href="#about" class="hero-scroll" aria-label="Cuộn xuống xem thêm"><span></span></a>
   </section>
 
+
+  <!-- THRESHOLD STATEMENT (học Quique Dacosta) -->
+  <section class="statement">
+    <div class="container">
+      <div class="section-eyebrow">Chào Mừng Bạn</div>
+      <p class="statement-line">Bước qua cánh cổng xanh là một thế giới thanh tịnh — nơi bữa cơm nuôi thân, và <em>an nhiên nuôi tâm</em>.</p>
+    </div>
+  </section>
 
   <!-- STORY SECTION: Tu vuon den ban an -->
   <section class="about" id="about">
@@ -3509,7 +3557,7 @@
 
     function initReveal() {
       const siblingIndex = new Map();
-      document.querySelectorAll('.section-eyebrow, .section-title, .section-desc, .story-media, .story-text, .contact-card, .gallery-item, .post-card, .stat-item, .cta-inner').forEach(el => {
+      document.querySelectorAll('.section-eyebrow, .section-title, .section-desc, .statement-line, .story-media, .story-text, .contact-card, .gallery-item, .post-card, .stat-item, .cta-inner').forEach(el => {
         // Các phần tử cùng cha hiện so le nhau cho có nhịp điệu
         const parent = el.parentElement;
         const idx = siblingIndex.get(parent) || 0;
@@ -3627,6 +3675,21 @@
       });
     }
 
+    // === HERO SLIDESHOW (crossfade điện ảnh) ===
+    function initHeroSlides() {
+      const slides = document.querySelectorAll('.hero-slide');
+      if (slides.length < 2) return;
+      const reduceMotion = typeof window.matchMedia === 'function'
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion) return;
+      let current = 0;
+      setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 6000);
+    }
+
     // Initialize application on page load
     window.onload = () => {
       buildCategoryPills();
@@ -3638,6 +3701,7 @@
       buildPostsSection();
       initReveal();
       initStats();
+      initHeroSlides();
     };
   </script>
 </body>
