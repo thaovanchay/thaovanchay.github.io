@@ -1101,66 +1101,6 @@
       box-shadow: 0 4px 12px rgba(0, 177, 79, 0.2);
     }
 
-    .menu-card-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 16px;
-      border-top: 1px dashed var(--border);
-      padding-top: 12px;
-    }
-
-    .card-action-btn {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 6px 10px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background-color: var(--bg);
-      color: var(--text-muted);
-      transition: var(--transition);
-    }
-
-    .card-action-btn:hover {
-      border-color: currentColor;
-      background-color: var(--card-bg);
-      transform: translateY(-1px);
-    }
-
-    .card-action-btn.shopee-btn {
-      color: #ee4d2d;
-    }
-    .card-action-btn.shopee-btn:hover {
-      background-color: rgba(238, 77, 45, 0.05);
-      border-color: #ee4d2d;
-    }
-
-    .card-action-btn.grab-btn {
-      color: #00b14f;
-    }
-    .card-action-btn.grab-btn:hover {
-      background-color: rgba(0, 177, 79, 0.05);
-      border-color: #00b14f;
-    }
-
-    .btn-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    .shopee-dot {
-      background-color: #ee4d2d;
-    }
-    .grab-dot {
-      background-color: #00b14f;
-    }
-
     .menu-empty {
       grid-column: 1 / -1;
       text-align: center;
@@ -2387,37 +2327,6 @@
       pointer-events: none;
     }
 
-    /* ===== Marquee band ===== */
-    .marquee {
-      background: var(--primary-dark);
-      color: var(--accent-soft);
-      overflow: hidden;
-      padding: 16px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      user-select: none;
-    }
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      white-space: nowrap;
-    }
-    .marquee-track span {
-      font-family: var(--font-title);
-      font-style: italic;
-      font-size: 1.15rem;
-      letter-spacing: 2px;
-      padding-right: 24px;
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      .marquee-track {
-        animation: marqueeMove 32s linear infinite;
-      }
-      @keyframes marqueeMove {
-        from { transform: translateX(0); }
-        to { transform: translateX(-50%); }
-      }
-    }
-
     /* ===== Stats strip (đếm số) ===== */
     .stats-strip {
       display: grid;
@@ -2619,12 +2528,6 @@
     <a href="#about" class="hero-scroll" aria-label="Cuộn xuống xem thêm"><span></span></a>
   </section>
 
-  <!-- MARQUEE BAND -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Thuần Chay ✦ Thanh Tịnh ✦ Từ Tâm ✦ Tươi Sạch Mỗi Ngày ✦ Không Gian Sân Vườn ✦ Buôn Ma Thuột ✦&nbsp;</span><span>Thuần Chay ✦ Thanh Tịnh ✦ Từ Tâm ✦ Tươi Sạch Mỗi Ngày ✦ Không Gian Sân Vườn ✦ Buôn Ma Thuột ✦&nbsp;</span>
-    </div>
-  </div>
 
   <!-- STORY SECTION: Tu vuon den ban an -->
   <section class="about" id="about">
@@ -2635,7 +2538,7 @@
 
       <div class="story-chapter">
         <div class="story-media">
-          <img src="Hình/Mâm chay.jpg" alt="Rau củ và món chay tươi lành tại Thảo Vân Chay" loading="lazy">
+          <img src="Hình/rau-cu-cho-som.jpg" alt="Rau củ tươi từ chợ sớm (ảnh minh họa)" loading="lazy">
         </div>
         <div class="story-text">
           <div class="story-num">01</div>
@@ -3276,14 +3179,6 @@
             ${appHtml}
           </div>
           <div class="menu-card-order">${orderHtml}</div>
-          <div class="menu-card-actions">
-            <a href="https://shopeefood.vn/dak-lak/quan-thao-van-chay-pham-ngu-lao?source_url=foody_ordernow_pc" target="_blank" class="card-action-btn shopee-btn" title="Đặt ShopeeFood">
-              <span class="btn-dot shopee-dot"></span> ShopeeFood
-            </a>
-            <a href="https://food.grab.com/vn/vi/restaurant/th%E1%BA%A3o-v%C3%A2n-chay-delivery/5-C3DKBENAMAVEV2?" target="_blank" class="card-action-btn grab-btn" title="Đặt GrabFood">
-              <span class="btn-dot grab-dot"></span> GrabFood
-            </a>
-          </div>
         `;
 
         grid.appendChild(card);
