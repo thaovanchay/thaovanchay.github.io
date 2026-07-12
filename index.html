@@ -170,13 +170,33 @@
       padding: 0 24px;
     }
 
+    .section-eyebrow {
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary-light);
+      margin-bottom: 14px;
+    }
+    .section-eyebrow::before,
+    .section-eyebrow::after {
+      content: '✦';
+      color: var(--accent);
+      margin: 0 12px;
+      font-size: 0.7rem;
+      vertical-align: 2px;
+    }
+
     .section-title {
       font-family: var(--font-title);
-      font-size: 2.5rem;
+      font-size: clamp(2.3rem, 5vw, 3.2rem);
       font-weight: 700;
       text-align: center;
       color: var(--primary);
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
       position: relative;
     }
     :root.dark-theme .section-title,
@@ -184,14 +204,13 @@
       color: var(--accent);
     }
 
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 3px;
-      background-color: var(--accent);
-      margin: 12px auto 0;
-      border-radius: 2px;
+    .section-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    :root.dark-theme .section-title em,
+    :root.auto-theme .section-title em {
+      color: var(--text);
     }
 
     .section-desc {
@@ -418,14 +437,101 @@
       justify-content: center;
       color: #ffffff;
       text-align: center;
-      background: linear-gradient(rgba(18, 38, 19, 0.8), rgba(18, 38, 19, 0.5)), url('Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg') no-repeat center center/cover;
+      background-color: var(--primary-dark);
       padding-top: 70px;
+      overflow: hidden;
+    }
+
+    /* Ảnh nền tách riêng để chạy hiệu ứng Ken Burns zoom chậm */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg') no-repeat center center/cover;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(18, 38, 19, 0.8) 0%, rgba(18, 38, 19, 0.5) 50%, rgba(18, 38, 19, 0.45) 78%, var(--bg) 100%);
+      z-index: 1;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero::before {
+        animation: kenburns 26s ease-in-out infinite alternate;
+      }
+      @keyframes kenburns {
+        from { transform: scale(1); }
+        to { transform: scale(1.12); }
+      }
     }
 
     .hero-content {
       max-width: 800px;
       z-index: 2;
-      animation: fadeInUp 1s ease-out;
+    }
+
+    /* Chữ hero hiện dần theo từng lớp */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-subtitle, .hero .open-status, .hero-title, .hero-desc, .hero-cta {
+        opacity: 0;
+        animation: heroUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .hero-subtitle { animation-delay: 0.15s; }
+      .hero .open-status { animation-delay: 0.32s; }
+      .hero-title { animation-delay: 0.5s; }
+      .hero-desc { animation-delay: 0.7s; }
+      .hero-cta { animation-delay: 0.9s; }
+      @keyframes heroUp {
+        from { opacity: 0; transform: translateY(34px); }
+        to { opacity: 1; transform: none; }
+      }
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* Chỉ báo cuộn xuống */
+    .hero-scroll {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      width: 26px;
+      height: 42px;
+      border: 2px solid rgba(255, 255, 255, 0.55);
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      padding-top: 7px;
+      opacity: 0.85;
+      transition: var(--transition);
+    }
+    .hero-scroll:hover {
+      border-color: var(--accent);
+      opacity: 1;
+    }
+    .hero-scroll span {
+      width: 4px;
+      height: 9px;
+      border-radius: 4px;
+      background: var(--accent);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-scroll span {
+        animation: scrollHint 1.8s ease-in-out infinite;
+      }
+      @keyframes scrollHint {
+        0% { transform: translateY(0); opacity: 1; }
+        70% { transform: translateY(14px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 0; }
+      }
     }
 
     .hero-subtitle {
@@ -466,8 +572,8 @@
     .btn-primary {
       background-color: var(--accent);
       color: var(--primary-dark);
-      padding: 14px 32px;
-      border-radius: var(--radius-sm);
+      padding: 15px 36px;
+      border-radius: 50px;
       font-weight: 600;
       font-size: 1rem;
       box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35);
@@ -483,11 +589,12 @@
     .btn-secondary {
       background-color: transparent;
       color: #ffffff;
-      padding: 14px 32px;
-      border-radius: var(--radius-sm);
+      padding: 15px 36px;
+      border-radius: 50px;
       font-weight: 600;
       font-size: 1rem;
-      border: 2px solid #ffffff;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(4px);
     }
 
     .btn-secondary:hover {
@@ -791,10 +898,17 @@
       transition: var(--transition);
     }
 
-    .category-pill.active {
-      background-color: var(--primary-light);
-      color: #ffffff;
+    .category-pill:hover {
       border-color: var(--primary-light);
+      color: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    .category-pill.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.35);
     }
 
     /* Menu Food Grid Card layout */
@@ -2184,9 +2298,180 @@
         bottom: 150px;
       }
     }
+
+    /* ===== Scroll progress bar ===== */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--primary-light));
+      z-index: 1002;
+      pointer-events: none;
+    }
+
+    /* ===== Marquee band ===== */
+    .marquee {
+      background: var(--primary-dark);
+      color: var(--accent);
+      overflow: hidden;
+      padding: 16px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      user-select: none;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      white-space: nowrap;
+    }
+    .marquee-track span {
+      font-family: var(--font-title);
+      font-style: italic;
+      font-size: 1.15rem;
+      letter-spacing: 2px;
+      padding-right: 24px;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .marquee-track {
+        animation: marqueeMove 32s linear infinite;
+      }
+      @keyframes marqueeMove {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+    }
+
+    /* ===== Stats strip (đếm số) ===== */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 72px;
+      padding: 36px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--font-title);
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+    :root.dark-theme .stat-num,
+    :root.auto-theme .stat-num {
+      color: var(--accent);
+    }
+    .stat-label {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    @media (max-width: 768px) {
+      .stats-strip {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px 12px;
+        margin-top: 48px;
+      }
+    }
+
+    /* ===== Emoji nhóm món trên thẻ thực đơn ===== */
+    .menu-card-emoji {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      font-size: 1.45rem;
+      background: rgba(var(--primary-rgb), 0.08);
+      border-radius: 14px;
+      transition: var(--transition);
+    }
+    .menu-card:hover .menu-card-emoji {
+      transform: rotate(-8deg) scale(1.12);
+      background: rgba(var(--primary-rgb), 0.14);
+    }
+    :root.dark-theme .menu-card-emoji,
+    :root.auto-theme .menu-card-emoji {
+      background: rgba(197, 168, 128, 0.12);
+    }
+
+    /* ===== CTA banner trước footer ===== */
+    .cta-banner {
+      padding: 30px 0 100px;
+      background: var(--bg);
+    }
+    .cta-inner {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 55%, var(--primary-light) 130%);
+      border-radius: var(--radius-lg);
+      padding: 72px 32px;
+      text-align: center;
+      color: #ffffff;
+      box-shadow: var(--shadow-lg);
+    }
+    .cta-inner::before,
+    .cta-inner::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(197, 168, 128, 0.25), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-inner::before {
+      width: 420px;
+      height: 420px;
+      top: -220px;
+      left: -140px;
+    }
+    .cta-inner::after {
+      width: 360px;
+      height: 360px;
+      bottom: -200px;
+      right: -120px;
+    }
+    .cta-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .cta-desc {
+      max-width: 560px;
+      margin: 0 auto;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.05rem;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body class="auto-theme">
+
+  <!-- SCROLL PROGRESS BAR -->
+  <div class="scroll-progress" id="scroll-progress"></div>
 
   <!-- BACKGROUND BACKDROP FOR MOBILE NAVIGATION DRAWER -->
   <div class="mobile-backdrop" id="mobile-backdrop"></div>
@@ -2248,14 +2533,22 @@
     <div class="hero-content">
       <div class="hero-subtitle">Nhà Hàng Chay Buôn Ma Thuột</div>
       <div class="open-status"><span class="open-dot"></span><span class="open-status-text">Đang mở cửa · 07:00–20:00</span></div>
-      <h1 class="hero-title">Thảo Vân Chay</h1>
+      <h1 class="hero-title">Thảo Vân <em>Chay</em></h1>
       <p class="hero-desc">Không gian thanh tịnh cùng tinh hoa ẩm thực chay thanh đạm, thơm ngon, tinh khiết, mang lại sức khỏe và an lạc trọn vẹn cho bạn.</p>
       <div class="hero-cta">
         <a href="#menu" class="btn-primary">Xem Thực Đơn</a>
         <a href="#about" class="btn-secondary">Tìm Hiểu Thêm</a>
       </div>
     </div>
+    <a href="#about" class="hero-scroll" aria-label="Cuộn xuống xem thêm"><span></span></a>
   </section>
+
+  <!-- MARQUEE BAND -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Thuần Chay ✦ Thanh Tịnh ✦ Từ Tâm ✦ Tươi Sạch Mỗi Ngày ✦ Không Gian Sân Vườn ✦ Buôn Ma Thuột ✦&nbsp;</span><span>Thuần Chay ✦ Thanh Tịnh ✦ Từ Tâm ✦ Tươi Sạch Mỗi Ngày ✦ Không Gian Sân Vườn ✦ Buôn Ma Thuột ✦&nbsp;</span>
+    </div>
+  </div>
 
   <!-- ABOUT & BUFFET SHOWCASE SECTION -->
   <section class="about" id="about">
@@ -2291,13 +2584,34 @@
           </div>
         </div>
       </div>
+
+      <!-- STATS STRIP (số liệu đếm khi cuộn tới) -->
+      <div class="stats-strip">
+        <div class="stat-item">
+          <div class="stat-num" id="stat-foods" data-count="70" data-suffix="+">0</div>
+          <div class="stat-label">Món ăn chay</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="stat-drinks" data-count="60" data-suffix="+">0</div>
+          <div class="stat-label">Thức uống & bar</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-count="13" data-suffix="h">0</div>
+          <div class="stat-label">Phục vụ mỗi ngày</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-count="7" data-suffix="/7">0</div>
+          <div class="stat-label">Ngày trong tuần</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- INTERACTIVE MENU SECTION -->
   <section class="menu-section" id="menu">
     <div class="container">
-      <h2 class="section-title">Khám Phá Thực Đơn</h2>
+      <div class="section-eyebrow">Ẩm Thực Mỗi Ngày</div>
+      <h2 class="section-title">Khám Phá <em>Thực Đơn</em></h2>
 
       <div class="menu-controls">
         <!-- Food vs Drink Tabs -->
@@ -2349,7 +2663,8 @@
   <!-- ORIGINAL VISUAL MENU LIGHTBOX SECTION -->
   <section class="gallery-section" id="gallery">
     <div class="container">
-      <h2 class="section-title">Ảnh menu giấy</h2>
+      <div class="section-eyebrow">Menu Giấy Chính Thức</div>
+      <h2 class="section-title">Ảnh <em>Menu Giấy</em></h2>
       <p class="section-desc">Bạn muốn xem cuốn menu giấy chính thức của Thảo Vân Chay? Hãy click vào các trang ảnh menu bên dưới để phóng to và lướt xem nhé.</p>
 
       <div class="gallery-grid" id="menu-gallery-grid">
@@ -2372,7 +2687,8 @@
   <!-- FANPAGE POSTS (TIN TỨC) SECTION -->
   <section class="posts-section" id="tintuc">
     <div class="container">
-      <h2 class="section-title">Tin Tức & Hoạt Động</h2>
+      <div class="section-eyebrow">Từ Fanpage</div>
+      <h2 class="section-title">Tin Tức & <em>Hoạt Động</em></h2>
       <p class="section-desc">Món mới, khuyến mãi và những hoạt động mỗi ngày tại Thảo Vân Chay. Bấm vào ảnh để phóng to và lướt xem.</p>
       <div class="posts-grid" id="posts-grid"></div>
       <div class="posts-cta">
@@ -2384,7 +2700,8 @@
   <!-- CONTACT & LOCATIONS MAP SECTION -->
   <section class="contact-section" id="contact">
     <div class="container">
-      <h2 class="section-title">Liên Hệ & Bản Đồ</h2>
+      <div class="section-eyebrow">Ghé Thăm Chúng Tôi</div>
+      <h2 class="section-title">Liên Hệ & <em>Bản Đồ</em></h2>
       <p class="section-desc">Ghé thăm Thảo Vân Chay để tận hưởng bữa ăn ấm cúng, hoặc liên hệ đặt mâm cỗ chay, tiệc sinh nhật trước qua điện thoại, Zalo hay Fanpage.</p>
 
       <div class="contact-grid">
@@ -2442,6 +2759,20 @@
           <div style="text-align: center; margin-top: 16px;">
             <a href="https://www.google.com/maps/place/Thao+Van+Vegetarian+Restaurant/@12.6939817,108.027543,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d9192ad0b1b:0xf04ecb3191c11e0b!8m2!3d12.6939817!4d108.0301179!16s%2Fg%2F11r10pr81w?hl=en&entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="contact-card-btn" style="display: inline-block;">Đường đi trên Google Maps ➔</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-inner">
+        <h2 class="cta-title">Sẵn Sàng Cho Bữa Chay <em>Thanh Tịnh</em>?</h2>
+        <p class="cta-desc">Đặt bàn trước để Thảo Vân Chay chuẩn bị chu đáo nhất cho gia đình bạn — hoặc chọn món và gửi đơn ngay trên website, quán nhận qua Zalo/Messenger.</p>
+        <div class="cta-actions">
+          <a href="tel:0917003898" class="btn-primary">📞 Gọi Đặt Bàn Ngay</a>
+          <button class="btn-secondary" type="button" onclick="toggleCart(true)">🛒 Đặt Món Online</button>
         </div>
       </div>
     </div>
@@ -2610,6 +2941,16 @@
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
+    // Emoji đại diện cho từng nhóm món
+    const categoryEmoji = {
+      'Khai vị': '🥟', 'Món chiên': '🥠', 'Salad': '🥗', 'Món xào': '🥬',
+      'Món kho': '🥘', 'Món đậu hủ': '🍱', 'Món gỏi': '🌿', 'Rau & Nấm': '🍄',
+      'Món cơm': '🍚', 'Mì & Miến': '🍜', 'Món nướng': '🍢', 'Món lẩu': '🍲',
+      'Món canh': '🥣', 'Món mới': '✨', 'Cà phê': '☕', 'Cà phê pha máy': '☕',
+      'Mojito': '🍹', 'Trà': '🍵', 'Đặc biệt': '⭐', 'Trái cây': '🍊',
+      'Sinh tố': '🥤', 'Yaourt': '🍧', 'Nước giải khát': '🧃'
+    };
+
     // Header scroll background behavior
     window.addEventListener('scroll', () => {
       const header = document.getElementById('main-header');
@@ -2719,7 +3060,7 @@
       categories.forEach(cat => {
         const pill = document.createElement('button');
         pill.className = `category-pill ${cat === activeCategory ? 'active' : ''}`;
-        pill.textContent = cat;
+        pill.textContent = cat === 'Tất cả' ? '🌱 Tất cả' : `${categoryEmoji[cat] || '🌱'} ${cat}`;
         pill.onclick = () => {
           activeCategory = cat;
           isMenuExpanded = false; // Reset expansion on category change
@@ -2845,6 +3186,7 @@
           <div class="menu-card-top">
             <div class="menu-card-header">
               <span class="menu-card-category">${item.category}</span>
+              <span class="menu-card-emoji">${categoryEmoji[item.category] || '🌱'}</span>
             </div>
             <h3 class="menu-card-title">${item.name}</h3>
           </div>
@@ -3171,6 +3513,12 @@
         link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
       });
       backToTopBtn.classList.toggle('show', window.scrollY > 600);
+
+      // Thanh tiến trình cuộn trên đầu trang
+      const docEl = document.documentElement;
+      const scrollable = docEl.scrollHeight - docEl.clientHeight;
+      document.getElementById('scroll-progress').style.width =
+        scrollable > 0 ? (window.scrollY / scrollable * 100) + '%' : '0%';
     });
 
     // === SCROLL REVEAL ===
@@ -3184,9 +3532,49 @@
     }, { threshold: 0.08 });
 
     function initReveal() {
-      document.querySelectorAll('.section-title, .section-desc, .about-content, .about-images, .contact-card, .gallery-item, .post-card').forEach(el => {
+      const siblingIndex = new Map();
+      document.querySelectorAll('.section-eyebrow, .section-title, .section-desc, .about-content, .about-images, .contact-card, .gallery-item, .post-card, .stat-item, .cta-inner').forEach(el => {
+        // Các phần tử cùng cha hiện so le nhau cho có nhịp điệu
+        const parent = el.parentElement;
+        const idx = siblingIndex.get(parent) || 0;
+        siblingIndex.set(parent, idx + 1);
+        el.style.transitionDelay = Math.min(idx * 80, 480) + 'ms';
         el.classList.add('reveal');
         revealObserver.observe(el);
+      });
+    }
+
+    // === BỘ ĐẾM SỐ LIỆU (stats strip) ===
+    function initStats() {
+      const foodStat = document.getElementById('stat-foods');
+      const drinkStat = document.getElementById('stat-drinks');
+      if (foodStat) foodStat.dataset.count = foods.length;
+      if (drinkStat) drinkStat.dataset.count = drinks.length;
+
+      const reduceMotion = typeof window.matchMedia === 'function'
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('.stat-num').forEach(el => {
+        const target = parseInt(el.dataset.count, 10) || 0;
+        const suffix = el.dataset.suffix || '';
+        if (reduceMotion) {
+          el.textContent = target + suffix;
+          return;
+        }
+        const counterObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            counterObserver.unobserve(el);
+            const start = performance.now();
+            const duration = 1400;
+            const tick = now => {
+              const p = Math.min((now - start) / duration, 1);
+              el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+              if (p < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          });
+        }, { threshold: 0.4 });
+        counterObserver.observe(el);
       });
     }
 
@@ -3273,6 +3661,7 @@
       renderCart();
       buildPostsSection();
       initReveal();
+      initStats();
     };
   </script>
 </body>
