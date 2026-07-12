@@ -16,6 +16,7 @@ scratch/
 
 # Whitelist the website code and git configuration
 !index.html
+!posts.js
 !.gitignore
 
 # Whitelist the image assets folder and all its contents
