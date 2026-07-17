@@ -10,14 +10,14 @@
   <meta name="keywords" content="thảo vân chay, quán chay buôn ma thuột, buffet chay buôn ma thuột, ăn chay bmt, nhà hàng chay đắk lắk, lẩu chay buôn ma thuột">
   <meta property="og:title" content="Thảo Vân Chay - Hương Vị Thuần Chay Từ Tâm">
   <meta property="og:description" content="Ẩm thực chay thuần khiết, bổ dưỡng và thanh tịnh tại 250 Phạm Ngũ Lão, Buôn Ma Thuột.">
-  <meta property="og:image" content="https://levu5cms.github.io/thaovanchay/H%C3%ACnh/Kh%C3%B4ng%20gian/144591704_332117394793776_8423430007090968191_o.jpg">
+  <meta property="og:image" content="https://levu5cms.github.io/thaovanchay/H%C3%ACnh/web/hero-khong-gian.jpg">
   <meta property="og:url" content="https://levu5cms.github.io/thaovanchay/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="vi_VN">
   <link rel="canonical" href="https://levu5cms.github.io/thaovanchay/">
-  <link rel="icon" type="image/png" href="Hình/LOGO - THẢO VÂN - PNG.png">
-  <link rel="apple-touch-icon" href="Hình/LOGO - THẢO VÂN - PNG.png">
-  <link rel="preload" as="image" href="Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg">
+  <link rel="icon" type="image/png" href="Hình/web/logo.png">
+  <link rel="apple-touch-icon" href="Hình/web/logo.png">
+  <link rel="preload" as="image" href="Hình/web/hero-khong-gian.jpg">
 
   <!-- Structured data for Google (Restaurant rich result) -->
   <script type="application/ld+json">
@@ -27,7 +27,7 @@
     "name": "Thảo Vân Chay",
     "servesCuisine": "Vegetarian",
     "url": "https://levu5cms.github.io/thaovanchay/",
-    "image": "https://levu5cms.github.io/thaovanchay/H%C3%ACnh/Kh%C3%B4ng%20gian/144591704_332117394793776_8423430007090968191_o.jpg",
+    "image": "https://levu5cms.github.io/thaovanchay/H%C3%ACnh/web/hero-khong-gian.jpg",
     "telephone": "+84917003898",
     "priceRange": "$",
     "address": {
@@ -2500,7 +2500,7 @@
   <header id="main-header">
     <div class="container header-container">
       <a href="#" class="logo-link">
-        <img src="Hình/LOGO - THẢO VÂN - PNG.png" alt="Logo Thảo Vân Chay" class="logo-img" onerror="this.src='Hình/LOGO - THẢO VÂN - JPG-01.jpg'">
+        <img src="Hình/web/logo.png" alt="Logo Thảo Vân Chay" class="logo-img" onerror="this.src='Hình/LOGO - THẢO VÂN - JPG-01.jpg'">
         <div class="logo-text">Thảo Vân <span>Chay</span></div>
       </a>
 
@@ -2551,9 +2551,9 @@
   <!-- HERO WELCOME SECTION -->
   <section class="hero">
     <div class="hero-slides" aria-hidden="true">
-      <div class="hero-slide active" style="background-image: url('Hình/Không gian/144591704_332117394793776_8423430007090968191_o.jpg')"></div>
-      <div class="hero-slide" style="background-image: url('Hình/Hình món ăn Face/Mâm tiệc.PNG')"></div>
-      <div class="hero-slide" style="background-image: url('Hình/Không gian/Khu vực họp mặt.jpg')"></div>
+      <div class="hero-slide active" style="background-image: url('Hình/web/hero-khong-gian.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('Hình/web/mam-tiec.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('Hình/web/hop-mat.jpg')"></div>
     </div>
     <div class="hero-content">
       <div class="hero-subtitle">Nhà Hàng Chay Buôn Ma Thuột</div>
@@ -3282,7 +3282,7 @@
         item.onclick = () => openLightbox(i);
         
         item.innerHTML = `
-          <img src="Hình/ảnh menu/Screenshot (${num}).png" alt="Trang menu ${i + 1}" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <img src="Hình/web/menu-${num}.jpg" alt="Trang menu ${i + 1}" loading="lazy" onerror="this.parentElement.style.display='none'">
           <div class="gallery-overlay">Trang ${i + 1}</div>
         `;
         container.appendChild(item);
@@ -3308,7 +3308,7 @@
       const cap = document.getElementById('lightbox-caption');
 
       const num = screenshotStart + idx;
-      img.src = `Hình/ảnh menu/Screenshot (${num}).png`;
+      img.src = `Hình/web/menu-${num}.jpg`;
       cap.textContent = `Trang Menu Số ${idx + 1} / ${screenshotsCount}`;
       
       lightbox.style.display = 'flex';
@@ -3339,7 +3339,7 @@
       const cap = document.getElementById('lightbox-caption');
       const num = screenshotStart + currentLightboxIdx;
       
-      img.src = `Hình/ảnh menu/Screenshot (${num}).png`;
+      img.src = `Hình/web/menu-${num}.jpg`;
       cap.textContent = `Trang Menu Số ${currentLightboxIdx + 1} / ${screenshotsCount}`;
     }
 
