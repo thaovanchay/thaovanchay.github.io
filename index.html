@@ -2723,6 +2723,7 @@
       <h2 class="section-title">Tin Tức & <em>Hoạt Động</em></h2>
       <p class="section-desc">Món mới, khuyến mãi và những hoạt động mỗi ngày tại Thảo Vân Chay. Bấm vào ảnh để phóng to và lướt xem.</p>
       <div class="posts-grid" id="posts-grid"></div>
+      <div class="menu-expand-container" id="posts-expand-container"></div>
       <div class="posts-cta">
         <a href="https://www.facebook.com/thaovanchay.vn/" target="_blank" class="btn-primary">Theo Dõi Fanpage Facebook</a>
       </div>
@@ -3619,11 +3620,41 @@
       return `${d}/${m}/${y}`;
     }
 
+    let isPostsExpanded = false;
+
+    function togglePostsExpansion(expand) {
+      isPostsExpanded = expand;
+      buildPostsSection();
+      if (!expand) {
+        document.getElementById('tintuc').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
     function buildPostsSection() {
       const grid = document.getElementById('posts-grid');
       if (!grid || typeof fbPosts === 'undefined') return;
 
-      const posts = [...fbPosts].sort((a, b) => b.date.localeCompare(a.date));
+      const allPosts = [...fbPosts].sort((a, b) => b.date.localeCompare(a.date));
+      // Mặc định chỉ hiện 3 bài mới nhất, như mục thực đơn
+      const posts = isPostsExpanded ? allPosts : allPosts.slice(0, 3);
+
+      const expandContainer = document.getElementById('posts-expand-container');
+      if (expandContainer) {
+        if (allPosts.length <= 3) {
+          expandContainer.innerHTML = '';
+        } else if (!isPostsExpanded) {
+          expandContainer.innerHTML = `
+            <button class="btn-expand-menu" onclick="togglePostsExpansion(true)">
+              <span>Xem thêm tin tức (${allPosts.length - 3} bài)</span> 🗎
+            </button>`;
+        } else {
+          expandContainer.innerHTML = `
+            <button class="btn-expand-menu" onclick="togglePostsExpansion(false)">
+              <span>Thu gọn tin tức</span> 🗎
+            </button>`;
+        }
+      }
+
       grid.innerHTML = '';
 
       posts.forEach(post => {
