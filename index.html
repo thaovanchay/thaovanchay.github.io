@@ -2486,6 +2486,154 @@
       position: relative;
       z-index: 1;
     }
+
+    /* ===== Mobile refinement pass ===== */
+    /* Chạm nhanh, không lóe xám khi bấm (mọi thiết bị cảm ứng) */
+    a, button {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    /* Chừa chỗ cho thanh home iPhone */
+    .cart-footer {
+      padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    }
+    .mobile-call-bar {
+      padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    }
+
+    @media (max-width: 768px) {
+      /* Nhịp section gọn lại — màn nhỏ không cần nhiều khoảng trắng như desktop */
+      .about, .menu-section, .gallery-section, .posts-section, .contact-section {
+        padding: 56px 0;
+      }
+      .statement {
+        padding: 64px 0 56px;
+      }
+      .statement-line {
+        font-size: 1.4rem;
+        line-height: 1.65;
+      }
+      .section-desc {
+        font-size: 0.95rem;
+        margin-bottom: 32px;
+      }
+      .section-eyebrow {
+        letter-spacing: 3px;
+        font-size: 0.75rem;
+      }
+
+      /* Hero: dùng svh để không nhảy khi thanh địa chỉ ẩn/hiện */
+      .hero {
+        min-height: 540px;
+      }
+      @supports (height: 100svh) {
+        .hero {
+          height: 92svh;
+        }
+      }
+      .hero-subtitle {
+        font-size: 0.82rem;
+        letter-spacing: 3px;
+      }
+      .open-status {
+        font-size: 0.8rem;
+        padding: 5px 14px;
+        margin-bottom: 16px;
+      }
+      .hero-desc {
+        margin-bottom: 28px;
+      }
+
+      /* Câu chuyện: sát nhịp đọc điện thoại */
+      .story-chapter {
+        margin-top: 44px;
+      }
+      .story-num {
+        font-size: 2.8rem;
+      }
+      .story-title {
+        font-size: 1.7rem;
+      }
+      .story-text p {
+        font-size: 0.97rem;
+        line-height: 1.75;
+      }
+      .story-media img,
+      .story-chapter.reverse .story-media img {
+        border-radius: var(--radius);
+        border-bottom-left-radius: 56px;
+      }
+
+      /* Stats gọn */
+      .stats-strip {
+        padding: 26px 12px;
+        margin-top: 40px;
+        gap: 22px 8px;
+      }
+      .stat-num {
+        font-size: 2rem;
+      }
+      .stat-label {
+        font-size: 0.78rem;
+      }
+
+      /* Menu & bài viết & gallery: lưới sát hơn */
+      .menu-grid {
+        gap: 14px;
+      }
+      .menu-card {
+        padding: 18px;
+      }
+      .menu-card-emoji {
+        width: 38px;
+        height: 38px;
+        font-size: 1.25rem;
+        border-radius: 11px;
+      }
+      .posts-grid {
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .post-body {
+        padding: 14px 16px 8px;
+      }
+      .post-footer {
+        padding: 6px 16px 14px;
+      }
+      .gallery-grid {
+        gap: 12px;
+      }
+
+      /* CTA banner vừa màn hình */
+      .cta-banner {
+        padding: 8px 0 56px;
+      }
+      .cta-inner {
+        padding: 44px 22px;
+        border-radius: var(--radius);
+      }
+      .cta-desc {
+        font-size: 0.95rem;
+      }
+
+      /* Vùng bấm tối thiểu 34px trong giỏ hàng */
+      .qty-btn {
+        width: 34px;
+        height: 34px;
+      }
+
+      /* Footer không bị thanh gọi điện cố định che mất */
+      footer {
+        padding-bottom: 92px;
+      }
+    }
+
+    /* Màn hình lùn (điện thoại xoay ngang, màn nhỏ): ẩn chỉ báo cuộn cho thoáng */
+    @media (max-height: 620px) {
+      .hero-scroll {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body class="auto-theme">
