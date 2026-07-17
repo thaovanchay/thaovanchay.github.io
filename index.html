@@ -1092,6 +1092,14 @@
       font-size: 0.85rem;
     }
     
+    .brand-ic {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+      vertical-align: -2.5px;
+      display: inline-block;
+    }
+
     .delivery-btn.shopee-global {
       background-color: #ee4d2d;
       color: #ffffff;
@@ -2964,10 +2972,10 @@
               </label>
             </div>
             <a href="https://shopeefood.vn/dak-lak/quan-thao-van-chay-pham-ngu-lao?source_url=foody_ordernow_pc" target="_blank" class="delivery-btn shopee-global compact" title="Đặt trên ShopeeFood">
-              🍊 ShopeeFood
+              <svg class="brand-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm0 10c-2.76 0-5-2.24-5-5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h2c0 2.76-2.24 5-5 5z"/></svg> ShopeeFood
             </a>
             <a href="https://food.grab.com/vn/vi/restaurant/th%E1%BA%A3o-v%C3%A2n-chay-delivery/5-C3DKBENAMAVEV2?" target="_blank" class="delivery-btn grab-global compact" title="Đặt trên GrabFood">
-              🟢 GrabFood
+              <svg class="brand-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.44 9.03 15.41 5H11v2h3.59l2 2H5c-2.8 0-5 2.2-5 5s2.2 5 5 5c2.46 0 4.45-1.69 4.9-4h1.65l2.77-2.77c-.21.54-.32 1.14-.32 1.77 0 2.8 2.2 5 5 5s5-2.2 5-5c0-2.65-1.97-4.77-4.56-4.97zM7.82 15C7.4 16.15 6.28 17 5 17c-1.63 0-3-1.37-3-3s1.37-3 3-3c1.28 0 2.4.85 2.82 2H5v2h2.82zM19 17c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg> GrabFood
             </a>
           </div>
         </div>
@@ -3465,14 +3473,14 @@
             if (typeof item.grab === 'number') {
               appHtml += `
                 <div class="app-price-row">
-                  <span class="app-brand">🟢 GrabFood:</span>
+                  <span class="app-brand"><svg class="brand-ic" style="fill:#00b14f" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.44 9.03 15.41 5H11v2h3.59l2 2H5c-2.8 0-5 2.2-5 5s2.2 5 5 5c2.46 0 4.45-1.69 4.9-4h1.65l2.77-2.77c-.21.54-.32 1.14-.32 1.77 0 2.8 2.2 5 5 5s5-2.2 5-5c0-2.65-1.97-4.77-4.56-4.97zM7.82 15C7.4 16.15 6.28 17 5 17c-1.63 0-3-1.37-3-3s1.37-3 3-3c1.28 0 2.4.85 2.82 2H5v2h2.82zM19 17c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg> GrabFood:</span>
                   <span class="app-val grab-val">${formatNumber(item.grab)} đ</span>
                 </div>
               `;
             } else {
               appHtml += Object.entries(item.grab).map(([size, pr]) => `
                 <div class="app-price-row">
-                  <span class="app-brand">🟢 Grab (${size}):</span>
+                  <span class="app-brand"><svg class="brand-ic" style="fill:#00b14f" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.44 9.03 15.41 5H11v2h3.59l2 2H5c-2.8 0-5 2.2-5 5s2.2 5 5 5c2.46 0 4.45-1.69 4.9-4h1.65l2.77-2.77c-.21.54-.32 1.14-.32 1.77 0 2.8 2.2 5 5 5s5-2.2 5-5c0-2.65-1.97-4.77-4.56-4.97zM7.82 15C7.4 16.15 6.28 17 5 17c-1.63 0-3-1.37-3-3s1.37-3 3-3c1.28 0 2.4.85 2.82 2H5v2h2.82zM19 17c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg> Grab (${size}):</span>
                   <span class="app-val grab-val">${formatNumber(pr)} đ</span>
                 </div>
               `).join('');
@@ -3483,14 +3491,14 @@
             if (typeof item.shopeefood  === 'number') {
               appHtml += `
                 <div class="app-price-row">
-                  <span class="app-brand">🍊 ShopeeFood:</span>
+                  <span class="app-brand"><svg class="brand-ic" style="fill:#ee4d2d" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm0 10c-2.76 0-5-2.24-5-5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h2c0 2.76-2.24 5-5 5z"/></svg> ShopeeFood:</span>
                   <span class="app-val shopeefood-val">${formatNumber(item.shopeefood )} đ</span>
                 </div>
               `;
             } else {
               appHtml += Object.entries(item.shopeefood ).map(([size, pr]) => `
                 <div class="app-price-row">
-                  <span class="app-brand">🍊 Shopee (${size}):</span>
+                  <span class="app-brand"><svg class="brand-ic" style="fill:#ee4d2d" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm0 10c-2.76 0-5-2.24-5-5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h2c0 2.76-2.24 5-5 5z"/></svg> Shopee (${size}):</span>
                   <span class="app-val shopeefood-val">${formatNumber(pr)} đ</span>
                 </div>
               `).join('');
