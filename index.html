@@ -3426,11 +3426,12 @@
 
       // Check if search query is active
       const isSearching = query.length > 0;
-      const showExpandButton = filtered.length > 3 && !isSearching;
-      
+      const collapsedCount = collapsedItemCount();
+      const showExpandButton = filtered.length > collapsedCount && !isSearching;
+
       // Determine array slices
-      const itemsToShow = showExpandButton && !isMenuExpanded 
-        ? filtered.slice(0, 3) 
+      const itemsToShow = showExpandButton && !isMenuExpanded
+        ? filtered.slice(0, collapsedCount)
         : filtered;
 
       itemsToShow.forEach(item => {
@@ -3914,6 +3915,21 @@
       return `${d}/${m}/${y}`;
     }
 
+    // Mobile lưới 2 cột nên thu gọn về 4 mục (2x2); desktop 3 cột thì 3 mục (1 hàng)
+    function collapsedItemCount() {
+      return typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 768px)').matches ? 4 : 3;
+    }
+
+    let lastCollapsedCount = null;
+    window.addEventListener('resize', () => {
+      const count = collapsedItemCount();
+      if (lastCollapsedCount !== null && count !== lastCollapsedCount) {
+        filterMenu();
+        buildPostsSection();
+      }
+      lastCollapsedCount = count;
+    });
+
     let isPostsExpanded = false;
 
     function togglePostsExpansion(expand) {
@@ -3929,17 +3945,18 @@
       if (!grid || typeof fbPosts === 'undefined') return;
 
       const allPosts = [...fbPosts].sort((a, b) => b.date.localeCompare(a.date));
-      // Mặc định chỉ hiện 3 bài mới nhất, như mục thực đơn
-      const posts = isPostsExpanded ? allPosts : allPosts.slice(0, 3);
+      // Mặc định chỉ hiện các bài mới nhất (3 desktop / 4 mobile), như mục thực đơn
+      const collapsedCount = collapsedItemCount();
+      const posts = isPostsExpanded ? allPosts : allPosts.slice(0, collapsedCount);
 
       const expandContainer = document.getElementById('posts-expand-container');
       if (expandContainer) {
-        if (allPosts.length <= 3) {
+        if (allPosts.length <= collapsedCount) {
           expandContainer.innerHTML = '';
         } else if (!isPostsExpanded) {
           expandContainer.innerHTML = `
             <button class="btn-expand-menu" onclick="togglePostsExpansion(true)">
-              <span>Xem thêm tin tức (${allPosts.length - 3} bài)</span> 🗎
+              <span>Xem thêm tin tức (${allPosts.length - collapsedCount} bài)</span> 🗎
             </button>`;
         } else {
           expandContainer.innerHTML = `
