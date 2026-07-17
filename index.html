@@ -4062,6 +4062,31 @@
       });
     }
 
+    // === MỞ APP SHOPEEFOOD/GRABFOOD TRÊN ANDROID ===
+    // intent:// yêu cầu Android mở đúng app; máy không cài app sẽ tự rơi về web (fallback).
+    // iOS không hỗ trợ ép mở app từ web — tùy Shopee/Grab đăng ký Universal Link.
+    function buildIntentUrl(url, pkg) {
+      return 'intent://' + url.replace(/^https?:\/\//, '')
+        + '#Intent;scheme=https;package=' + pkg
+        + ';S.browser_fallback_url=' + encodeURIComponent(url) + ';end';
+    }
+
+    function setupAppDeepLinks() {
+      if (!/Android/i.test(navigator.userAgent)) return;
+      const targets = [
+        { selector: 'a[href*="shopeefood.vn"]', pkg: 'com.foody.vn.activity' },
+        { selector: 'a[href*="food.grab.com"]', pkg: 'com.grabtaxi.passenger' },
+      ];
+      targets.forEach(({ selector, pkg }) => {
+        document.querySelectorAll(selector).forEach(link => {
+          link.addEventListener('click', e => {
+            e.preventDefault();
+            window.location.href = buildIntentUrl(link.href, pkg);
+          });
+        });
+      });
+    }
+
     // === HERO SLIDESHOW (crossfade điện ảnh) ===
     function initHeroSlides() {
       const slides = document.querySelectorAll('.hero-slide');
@@ -4089,6 +4114,7 @@
       initReveal();
       initStats();
       initHeroSlides();
+      setupAppDeepLinks();
     };
   </script>
 </body>
