@@ -2782,10 +2782,47 @@
         font-size: 0.62rem;
       }
 
-      /* Thẻ liên hệ gọn */
+      /* Thẻ liên hệ: 3 hàng mảnh (icon - tên - nút), ẩn mô tả dài */
+      .contact-info-cards {
+        gap: 10px;
+      }
       .contact-card {
-        padding: 16px;
+        padding: 10px 14px;
         gap: 12px;
+        align-items: center;
+      }
+      .contact-card-icon {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+      }
+      .contact-card-icon svg {
+        width: 17px;
+        height: 17px;
+      }
+      .contact-card > div:last-child {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        min-width: 0;
+      }
+      .contact-card-title {
+        font-size: 0.88rem;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .contact-card-text {
+        display: none;
+      }
+      .contact-card-btn {
+        padding: 7px 14px;
+        font-size: 0.76rem;
+        white-space: nowrap;
+        flex-shrink: 0;
       }
     }
   </style>
