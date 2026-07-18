@@ -127,10 +127,21 @@
     body {
       font-family: var(--font-body);
       background-color: var(--bg);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480' viewBox='0 0 480 480'%3E%3Cg fill='%2322332a' fill-opacity='0.045'%3E%3Cg transform='translate(84,104) rotate(-18)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(336,64) rotate(42) scale(0.82)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(120,344) rotate(158) scale(0.72)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(388,308) rotate(-32) scale(0.9)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(244,214) rotate(78) scale(0.55)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background-size: 480px 480px;
       color: var(--text);
       line-height: 1.6;
       transition: var(--transition);
       overflow-x: hidden;
+    }
+
+    :root.dark-theme body {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480' viewBox='0 0 480 480'%3E%3Cg fill='%23eae5d8' fill-opacity='0.035'%3E%3Cg transform='translate(84,104) rotate(-18)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(336,64) rotate(42) scale(0.82)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(120,344) rotate(158) scale(0.72)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(388,308) rotate(-32) scale(0.9)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(244,214) rotate(78) scale(0.55)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    @media (prefers-color-scheme: dark) {
+      :root.auto-theme body {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480' viewBox='0 0 480 480'%3E%3Cg fill='%23eae5d8' fill-opacity='0.035'%3E%3Cg transform='translate(84,104) rotate(-18)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(336,64) rotate(42) scale(0.82)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(120,344) rotate(158) scale(0.72)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(388,308) rotate(-32) scale(0.9)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3Cg transform='translate(244,214) rotate(78) scale(0.55)'%3E%3Cpath d='M0 0 C14 -20 40 -26 58 -18 C42 0 16 6 0 0 Z'/%3E%3Cpath d='M0 0 C-6 -24 6 -46 26 -56 C28 -34 18 -12 0 0 Z'/%3E%3Cpath d='M0 0 C-20 -8 -30 -30 -24 -50 C-6 -38 2 -18 0 0 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
     }
 
     img {
@@ -732,7 +743,7 @@
 
     /* === INTERACTIVE MENU === */
     .menu-section {
-      background-color: var(--bg);
+      background-color: transparent;
       padding: 100px 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
@@ -1175,7 +1186,7 @@
     /* === VISUAL MENU GALLERY === */
     .gallery-section {
       padding: 100px 0;
-      background-color: var(--bg);
+      background-color: transparent;
     }
 
     .gallery-grid {
@@ -1318,7 +1329,7 @@
     /* === CONTACT & MAP === */
     .contact-section {
       padding: 100px 0;
-      background-color: var(--bg);
+      background-color: transparent;
     }
 
     .contact-grid {
@@ -2138,7 +2149,7 @@
     /* ===== Fanpage posts (Tin tức) section ===== */
     .posts-section {
       padding: 90px 0;
-      background: var(--bg);
+      background: transparent;
     }
     .posts-grid {
       display: grid;
@@ -2337,7 +2348,7 @@
     /* ===== Threshold statement ===== */
     .statement {
       padding: 120px 0 110px;
-      background: var(--bg);
+      background: transparent;
       text-align: center;
     }
     .statement-line {
@@ -2433,7 +2444,7 @@
     /* ===== CTA banner trước footer ===== */
     .cta-banner {
       padding: 30px 0 100px;
-      background: var(--bg);
+      background: transparent;
     }
     .cta-inner {
       position: relative;
