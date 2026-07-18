@@ -56,6 +56,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
   <meta name="theme-color" content="#22332a">
+  <link rel="manifest" href="manifest.webmanifest">
 
   <style>
     /* CSS Variables - Zen wabi-sabi Design System */
@@ -1736,8 +1737,8 @@
       .mobile-call-actions {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 6px;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
       }
       .mobile-action-btn {
         justify-content: center;
@@ -2369,6 +2370,88 @@
       color: var(--accent);
     }
 
+    /* ===== Ảnh món trên thẻ thực đơn ===== */
+    .menu-card-photo {
+      margin: -24px -24px 16px;
+      aspect-ratio: 5 / 3;
+      overflow: hidden;
+    }
+    .menu-card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0;
+      transition: transform 0.5s ease;
+    }
+    .menu-card:hover .menu-card-photo img {
+      transform: scale(1.06);
+    }
+
+    /* ===== Nút chỉ đường trên thanh mobile ===== */
+    .mobile-action-btn.btn-maps {
+      background-color: #1a73e8;
+      color: #ffffff;
+    }
+
+    /* ===== Mục đánh giá ===== */
+    .reviews-section {
+      padding: 90px 0;
+      background: transparent;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 420px));
+      justify-content: center;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto 36px;
+    }
+    .review-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 26px 28px;
+      margin: 0;
+    }
+    .review-stars {
+      color: var(--accent);
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+    .review-text {
+      font-family: var(--font-title);
+      font-style: italic;
+      font-size: 1.12rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin: 0 0 14px;
+    }
+    .review-author {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .review-author a {
+      color: var(--primary-light);
+      text-decoration: underline;
+    }
+
+    /* ===== Nút đổi ngôn ngữ ===== */
+    .lang-toggle {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      border-radius: 50px;
+      padding: 6px 12px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+    .lang-toggle:hover {
+      border-color: var(--accent-soft);
+      color: var(--accent-soft);
+    }
+
     /* ===== Scroll progress bar ===== */
     .scroll-progress {
       position: fixed;
@@ -2793,6 +2876,19 @@
         font-size: 0.62rem;
       }
 
+      .menu-card-photo {
+        margin: -12px -12px 10px;
+      }
+      .reviews-section {
+        padding: 56px 0;
+      }
+      .review-card {
+        padding: 18px 20px;
+      }
+      .review-text {
+        font-size: 0.98rem;
+      }
+
       /* Thẻ liên hệ: 3 hàng mảnh (icon - tên - nút), ẩn mô tả dài */
       .contact-info-cards {
         gap: 10px;
@@ -2865,6 +2961,9 @@
       </nav>
 
       <div class="header-actions">
+        <!-- Language Toggle -->
+        <button class="lang-toggle" id="lang-btn" aria-label="Switch to English / Đổi sang tiếng Việt">EN</button>
+
         <!-- Theme Toggle Button -->
         <button class="theme-toggle" id="theme-btn" aria-label="Đổi chế độ sáng tối">
           <svg viewBox="0 0 24 24" id="sun-icon">
@@ -3147,6 +3246,18 @@
     </div>
   </section>
 
+  <!-- REVIEWS SECTION -->
+  <section class="reviews-section" id="danhgia">
+    <div class="container">
+      <div class="section-eyebrow">Khách Nói Về Chúng Tôi</div>
+      <h2 class="section-title">Đánh Giá & <em>Cảm Nhận</em></h2>
+      <div class="reviews-grid" id="reviews-grid"></div>
+      <div class="posts-cta">
+        <a href="https://www.google.com/maps/place/Thao+Van+Vegetarian+Restaurant/@12.6939817,108.027543,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d9192ad0b1b:0xf04ecb3191c11e0b!8m2!3d12.6939817!4d108.0301179!16s%2Fg%2F11r10pr81w" target="_blank" class="btn-primary">Xem &amp; Viết Đánh Giá Trên Google</a>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA BANNER -->
   <section class="cta-banner">
     <div class="container">
@@ -3221,6 +3332,10 @@
         <span class="btn-text-full">GrabFood</span>
         <span class="btn-text-short">Grab</span>
       </a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=12.6939817,108.0301179" target="_blank" class="mobile-action-btn btn-maps">
+        <span class="btn-text-full">Chỉ Đường</span>
+        <span class="btn-text-short">Maps</span>
+      </a>
     </div>
   </div>
 
@@ -3280,17 +3395,17 @@
   <script>
     // Core database compiled from local excel/word
     const foods = [
-      { id: 1, name: "Cà ri bánh mì", category: "Khai vị", price:{ "Nhỏ": 40000, "Lớn": 75000 }, grab:{ "Nhỏ": 48000, "Lớn": 84000 }, shopeefood :{ "Nhỏ": 48000, "Lớn": 84000 } },      { id: 2, name: "Súp đậu gà", category: "Khai vị", price:{ "Nhỏ": 35000, "Lớn": 70000 }, grab:{ "Nhỏ": 42000, "Lớn": 74000 }, shopeefood :{ "Nhỏ": 36000, "Lớn": 74000 } },      { id: 3, name: "Cháo Thảo Vân", category: "Khai vị", price:{ "Nhỏ": 30000, "Lớn": 65000 }, grab:{ "Nhỏ": 36000, "Lớn": 74000 }, shopeefood :{ "Nhỏ": 42000, "Lớn": 74000 } },      { id: 4, name: "Bánh mì xíu mại", category: "Khai vị", price: 35000, grab: 45000, shopeefood : 42000 },      { id: 5, name: "Cuốn Thảo Vân", category: "Khai vị", price: 10000, grab: 12000, shopeefood : 12000 },      { id: 6, name: "Há cảo may mắn", category: "Khai vị", price: 55000, grab: 67000, shopeefood : 67000 },      { id: 7, name: "Nem trái cây", category: "Khai vị", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 8, name: "Nem vuông", category: "Khai vị", price: 55000, grab: 68000, shopeefood : 68000 },      
+      { id: 1, img: "Hình/web/dishes/mon-1.jpg", name: "Cà ri bánh mì", category: "Khai vị", price:{ "Nhỏ": 40000, "Lớn": 75000 }, grab:{ "Nhỏ": 48000, "Lớn": 84000 }, shopeefood :{ "Nhỏ": 48000, "Lớn": 84000 } },      { id: 2, img: "Hình/web/dishes/mon-2.jpg", name: "Súp đậu gà", category: "Khai vị", price:{ "Nhỏ": 35000, "Lớn": 70000 }, grab:{ "Nhỏ": 42000, "Lớn": 74000 }, shopeefood :{ "Nhỏ": 36000, "Lớn": 74000 } },      { id: 3, img: "Hình/web/dishes/mon-3.jpg", name: "Cháo Thảo Vân", category: "Khai vị", price:{ "Nhỏ": 30000, "Lớn": 65000 }, grab:{ "Nhỏ": 36000, "Lớn": 74000 }, shopeefood :{ "Nhỏ": 42000, "Lớn": 74000 } },      { id: 4, img: "Hình/web/dishes/mon-4.jpg", name: "Bánh mì xíu mại", category: "Khai vị", price: 35000, grab: 45000, shopeefood : 42000 },      { id: 5, img: "Hình/web/dishes/mon-5.jpg", name: "Cuốn Thảo Vân", category: "Khai vị", price: 10000, grab: 12000, shopeefood : 12000 },      { id: 6, img: "Hình/web/dishes/mon-6.jpg", name: "Há cảo may mắn", category: "Khai vị", price: 55000, grab: 67000, shopeefood : 67000 },      { id: 7, img: "Hình/web/dishes/mon-7.jpg", name: "Nem trái cây", category: "Khai vị", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 8, img: "Hình/web/dishes/mon-8.jpg", name: "Nem vuông", category: "Khai vị", price: 55000, grab: 68000, shopeefood : 68000 },      
       { id: 9, name: "Hoành thánh chiên", category: "Món chiên", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 10, name: "Chả chiên giòn", category: "Món chiên", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 11, name: "Dồi chiên chay", category: "Món chiên", price: 55000, grab: 74000, shopeefood : 74000 },      { id: 12, name: "Khoai tây chiên", category: "Món chiên", price: 35000, grab: 42000, shopeefood : 42000 },
       { id: 13, name: "Rau luộc thập cẩm + kho quẹt", category: "Salad", price: 49000, grab: 66000, shopeefood : 66000 },      { id: 14, name: "Salad trộn dầu giấm", category: "Salad", price: 44000, grab: 60000, shopeefood : 60000 },      { id: 15, name: "Nấm đút lò phô mai", category: "Salad", price: 62000, grab: 95000, shopeefood : 95000 },      { id: 16, name: "Salad rau mầm dinh dưỡng", category: "Salad", price: 49000, grab: 49000, shopeefood : 49000 },
       { id: 17, name: "Nấm hàu xào xả ớt", category: "Món xào", price: 65000, grab: 95000, shopeefood : 95000 },      { id: 18, name: "Rau muống xào tỏi chay", category: "Món xào", price: 37000, grab: 52000, shopeefood : 52000 },      { id: 19, name: "Chả quế xào chua ngọt", category: "Món xào", price: 57000, grab: 84000, shopeefood : 65000 },      { id: 20, name: "Rau xào tỏi theo mùa", category: "Món xào", price: 44000, grab: 60000, shopeefood : 60000 },      { id: 21, name: "Bí đỏ xào tỏi", category: "Món xào", price: 44000, grab: 60000, shopeefood : 60000 },
       { id: 22, name: "Đạm kho chả quế", category: "Món kho", price: 65000, grab: 75000, shopeefood : 75000 },      { id: 23, name: "Đạm kho tiêu tộ", category: "Món kho", price: 60000, grab: 72000, shopeefood : 59000 },      { id: 24, name: "Kho Thảo Vân", category: "Món kho", price: 65000, grab: 75000, shopeefood : 75000 },      { id: 25, name: "Chả lụa kho tộ", category: "Món kho", price: 60000, grab: 72000, shopeefood : 72000 },      { id: 26, name: "Nấm đùi gà kho gừng", category: "Món kho", price: 60000, grab: 72000, shopeefood : 72000 },
       { id: 27, name: "Đậu hủ bậc thang độc quyền", category: "Món đậu hủ", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 28, name: "Đậu hủ chiên mắm hành chay", category: "Món đậu hủ", price: 50000, grab: 60000, shopeefood : 60000 },      { id: 29, name: "Đậu hủ sốt nấm hương", category: "Món đậu hủ", price: 50000, grab: 64000, shopeefood : 64000 },      { id: 30, name: "Đậu hủ xả ớt đậm đà", category: "Món đậu hủ", price: 55000, grab: 64000, shopeefood : 64000 },
       { id: 31, name: "Gỏi nấm hàu đặc biệt", category: "Món gỏi", price: 85000, grab: 88000, shopeefood : 88000 },      { id: 32, name: "Gỏi nấm bào ngư", category: "Món gỏi", price: 70000, grab: 82000, shopeefood : 82000 },      { id: 33, name: "Gỏi đậu rồng tôm chay", category: "Món gỏi", price: 70000, grab: 82000, shopeefood : 82000 },      { id: 34, name: "Gỏi rong biển thanh mát", category: "Món gỏi", price: 70000, grab: 82000, shopeefood : 82000 },      { id: 35, name: "Gỏi củ hủ dừa", category: "Món gỏi", price: 75000, grab: 82000, shopeefood : 82000 },      { id: 36, name: "Gỏi rau má", category: "Món gỏi", price: 60000, grab: 72000, shopeefood : 72000 },      { id: 37, name: "Gỏi ngó sen chay", category: "Món gỏi", price: 70000, grab: 76000, shopeefood : 76000 },
-      { id: 38, name: "Nấm rang muối Hồng Kông", category: "Rau & Nấm", price: 65000, grab: 74000, shopeefood : 74000 },      { id: 39, name: "Rau củ chiên giòn", category: "Rau & Nấm", price: 65000, grab: 70000, shopeefood : 70000 },
+      { id: 38, img: "Hình/web/dishes/mon-38.jpg", name: "Nấm rang muối Hồng Kông", category: "Rau & Nấm", price: 65000, grab: 74000, shopeefood : 74000 },      { id: 39, img: "Hình/web/dishes/mon-39.jpg", name: "Rau củ chiên giòn", category: "Rau & Nấm", price: 65000, grab: 70000, shopeefood : 70000 },
       { id: 40, name: "Cơm chiên Thảo Vân", category: "Món cơm", price: 65000, grab: 75000, shopeefood : 75000 },      { id: 41, name: "Cơm chiên dương châu", category: "Món cơm", price: 65000, grab: 70000, shopeefood : 75000 },      { id: 42, name: "Cơm chiên muối ớt", category: "Món cơm", price: 65000, grab: 75000, shopeefood : 75000 },      { id: 43, name: "Cơm ngũ sắc", category: "Món cơm", price: 60000, grab: 70000, shopeefood : 70000 },
       { id: 44, name: "Mì spaghetti", category: "Mì & Miến", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 45, name: "Mì xào giòn", category: "Mì & Miến", price: 60000, grab: 72000, shopeefood : 72000 },      { id: 46, name: "Mì xào mềm", category: "Mì & Miến", price: 50000, grab: 60000, shopeefood : 45000 },      { id: 47, name: "Miến xào", category: "Mì & Miến", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 48, name: "Nui xào kiểu Italia", category: "Mì & Miến", price: 55000, grab: 69000, shopeefood : 68000 },      { id: 49, name: "Mì nấm tiềm thuốc bắc", category: "Mì & Miến", price: 55000, grab: 72000, shopeefood : 72000 },      { id: 50, name: "Hủ tiếu áp chảo giòn tan", category: "Mì & Miến", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 51, name: "Bún gạo xào kiểu Singapore", category: "Mì & Miến", price: 55000, grab: 68000, shopeefood : 68000 },
-      { id: 52, name: "Bí đỏ nướng", category: "Món nướng", price: 65000, grab: 57000, shopeefood : 57000 },      { id: 53, name: "Cà tím nướng rẻ quạt", category: "Món nướng", price: 50000, grab: 60000, shopeefood : 60000 },      { id: 54, name: "Cà tím nướng sốt Oval", category: "Món nướng", price: 50000, grab: 60000, shopeefood : 60000 },      { id: 55, name: "Nấm bào ngư nướng sa tế cay", category: "Món nướng", price: 50000, grab: 68000, shopeefood : 68000 },
+      { id: 52, img: "Hình/web/dishes/mon-52.jpg", name: "Bí đỏ nướng", category: "Món nướng", price: 65000, grab: 57000, shopeefood : 57000 },      { id: 53, name: "Cà tím nướng rẻ quạt", category: "Món nướng", price: 50000, grab: 60000, shopeefood : 60000 },      { id: 54, name: "Cà tím nướng sốt Oval", category: "Món nướng", price: 50000, grab: 60000, shopeefood : 60000 },      { id: 55, img: "Hình/web/dishes/mon-55.jpg", name: "Nấm bào ngư nướng sa tế cay", category: "Món nướng", price: 50000, grab: 68000, shopeefood : 68000 },
       { id: 56, name: "Lẩu riêu cua", category: "Món lẩu", price: 179000, grab: 198000, shopeefood : 198000 },      { id: 57, name: "Lẩu nấm thập cẩm thanh ngọt", category: "Món lẩu", price: 179000, grab: 198000, shopeefood : 198000 },      { id: 58, name: "Lẩu kim chi", category: "Món lẩu", price: 179000, grab: 198000, shopeefood : 198000 },      { id: 59, name: "Lẩu thái chua cay", category: "Món lẩu", price: 179000, grab: 219000, shopeefood : 219000 },      { id: 60, name: "Lẩu nấm thập tam vị đặc biệt", category: "Món lẩu", price: 195000, grab: 235000, shopeefood : 195000 },
       { id: 61, name: "Canh chua nam bộ thanh nhiệt", category: "Món canh", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 62, name: "Canh rong biển đậu hủ non", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 63, name: "Canh rau tập tàng thanh đạm", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 64, name: "Canh khổ qua nhồi đậu hủ", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 65, name: "Canh khoai mỡ tím thơm ngon", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 66, name: "Canh ngũ quả bồi bổ sức khỏe", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },      { id: 67, name: "Canh bí đỏ đậu phộng", category: "Món canh", price: 55000, grab: 62000, shopeefood : 62000 },
       { id: 68, name: "Măng tây xào đậu gà", category: "Món mới", price: 60000, grab: 60000, shopeefood : 60000 },      { id: 69, name: "Hủ tiếu áp chảo", category: "Món mới", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 70, name: "Phở áp chảo", category: "Món mới", price: 55000, grab: 68000, shopeefood : 68000 },      { id: 71, name: "Cải thìa sốt dầu hào", category: "Món mới", price: 55000, grab: 44000, shopeefood : 44000 }    ];
@@ -3567,6 +3682,7 @@
         }
 
         card.innerHTML = `
+          ${item.img ? `<div class="menu-card-photo"><img src="${item.img}" alt="${item.name}" loading="lazy"></div>` : ''}
           <div class="menu-card-top">
             <div class="menu-card-header">
               <span class="menu-card-category">${item.category}</span>
@@ -3965,6 +4081,36 @@
       touchStartX = null;
     }, { passive: true });
 
+    // === ĐÁNH GIÁ — render từ posts.js (tvcReviews) ===
+    function buildReviews() {
+      const grid = document.getElementById('reviews-grid');
+      const section = document.getElementById('danhgia');
+      if (!grid || typeof tvcReviews === 'undefined' || !tvcReviews.length) {
+        if (section) section.style.display = 'none';
+        return;
+      }
+      grid.innerHTML = '';
+      tvcReviews.forEach(rv => {
+        const card = document.createElement('figure');
+        card.className = 'review-card';
+        card.innerHTML = `
+          ${rv.stars ? `<div class="review-stars">${'★'.repeat(rv.stars)}${'☆'.repeat(5 - rv.stars)}</div>` : ''}
+          <blockquote class="review-text"></blockquote>
+          <figcaption class="review-author"></figcaption>`;
+        card.querySelector('.review-text').textContent = '“' + rv.text + '”';
+        const author = card.querySelector('.review-author');
+        if (rv.source) {
+          const a = document.createElement('a');
+          a.href = rv.source; a.target = '_blank'; a.rel = 'noopener';
+          a.textContent = '— ' + rv.author;
+          author.appendChild(a);
+        } else {
+          author.textContent = '— ' + rv.author;
+        }
+        grid.appendChild(card);
+      });
+    }
+
     // === FANPAGE POSTS (Tin tức) — render từ posts.js ===
     function formatPostDate(iso) {
       const [y, m, d] = iso.split('-');
@@ -4113,6 +4259,103 @@
       }, 6000);
     }
 
+    // === SONG NGỮ VI/EN (phần giao diện tĩnh; tên món giữ tiếng Việt) ===
+    const I18N_EN = [
+      ['nav .nav-link', 'Home', 0], ['nav .nav-link', 'Our Story', 1], ['nav .nav-link', 'Menu', 2],
+      ['nav .nav-link', 'Photo Menu', 3], ['nav .nav-link', 'News', 4], ['nav .nav-link', 'Contact', 5],
+      ['.mobile-nav-link', 'Home', 0], ['.mobile-nav-link', 'Our Story', 1], ['.mobile-nav-link', 'Menu', 2],
+      ['.mobile-nav-link', 'Photo Menu', 3], ['.mobile-nav-link', 'News', 4], ['.mobile-nav-link', 'Contact', 5],
+      ['.hero-subtitle', 'Vegetarian Restaurant · Buon Ma Thuot'],
+      ['.hero-desc', 'A serene space with pure, wholesome plant-based cuisine — nourishing the body and bringing peace to the soul.'],
+      ['.hero-cta .btn-primary', 'View Menu'],
+      ['.hero-cta .btn-secondary', 'Our Story'],
+      ['.statement .section-eyebrow', 'Welcome'],
+      ['.statement-line', 'Beyond the green gate lies a world of serenity — where meals nourish the body, and <em>peace nourishes the soul</em>.'],
+      ['#about .section-eyebrow', 'The Thao Van Story'],
+      ['#about .section-title', 'From the garden, <em>to the table</em>'],
+      ['#about .section-desc', 'A good vegetarian meal begins long before it is served.'],
+      ['.story-title', 'Fresh produce every morning', 0],
+      ['.story-title', 'Cooking from the heart', 1],
+      ['.story-title', 'A tranquil table', 2],
+      ['.story-text p', 'Vegetables, mushrooms and grains are chosen fresh each morning from local farms and markets — no additives, no preservatives. Good vegan food starts with honest ingredients.', 0],
+      ['.story-text p', 'Slow cooking, gentle seasoning, careful plating — the way we cook for our own family, keeping the natural sweetness of vegetables intact.', 1],
+      ['.story-text p', 'An open garden space, quiet amid the city. A meal at Thao Van is not just to be full — it is to feel light.', 2],
+      ['.stat-label', 'Vegan dishes', 0], ['.stat-label', 'Drinks &amp; bar', 1],
+      ['.stat-label', 'Hours daily', 2], ['.stat-label', 'Days a week', 3],
+      ['#menu .section-eyebrow', 'Everyday Cuisine'],
+      ['#menu .section-title', 'Explore the <em>Menu</em>'],
+      ['#tab-food', 'Vegan Dishes'], ['#tab-drink', 'Drinks &amp; Bar'],
+      ['#gallery .section-eyebrow', 'Official Paper Menu'],
+      ['#gallery .section-title', 'Paper <em>Menu</em>'],
+      ['#gallery .section-desc', 'Tap any page below to zoom in and browse our official menu book.'],
+      ['#tintuc .section-eyebrow', 'From Our Fanpage'],
+      ['#tintuc .section-title', 'News &amp; <em>Happenings</em>'],
+      ['#tintuc .section-desc', 'New dishes, promotions and daily life at Thao Van Chay. Tap a photo to zoom and browse.'],
+      ['#tintuc .posts-cta a', 'Follow Our Facebook Page'],
+      ['#danhgia .section-eyebrow', 'What Guests Say'],
+      ['#danhgia .section-title', 'Reviews &amp; <em>Impressions</em>'],
+      ['#danhgia .posts-cta a', 'Read &amp; Write Reviews on Google'],
+      ['#contact .section-eyebrow', 'Visit Us'],
+      ['#contact .section-title', 'Contact &amp; <em>Map</em>'],
+      ['#contact .section-desc', 'Drop by for a cozy meal, or contact us in advance by phone, Zalo or our fanpage to book tables and vegan party trays.'],
+      ['.contact-card-title', 'Phone / Hotline', 0],
+      ['.contact-card-title', 'Zalo Chat', 1],
+      ['.contact-card-title', 'Facebook Fanpage', 2],
+      ['.contact-card-btn', 'Call Now', 0],
+      ['.contact-card-btn', 'Chat on Zalo', 1],
+      ['.contact-card-btn', 'Open Facebook', 2],
+      ['.contact-card-btn', 'Directions on Google Maps ➔', 3],
+      ['.cta-title', 'Ready for a peaceful <em>vegan feast</em>?'],
+      ['.cta-desc', 'Book a table ahead so we can prepare our best for your family — or pick your dishes right here and send the order via Zalo or Messenger.'],
+      ['.cta-actions .btn-primary', '📞 Call to Book a Table'],
+      ['.cta-actions .btn-secondary', '🛒 Order Online'],
+      ['.footer-title', 'Opening Hours', 0],
+      ['.footer-title', 'Restaurant Info', 1],
+      ['.footer-info-row', '⏱️ 07:00 – 20:00 daily', 0],
+      ['.footer-info-row', '📅 Open Monday – Sunday', 1],
+      ['.footer-info-row', '📞 Phone: 0917 003 898', 3],
+      ['.footer-about-text', 'Thao Van Chay brings wholesome vegetarian meals made from the heart — nourishing good health and peace of mind for your whole family.'],
+      ['.footer-bottom div', '© 2026 Thao Van Chay. All rights reserved.', 0],
+      ['.footer-bottom div', 'Vegetarian cuisine for health and inner peace.', 1]
+    ];
+    const I18N_ATTR_EN = [
+      ['#menu-search', 'placeholder', 'Search dishes...']
+    ];
+
+    const viCache = new Map();
+    const viAttrCache = new Map();
+
+    function setLang(lang) {
+      document.documentElement.lang = lang === 'en' ? 'en' : 'vi';
+      I18N_EN.forEach(([sel, html, idx]) => {
+        const el = document.querySelectorAll(sel)[idx || 0];
+        if (!el) return;
+        const key = sel + '|' + (idx || 0);
+        if (!viCache.has(key)) viCache.set(key, el.innerHTML);
+        el.innerHTML = lang === 'en' ? html : viCache.get(key);
+      });
+      I18N_ATTR_EN.forEach(([sel, attr, val]) => {
+        const el = document.querySelector(sel);
+        if (!el) return;
+        const key = sel + '|' + attr;
+        if (!viAttrCache.has(key)) viAttrCache.set(key, el.getAttribute(attr));
+        el.setAttribute(attr, lang === 'en' ? val : viAttrCache.get(key));
+      });
+      const btn = document.getElementById('lang-btn');
+      if (btn) btn.textContent = lang === 'en' ? 'VI' : 'EN';
+      localStorage.setItem('tvc-lang', lang);
+    }
+
+    document.getElementById('lang-btn').addEventListener('click', () => {
+      setLang(document.documentElement.lang === 'en' ? 'vi' : 'en');
+    });
+    if (localStorage.getItem('tvc-lang') === 'en') setLang('en');
+
+    // Đăng ký Service Worker cho PWA (thêm vào màn hình chính)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+
     // Initialize application on page load
     window.onload = () => {
       buildCategoryPills();
@@ -4122,6 +4365,7 @@
       updateCartBadge();
       renderCart();
       buildPostsSection();
+      buildReviews();
       initReveal();
       initStats();
       initHeroSlides();

@@ -51,3 +51,17 @@ const fbPosts = [
     link: "https://www.facebook.com/thaovanchay.vn/"
   }
 ];
+
+// ================================================================
+// ĐÁNH GIÁ HIỂN THỊ Ở MỤC "ĐÁNH GIÁ & CẢM NHẬN"
+// Thêm review thật từ Google Maps của quán: copy nguyên văn lời khách,
+// điền author (VD: "Chị Lan — khách Google") và stars: 1-5.
+// KHÔNG tự bịa đánh giá — chỉ dùng lời khách/báo chí có thật.
+// ================================================================
+const tvcReviews = [
+  {
+    author: "Ănchay.vn — chuyên trang ẩm thực chay",
+    source: "https://anchay.vn/dia-diem-an-chay/top-5-quan-chay-ngon-o-buon-ma-thuoc.html",
+    text: "Chủ quán tận tình, nêm nếm món ăn tỉ mỉ. Thực đơn đa dạng với những món chay chất lượng, trình bày đẹp mắt, hương vị hợp khẩu vị nhiều người."
+  }
+];
