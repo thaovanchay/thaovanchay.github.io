@@ -129,7 +129,7 @@
       font-family: var(--font-body);
       background-color: var(--bg);
       background-image: url("Hình/web/pattern-light.png");
-      background-size: 640px 640px;
+      background-size: 480px 480px;
       color: var(--text);
       line-height: 1.6;
       transition: var(--transition);
@@ -1675,7 +1675,11 @@
         height: 36px; /* Smaller, cleaner logo */
       }
       .logo-text {
-        font-size: 1.15rem; /* Symmetrical one-line text size */
+        font-size: 1.02rem;
+        white-space: nowrap;
+      }
+      .logo-link {
+        gap: 8px;
       }
       header {
         padding: 0;
@@ -2896,6 +2900,11 @@
       .review-text {
         font-size: 0.98rem;
       }
+      .posts-cta .btn-primary {
+        padding: 13px 22px;
+        font-size: 0.9rem;
+        white-space: nowrap;
+      }
 
       /* Thẻ liên hệ: 3 hàng mảnh (icon - tên - nút), ẩn mô tả dài */
       .contact-info-cards {
@@ -3261,7 +3270,7 @@
       <h2 class="section-title">Đánh Giá & <em>Cảm Nhận</em></h2>
       <div class="reviews-grid" id="reviews-grid"></div>
       <div class="posts-cta">
-        <a href="https://www.google.com/maps/place/Thao+Van+Vegetarian+Restaurant/@12.6939817,108.027543,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d9192ad0b1b:0xf04ecb3191c11e0b!8m2!3d12.6939817!4d108.0301179!16s%2Fg%2F11r10pr81w" target="_blank" class="btn-primary">Xem &amp; Viết Đánh Giá Trên Google</a>
+        <a href="https://www.google.com/maps/place/Thao+Van+Vegetarian+Restaurant/@12.6939817,108.027543,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d9192ad0b1b:0xf04ecb3191c11e0b!8m2!3d12.6939817!4d108.0301179!16s%2Fg%2F11r10pr81w" target="_blank" class="btn-primary">Đánh Giá Trên Google ★</a>
       </div>
     </div>
   </section>
@@ -4319,7 +4328,7 @@
       ['#tintuc .posts-cta a', 'Follow Our Facebook Page'],
       ['#danhgia .section-eyebrow', 'What Guests Say'],
       ['#danhgia .section-title', 'Reviews &amp; <em>Impressions</em>'],
-      ['#danhgia .posts-cta a', 'Read &amp; Write Reviews on Google'],
+      ['#danhgia .posts-cta a', 'Reviews on Google ★'],
       ['#contact .section-eyebrow', 'Visit Us'],
       ['#contact .section-title', 'Contact &amp; <em>Map</em>'],
       ['#contact .section-desc', 'Drop by for a cozy meal, or contact us in advance by phone, Zalo or our fanpage to book tables and vegan party trays.'],
