@@ -295,14 +295,17 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 22px;
+      margin: 0 28px;
+      flex-wrap: nowrap;
     }
 
     .nav-link {
       font-weight: 600;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.1px;
+      white-space: nowrap;
       position: relative;
       padding: 6px 0;
       opacity: 0.9;
@@ -1658,7 +1661,7 @@
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       nav {
         display: none;
       }
@@ -1666,8 +1669,11 @@
         display: flex;
       }
       .btn-book-nav {
-        display: none; /* Hide redundant desktop CTA button on mobile */
+        display: none; /* Nav gon: dung menu hamburger */
       }
+    }
+
+    @media (max-width: 768px) {
       .header-container {
         height: 56px; /* Ultra-sleek, slim header height */
       }
