@@ -1798,9 +1798,20 @@
       scroll-margin-top: 84px;
     }
 
-    /* ===== Active nav link (scrollspy) ===== */
+    /* ===== Tab view switching ===== */
+    body > [data-view] { animation: viewFade 0.5s ease both; }
+    @keyframes viewFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body > [data-view] { animation: none; }
+    }
     .nav-link.active {
       color: var(--accent-soft);
+    }
+    .mobile-nav-link.active {
+      color: var(--accent);
     }
 
     /* ===== Open / Closed status badge ===== */
@@ -3062,12 +3073,12 @@
 
       <!-- Desktop Nav -->
       <nav>
-        <a href="#" class="nav-link">Trang Chủ</a>
-        <a href="#about" class="nav-link">Câu Chuyện</a>
-        <a href="#menu" class="nav-link">Thực Đơn</a>
-        <a href="#gallery" class="nav-link">Menu Ảnh</a>
-        <a href="#tintuc" class="nav-link">Tin Tức</a>
-        <a href="#contact" class="nav-link">Liên Hệ</a>
+        <a href="#" class="nav-link" data-view="home">Trang Chủ</a>
+        <a href="#about" class="nav-link" data-view="story">Câu Chuyện</a>
+        <a href="#menu" class="nav-link" data-view="menu">Thực Đơn</a>
+        <a href="#tintuc" class="nav-link" data-view="news">Tin Tức</a>
+        <a href="#datban" class="nav-link" data-view="booking">Đặt Bàn</a>
+        <a href="#contact" class="nav-link" data-view="contact">Liên Hệ</a>
       </nav>
 
       <div class="header-actions">
@@ -3084,7 +3095,6 @@
           </svg>
         </button>
 
-        <a href="#datban" class="btn-book-nav">Đặt Bàn</a>
 
         <!-- Mobile Menu Trigger -->
         <button class="mobile-menu-btn" id="menu-open-btn" aria-label="Mở menu di động">
@@ -3099,17 +3109,16 @@
   <!-- MOBILE NAVIGATION DRAWER -->
   <div class="mobile-nav" id="mobile-nav">
     <button class="mobile-nav-close" id="menu-close-btn" aria-label="Đóng menu">✕</button>
-    <a href="#" class="mobile-nav-link" onclick="toggleMobileNav()">Trang Chủ</a>
-    <a href="#about" class="mobile-nav-link" onclick="toggleMobileNav()">Câu Chuyện</a>
-    <a href="#menu" class="mobile-nav-link" onclick="toggleMobileNav()">Thực Đơn</a>
-    <a href="#gallery" class="mobile-nav-link" onclick="toggleMobileNav()">Menu Ảnh</a>
-    <a href="#tintuc" class="mobile-nav-link" onclick="toggleMobileNav()">Tin Tức</a>
-    <a href="#datban" class="mobile-nav-link" onclick="toggleMobileNav()">Đặt Bàn</a>
-    <a href="#contact" class="mobile-nav-link" onclick="toggleMobileNav()">Liên Hệ</a>
+    <a href="#" class="mobile-nav-link" data-view="home" onclick="toggleMobileNav()">Trang Chủ</a>
+    <a href="#about" class="mobile-nav-link" data-view="story" onclick="toggleMobileNav()">Câu Chuyện</a>
+    <a href="#menu" class="mobile-nav-link" data-view="menu" onclick="toggleMobileNav()">Thực Đơn</a>
+    <a href="#tintuc" class="mobile-nav-link" data-view="news" onclick="toggleMobileNav()">Tin Tức</a>
+    <a href="#datban" class="mobile-nav-link" data-view="booking" onclick="toggleMobileNav()">Đặt Bàn</a>
+    <a href="#contact" class="mobile-nav-link" data-view="contact" onclick="toggleMobileNav()">Liên Hệ</a>
   </div>
 
   <!-- HERO WELCOME SECTION -->
-  <section class="hero">
+  <section class="hero" data-view="home">
     <div class="hero-slides" aria-hidden="true">
       <div class="hero-slide active" style="background-image: url('Hình/web/hero-khong-gian.jpg')"></div>
       <div class="hero-slide" data-bg="Hình/web/mam-tiec.jpg"></div>
@@ -3125,12 +3134,12 @@
         <a href="#about" class="btn-secondary">Tìm Hiểu Thêm</a>
       </div>
     </div>
-    <a href="#about" class="hero-scroll" aria-label="Cuộn xuống xem thêm"><span></span></a>
+    <a href="#statement" class="hero-scroll" aria-label="Cuộn xuống xem thêm"><span></span></a>
   </section>
 
 
   <!-- THRESHOLD STATEMENT (học Quique Dacosta) -->
-  <section class="statement">
+  <section class="statement" id="statement" data-view="home">
     <div class="container">
       <div class="section-eyebrow">Chào Mừng Bạn</div>
       <p class="statement-line">Bước qua cánh cổng xanh là một thế giới thanh tịnh — nơi bữa cơm nuôi thân, và <em>an nhiên nuôi tâm</em>.</p>
@@ -3138,7 +3147,7 @@
   </section>
 
   <!-- STORY SECTION: Tu vuon den ban an -->
-  <section class="about" id="about">
+  <section class="about" id="about" data-view="story">
     <div class="container">
       <div class="section-eyebrow">Câu Chuyện Thảo Vân</div>
       <h2 class="section-title">Từ vườn, <em>đến bàn ăn</em></h2>
@@ -3200,7 +3209,7 @@
   </section>
 
   <!-- INTERACTIVE MENU SECTION -->
-  <section class="menu-section" id="menu">
+  <section class="menu-section" id="menu" data-view="menu">
     <div class="container">
       <div class="section-eyebrow">Ẩm Thực Mỗi Ngày</div>
       <h2 class="section-title">Khám Phá <em>Thực Đơn</em></h2>
@@ -3253,7 +3262,7 @@
   </section>
 
   <!-- ORIGINAL VISUAL MENU LIGHTBOX SECTION -->
-  <section class="gallery-section" id="gallery">
+  <section class="gallery-section" id="gallery" data-view="menu">
     <div class="container">
       <div class="section-eyebrow">Menu Giấy Chính Thức</div>
       <h2 class="section-title">Ảnh <em>Menu Giấy</em></h2>
@@ -3277,7 +3286,7 @@
   </div>
 
   <!-- FANPAGE POSTS (TIN TỨC) SECTION -->
-  <section class="posts-section" id="tintuc">
+  <section class="posts-section" id="tintuc" data-view="news">
     <div class="container">
       <div class="section-eyebrow">Từ Fanpage</div>
       <h2 class="section-title">Tin Tức & <em>Hoạt Động</em></h2>
@@ -3291,7 +3300,7 @@
   </section>
 
   <!-- CONTACT & LOCATIONS MAP SECTION -->
-  <section class="contact-section" id="contact">
+  <section class="contact-section" id="contact" data-view="contact">
     <div class="container">
       <div class="section-eyebrow">Ghé Thăm Chúng Tôi</div>
       <h2 class="section-title">Liên Hệ & <em>Bản Đồ</em></h2>
@@ -3358,7 +3367,7 @@
   </section>
 
   <!-- REVIEWS SECTION -->
-  <section class="reviews-section" id="danhgia">
+  <section class="reviews-section" id="danhgia" data-view="home">
     <div class="container">
       <div class="section-eyebrow">Khách Nói Về Chúng Tôi</div>
       <h2 class="section-title">Đánh Giá & <em>Cảm Nhận</em></h2>
@@ -3370,7 +3379,7 @@
   </section>
 
   <!-- BOOKING SECTION (tham khảo viquekitchen.com/book-table) -->
-  <section class="booking-section" id="datban">
+  <section class="booking-section" id="datban" data-view="booking">
     <div class="container">
       <div class="section-eyebrow">Giữ Chỗ Trước</div>
       <h2 class="section-title">Đặt Bàn <em>Trước</em></h2>
@@ -3395,7 +3404,7 @@
   </section>
 
   <!-- CTA BANNER -->
-  <section class="cta-banner">
+  <section class="cta-banner" data-view="home">
     <div class="container">
       <div class="cta-inner">
         <h2 class="cta-title">Sẵn Sàng Cho Bữa Chay <em>Thanh Tịnh</em>?</h2>
@@ -4142,25 +4151,61 @@
     }
     setInterval(updateOpenStatus, 60000);
 
-    // === SCROLLSPY + BACK TO TOP ===
-    const spySectionIds = ['about', 'menu', 'gallery', 'tintuc', 'contact'];
+    // === BACK TO TOP + THANH TIẾN TRÌNH ===
     const backToTopBtn = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => {
-      let currentId = '';
-      spySectionIds.forEach(id => {
-        const sec = document.getElementById(id);
-        if (sec && window.scrollY >= sec.offsetTop - 130) currentId = id;
-      });
-      document.querySelectorAll('nav .nav-link').forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
-      });
       backToTopBtn.classList.toggle('show', window.scrollY > 600);
-
-      // Thanh tiến trình cuộn trên đầu trang
       const docEl = document.documentElement;
       const scrollable = docEl.scrollHeight - docEl.clientHeight;
       document.getElementById('scroll-progress').style.width =
         scrollable > 0 ? (window.scrollY / scrollable * 100) + '%' : '0%';
+    });
+
+    // === TAB VIEW: bấm mục nào chỉ hiện nội dung mục đó ===
+    const VIEW_OF = {
+      '': 'home', 'home': 'home', 'about': 'story', 'menu': 'menu',
+      'gallery': 'menu', 'tintuc': 'news', 'contact': 'contact',
+      'datban': 'booking', 'danhgia': 'home'
+    };
+
+    function showView(view) {
+      view = view || 'home';
+      document.querySelectorAll('body > [data-view]').forEach(el => {
+        const on = el.dataset.view === view;
+        el.style.display = on ? '' : 'none';
+        if (on) {
+          // chạy lại animation vào & hiện các phần tử reveal
+          el.style.animation = 'none';
+          void el.offsetWidth;
+          el.style.animation = '';
+          el.querySelectorAll('.reveal').forEach(r => r.classList.add('visible'));
+        }
+      });
+      document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(l => {
+        l.classList.toggle('active', l.dataset.view === view);
+      });
+      if (view === 'home' || view === 'story') animateStats();
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    function navigate(id) {
+      const view = VIEW_OF[id];
+      if (view === undefined) return false;
+      history.replaceState(null, '', id ? '#' + id : '#home');
+      showView(view);
+      return true;
+    }
+
+    // Chặn mọi link neo trong trang: nếu trỏ tới một tab thì đổi tab
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const id = a.getAttribute('href').slice(1);
+      if (VIEW_OF[id] !== undefined) {
+        e.preventDefault();
+        navigate(id);
+      }
+      // id khác (vd #statement) để trình duyệt tự cuộn trong tab hiện tại
     });
 
     // === SCROLL REVEAL ===
@@ -4186,37 +4231,30 @@
       });
     }
 
-    // === BỘ ĐẾM SỐ LIỆU (stats strip) ===
-    function initStats() {
+    // === BỘ ĐẾM SỐ LIỆU (stats strip) — chạy lại mỗi lần mở tab chứa nó ===
+    let statsAnimating = false;
+    function animateStats() {
       const foodStat = document.getElementById('stat-foods');
       const drinkStat = document.getElementById('stat-drinks');
       if (foodStat) foodStat.dataset.count = foods.length;
       if (drinkStat) drinkStat.dataset.count = drinks.length;
-
+      const stats = document.querySelectorAll('.stat-num');
+      if (!stats.length || statsAnimating) return;
       const reduceMotion = typeof window.matchMedia === 'function'
         && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      document.querySelectorAll('.stat-num').forEach(el => {
+      statsAnimating = true;
+      stats.forEach(el => {
         const target = parseInt(el.dataset.count, 10) || 0;
         const suffix = el.dataset.suffix || '';
-        if (reduceMotion) {
-          el.textContent = target + suffix;
-          return;
-        }
-        const counterObserver = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            counterObserver.unobserve(el);
-            const start = performance.now();
-            const duration = 1400;
-            const tick = now => {
-              const p = Math.min((now - start) / duration, 1);
-              el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
-              if (p < 1) requestAnimationFrame(tick);
-            };
-            requestAnimationFrame(tick);
-          });
-        }, { threshold: 0.4 });
-        counterObserver.observe(el);
+        if (reduceMotion) { el.textContent = target + suffix; return; }
+        const start = performance.now();
+        const duration = 1400;
+        const tick = now => {
+          const p = Math.min((now - start) / duration, 1);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+          if (p < 1) requestAnimationFrame(tick); else statsAnimating = false;
+        };
+        requestAnimationFrame(tick);
       });
     }
 
@@ -4465,10 +4503,9 @@
     // === SONG NGỮ VI/EN (phần giao diện tĩnh; tên món giữ tiếng Việt) ===
     const I18N_EN = [
       ['nav .nav-link', 'Home', 0], ['nav .nav-link', 'Our Story', 1], ['nav .nav-link', 'Menu', 2],
-      ['nav .nav-link', 'Photo Menu', 3], ['nav .nav-link', 'News', 4], ['nav .nav-link', 'Contact', 5],
+      ['nav .nav-link', 'News', 3], ['nav .nav-link', 'Book a Table', 4], ['nav .nav-link', 'Contact', 5],
       ['.mobile-nav-link', 'Home', 0], ['.mobile-nav-link', 'Our Story', 1], ['.mobile-nav-link', 'Menu', 2],
-      ['.mobile-nav-link', 'Photo Menu', 3], ['.mobile-nav-link', 'News', 4], ['.mobile-nav-link', 'Book a Table', 5], ['.mobile-nav-link', 'Contact', 6],
-      ['.btn-book-nav', 'Book a Table'],
+      ['.mobile-nav-link', 'News', 3], ['.mobile-nav-link', 'Book a Table', 4], ['.mobile-nav-link', 'Contact', 5],
       ['.hero-subtitle', 'Vegetarian Restaurant · Buon Ma Thuot'],
       ['.hero-desc', 'A serene space with pure, wholesome plant-based cuisine — nourishing the body and bringing peace to the soul.'],
       ['.hero-cta .btn-primary', 'View Menu'],
@@ -4622,9 +4659,11 @@
       buildReviews();
       initBooking();
       initReveal();
-      initStats();
       initHeroSlides();
       setupAppDeepLinks();
+      // Mở đúng tab theo hash (mặc định Trang Chủ)
+      const startId = location.hash.slice(1);
+      showView(VIEW_OF[startId] !== undefined ? VIEW_OF[startId] : 'home');
     };
   </script>
 </body>
