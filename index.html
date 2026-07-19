@@ -1189,19 +1189,34 @@
 
     /* === VISUAL MENU GALLERY === */
     .gallery-section {
-      padding: 100px 0;
+      padding: 80px 0;
       background-color: transparent;
     }
 
     .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      display: flex;
       gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 4px 14px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-light) transparent;
+    }
+    .gallery-grid::-webkit-scrollbar {
+      height: 6px;
+    }
+    .gallery-grid::-webkit-scrollbar-thumb {
+      background: var(--primary-light);
+      border-radius: 4px;
     }
 
     .gallery-item {
       position: relative;
+      flex: 0 0 auto;
+      width: 200px;
       aspect-ratio: 3 / 4;
+      scroll-snap-align: start;
       overflow: hidden;
       border-radius: var(--radius-sm);
       border: 1px solid var(--border);
@@ -2929,9 +2944,8 @@
       }
 
       /* Menu ảnh giấy: 3 cột thumbnail */
-      .gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
+      .gallery-item {
+        width: 140px;
       }
       .gallery-overlay {
         font-size: 0.7rem;
@@ -3243,7 +3257,7 @@
     <div class="container">
       <div class="section-eyebrow">Menu Giấy Chính Thức</div>
       <h2 class="section-title">Ảnh <em>Menu Giấy</em></h2>
-      <p class="section-desc">Bạn muốn xem cuốn menu giấy chính thức của Thảo Vân Chay? Hãy click vào các trang ảnh menu bên dưới để phóng to và lướt xem nhé.</p>
+      <p class="section-desc">Cuốn menu giấy chính thức của Thảo Vân Chay — vuốt ngang để xem toàn bộ, chạm vào một trang để phóng to.</p>
 
       <div class="gallery-grid" id="menu-gallery-grid">
         <!-- Populated dynamically by JS (Screenshot 76 to 95) -->
@@ -4477,7 +4491,7 @@
       ['#tab-food', 'Vegan Dishes'], ['#tab-drink', 'Drinks &amp; Bar'],
       ['#gallery .section-eyebrow', 'Official Paper Menu'],
       ['#gallery .section-title', 'Paper <em>Menu</em>'],
-      ['#gallery .section-desc', 'Tap any page below to zoom in and browse our official menu book.'],
+      ['#gallery .section-desc', 'Swipe sideways to browse; tap a page to zoom in.'],
       ['#tintuc .section-eyebrow', 'From Our Fanpage'],
       ['#tintuc .section-title', 'News &amp; <em>Happenings</em>'],
       ['#tintuc .section-desc', 'New dishes, promotions and daily life at Thao Van Chay. Tap a photo to zoom and browse.'],
