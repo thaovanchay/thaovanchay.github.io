@@ -949,7 +949,7 @@
     /* Menu Food Grid Card layout */
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
     }
 
@@ -1215,7 +1215,7 @@
       position: relative;
       flex: 0 0 auto;
       width: 200px;
-      aspect-ratio: 3 / 4;
+      aspect-ratio: 86 / 160;
       scroll-snap-align: start;
       overflow: hidden;
       border-radius: var(--radius-sm);
@@ -1656,6 +1656,7 @@
     @media (max-width: 1024px) {
       .lightbox-prev { left: -50px; }
       .lightbox-next { right: -50px; }
+      .menu-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (max-width: 900px) {
