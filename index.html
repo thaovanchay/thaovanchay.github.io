@@ -1805,19 +1805,19 @@
       width: 9px;
       height: 9px;
       border-radius: 50%;
-      background: #4ade80;
-      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+      background: #8fb573;
+      box-shadow: 0 0 0 0 rgba(143, 181, 115, 0.6);
       animation: pulseDot 2s infinite;
     }
     .open-status.closed .open-dot {
-      background: #f87171;
+      background: #c97662;
       animation: none;
       box-shadow: none;
     }
     @keyframes pulseDot {
-      0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6); }
-      70% { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+      0% { box-shadow: 0 0 0 0 rgba(143, 181, 115, 0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(143, 181, 115, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(143, 181, 115, 0); }
     }
 
     /* ===== Scroll reveal ===== */
@@ -3070,7 +3070,7 @@
           </svg>
         </button>
 
-        <a href="#contact" class="btn-book-nav">Liên Hệ Ngay</a>
+        <a href="#datban" class="btn-book-nav">Đặt Bàn</a>
 
         <!-- Mobile Menu Trigger -->
         <button class="mobile-menu-btn" id="menu-open-btn" aria-label="Mở menu di động">
@@ -3090,6 +3090,7 @@
     <a href="#menu" class="mobile-nav-link" onclick="toggleMobileNav()">Thực Đơn</a>
     <a href="#gallery" class="mobile-nav-link" onclick="toggleMobileNav()">Menu Ảnh</a>
     <a href="#tintuc" class="mobile-nav-link" onclick="toggleMobileNav()">Tin Tức</a>
+    <a href="#datban" class="mobile-nav-link" onclick="toggleMobileNav()">Đặt Bàn</a>
     <a href="#contact" class="mobile-nav-link" onclick="toggleMobileNav()">Liên Hệ</a>
   </div>
 
@@ -3097,8 +3098,8 @@
   <section class="hero">
     <div class="hero-slides" aria-hidden="true">
       <div class="hero-slide active" style="background-image: url('Hình/web/hero-khong-gian.jpg')"></div>
-      <div class="hero-slide" style="background-image: url('Hình/web/mam-tiec.jpg')"></div>
-      <div class="hero-slide" style="background-image: url('Hình/web/hop-mat.jpg')"></div>
+      <div class="hero-slide" data-bg="Hình/web/mam-tiec.jpg"></div>
+      <div class="hero-slide" data-bg="Hình/web/hop-mat.jpg"></div>
     </div>
     <div class="hero-content">
       <div class="hero-subtitle">Nhà Hàng Chay Buôn Ma Thuột</div>
@@ -3546,7 +3547,7 @@
     let currentTab = 'food'; // 'food' or 'drink'
     let activeCategory = 'Tất cả';
     let showDelivery = false;
-    let isMenuExpanded = false;
+    let menuVisibleCount = 0; // 0 = thu gọn về mặc định (3 desktop / 4 mobile)
 
     // Helper functions
     function removeAccents(str) {
@@ -3665,7 +3666,7 @@
     function changeMenuTab(tab) {
       currentTab = tab;
       activeCategory = 'Tất cả';
-      isMenuExpanded = false; // Reset expansion on tab change
+      menuVisibleCount = 0; // Thu gọn lại khi đổi tab
       
       // Update Tab button visuals
       const btnFood = document.getElementById('tab-food');
@@ -3698,7 +3699,7 @@
         pill.textContent = cat === 'Tất cả' ? `🌱 ${t('Tất cả', 'All')}` : `${categoryEmoji[cat] || '🌱'} ${catLabel(cat)}`;
         pill.onclick = () => {
           activeCategory = cat;
-          isMenuExpanded = false; // Reset expansion on category change
+          menuVisibleCount = 0; // Thu gọn lại khi đổi danh mục
           
           // Update visual active classes
           document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
@@ -3736,12 +3737,9 @@
       // Check if search query is active
       const isSearching = query.length > 0;
       const collapsedCount = collapsedItemCount();
-      const showExpandButton = filtered.length > collapsedCount && !isSearching;
-
-      // Determine array slices
-      const itemsToShow = showExpandButton && !isMenuExpanded
-        ? filtered.slice(0, collapsedCount)
-        : filtered;
+      const visibleCount = Math.max(menuVisibleCount, collapsedCount);
+      // Tìm kiếm thì hiện hết kết quả; bình thường hiện dần theo trang
+      const itemsToShow = isSearching ? filtered : filtered.slice(0, visibleCount);
 
       itemsToShow.forEach(item => {
         const card = document.createElement('div');
@@ -3841,34 +3839,34 @@
         });
       });
 
-      // Render expand/collapse button
-      if (showExpandButton) {
-        if (!isMenuExpanded) {
-          expandContainer.innerHTML = `
-            <button class="btn-expand-menu" onclick="toggleMenuExpansion(true)">
-              <span>${t('Xem thêm thực đơn', 'Show full menu')}</span> 🗎
-            </button>
-          `;
-        } else {
-          expandContainer.innerHTML = `
-            <button class="btn-expand-menu" onclick="toggleMenuExpansion(false)">
-              <span>${t('Thu gọn thực đơn', 'Collapse menu')}</span> 🗎
-            </button>
-          `;
-        }
-      } else {
+      // Nút phân trang: xem thêm 9 món mỗi lần / thu gọn khi đã hiện hết
+      if (isSearching || filtered.length <= collapsedCount) {
         expandContainer.innerHTML = '';
+      } else if (itemsToShow.length < filtered.length) {
+        const remaining = filtered.length - itemsToShow.length;
+        const step = Math.min(9, remaining);
+        expandContainer.innerHTML = `
+          <button class="btn-expand-menu" onclick="menuShowMore()">
+            <span>${t(`Xem thêm ${step} món (còn ${remaining})`, `Show ${step} more (${remaining} left)`)}</span> 🗎
+          </button>`;
+      } else {
+        expandContainer.innerHTML = `
+          <button class="btn-expand-menu" onclick="menuCollapse()">
+            <span>${t('Thu gọn thực đơn', 'Collapse menu')}</span> 🗎
+          </button>`;
       }
     }
 
-    // Toggle menu expansion with smooth scroll back to menu head
-    function toggleMenuExpansion(expand) {
-      isMenuExpanded = expand;
+    // Phân trang thực đơn: mỗi lần xem thêm 9 món
+    function menuShowMore() {
+      menuVisibleCount = Math.max(menuVisibleCount, collapsedItemCount()) + 9;
       filterMenu();
-      
-      if (!expand) {
-        document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
-      }
+    }
+
+    function menuCollapse() {
+      menuVisibleCount = 0;
+      filterMenu();
+      document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
     }
 
     // === ORIGINAL IMAGE MENU LIGHTBOX ENGINE ===
@@ -4455,7 +4453,8 @@
       ['nav .nav-link', 'Home', 0], ['nav .nav-link', 'Our Story', 1], ['nav .nav-link', 'Menu', 2],
       ['nav .nav-link', 'Photo Menu', 3], ['nav .nav-link', 'News', 4], ['nav .nav-link', 'Contact', 5],
       ['.mobile-nav-link', 'Home', 0], ['.mobile-nav-link', 'Our Story', 1], ['.mobile-nav-link', 'Menu', 2],
-      ['.mobile-nav-link', 'Photo Menu', 3], ['.mobile-nav-link', 'News', 4], ['.mobile-nav-link', 'Contact', 5],
+      ['.mobile-nav-link', 'Photo Menu', 3], ['.mobile-nav-link', 'News', 4], ['.mobile-nav-link', 'Book a Table', 5], ['.mobile-nav-link', 'Contact', 6],
+      ['.btn-book-nav', 'Book a Table'],
       ['.hero-subtitle', 'Vegetarian Restaurant · Buon Ma Thuot'],
       ['.hero-desc', 'A serene space with pure, wholesome plant-based cuisine — nourishing the body and bringing peace to the soul.'],
       ['.hero-cta .btn-primary', 'View Menu'],
@@ -4595,6 +4594,10 @@
 
     // Initialize application on page load
     window.onload = () => {
+      // Nạp muộn ảnh hero 2-3 (không chặn lần vẽ đầu tiên)
+      document.querySelectorAll('.hero-slide[data-bg]').forEach(el => {
+        el.style.backgroundImage = "url('" + el.dataset.bg + "')";
+      });
       buildCategoryPills();
       filterMenu();
       buildGalleryGrid();
