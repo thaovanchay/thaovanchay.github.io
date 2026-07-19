@@ -2454,6 +2454,70 @@
       text-decoration: underline;
     }
 
+    /* ===== Đặt bàn ===== */
+    .booking-section {
+      padding: 90px 0;
+      background: transparent;
+    }
+    .booking-card {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 36px;
+    }
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 18px;
+      margin-bottom: 8px;
+    }
+    .bk-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+      margin-bottom: 6px;
+    }
+    .bk-field input,
+    .bk-field select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+    }
+    .bk-field input:focus,
+    .bk-field select:focus {
+      outline: 2px solid var(--primary-light);
+      border-color: transparent;
+    }
+    .booking-card .order-send-row {
+      max-width: 460px;
+      margin: 10px auto 8px;
+    }
+    .booking-call {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .booking-call strong {
+      color: var(--primary);
+    }
+    :root.dark-theme .booking-call strong,
+    :root.auto-theme .booking-call strong {
+      color: var(--accent);
+    }
+    .booking-card .order-hint {
+      text-align: center;
+    }
+
     /* ===== Nút đổi ngôn ngữ ===== */
     .lang-toggle {
       border: 1px solid rgba(255, 255, 255, 0.35);
@@ -2906,6 +2970,15 @@
       .review-text {
         font-size: 0.98rem;
       }
+      .booking-section {
+        padding: 56px 0;
+      }
+      .booking-card {
+        padding: 20px 14px;
+      }
+      .booking-grid {
+        gap: 12px 10px;
+      }
       .posts-cta .btn-primary {
         padding: 13px 22px;
         font-size: 0.9rem;
@@ -3281,6 +3354,31 @@
     </div>
   </section>
 
+  <!-- BOOKING SECTION (tham khảo viquekitchen.com/book-table) -->
+  <section class="booking-section" id="datban">
+    <div class="container">
+      <div class="section-eyebrow">Giữ Chỗ Trước</div>
+      <h2 class="section-title">Đặt Bàn <em>Trước</em></h2>
+      <p class="section-desc">Cho Thảo Vân biết trước buổi ghé thăm — chúng tôi sẽ chuẩn bị bàn chu đáo nhất, và mâm cỗ trọn vẹn nếu bạn đặt tiệc.</p>
+      <div class="booking-card">
+        <div class="booking-grid">
+          <div class="bk-field"><label for="bk-name">Tên của bạn *</label><input id="bk-name" type="text" placeholder="Nguyễn Văn A"></div>
+          <div class="bk-field"><label for="bk-phone">Số điện thoại *</label><input id="bk-phone" type="tel" placeholder="09xx xxx xxx"></div>
+          <div class="bk-field"><label for="bk-date">Ngày đến *</label><input id="bk-date" type="date"></div>
+          <div class="bk-field"><label for="bk-time">Giờ đến *</label><select id="bk-time"></select></div>
+          <div class="bk-field"><label for="bk-guests">Số khách *</label><input id="bk-guests" type="number" min="1" max="60" placeholder="4"></div>
+          <div class="bk-field"><label for="bk-note">Ghi chú</label><input id="bk-note" type="text" placeholder="Sinh nhật, đặt tiệc, cần trang trí..."></div>
+        </div>
+        <p class="order-hint">Yêu cầu đặt bàn sẽ được <strong>tự động sao chép</strong> — bạn chỉ cần <strong>dán vào khung chat</strong> rồi gửi, quán xác nhận trong ít phút.</p>
+        <div class="order-send-row">
+          <button class="order-send-btn send-zalo" type="button" onclick="sendBooking('zalo')">💬 Gửi qua Zalo</button>
+          <button class="order-send-btn send-messenger" type="button" onclick="sendBooking('messenger')">💬 Gửi Messenger</button>
+        </div>
+        <div class="booking-call"><a href="tel:0917003898">Hoặc gọi trực tiếp: <strong>0917 003 898</strong></a></div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA BANNER -->
   <section class="cta-banner">
     <div class="container">
@@ -3288,7 +3386,7 @@
         <h2 class="cta-title">Sẵn Sàng Cho Bữa Chay <em>Thanh Tịnh</em>?</h2>
         <p class="cta-desc">Đặt bàn trước để Thảo Vân Chay chuẩn bị chu đáo nhất cho gia đình bạn — hoặc chọn món và gửi đơn ngay trên website, quán nhận qua Zalo/Messenger.</p>
         <div class="cta-actions">
-          <a href="tel:0917003898" class="btn-primary">📞 Gọi Đặt Bàn Ngay</a>
+          <a href="#datban" class="btn-primary">🍽️ Đặt Bàn Ngay</a>
           <button class="btn-secondary" type="button" onclick="toggleCart(true)">🛒 Đặt Món Online</button>
         </div>
       </div>
@@ -4299,6 +4397,59 @@
       }, 6000);
     }
 
+    // === ĐẶT BÀN ===
+    function initBooking() {
+      const timeSel = document.getElementById('bk-time');
+      if (!timeSel || timeSel.options.length) return;
+      for (let h = 7; h <= 19; h++) {
+        ['00', '30'].forEach(m => {
+          const v = String(h).padStart(2, '0') + ':' + m;
+          const opt = document.createElement('option');
+          opt.value = v; opt.textContent = v;
+          timeSel.appendChild(opt);
+        });
+      }
+      timeSel.value = '11:00';
+      const dateEl = document.getElementById('bk-date');
+      dateEl.min = new Date().toISOString().slice(0, 10);
+    }
+
+    function composeBookingText() {
+      const name = document.getElementById('bk-name').value.trim();
+      const phone = document.getElementById('bk-phone').value.trim();
+      const date = document.getElementById('bk-date').value;
+      const time = document.getElementById('bk-time').value;
+      const guests = document.getElementById('bk-guests').value;
+      const note = document.getElementById('bk-note').value.trim();
+      const [y, mo, d] = date.split('-');
+      const lines = ['🌿 ĐẶT BÀN — THẢO VÂN CHAY', ''];
+      lines.push(`👤 Tên: ${name}`);
+      lines.push(`📞 SĐT: ${phone}`);
+      lines.push(`📅 Ngày: ${d}/${mo}/${y} · ⏰ ${time}`);
+      lines.push(`👥 Số khách: ${guests}`);
+      if (note) lines.push(`✏️ Ghi chú: ${note}`);
+      return lines.join('\n');
+    }
+
+    function sendBooking(channel) {
+      const missing = !document.getElementById('bk-name').value.trim()
+        || !document.getElementById('bk-phone').value.trim()
+        || !document.getElementById('bk-date').value
+        || !document.getElementById('bk-guests').value;
+      if (missing) {
+        showToast(t('Vui lòng điền đủ tên, SĐT, ngày và số khách nhé!', 'Please fill in your name, phone, date and number of guests!'));
+        return;
+      }
+      copyText(composeBookingText());
+      if (channel === 'zalo') {
+        window.open('https://zalo.me/0917003898', '_blank');
+        showToast(t('Đã sao chép yêu cầu đặt bàn — DÁN vào Zalo rồi gửi nhé!', 'Booking request copied — PASTE it into Zalo and send!'));
+      } else if (channel === 'messenger') {
+        window.open('https://m.me/thaovanchay.vn', '_blank');
+        showToast(t('Đã sao chép yêu cầu đặt bàn — DÁN vào Messenger rồi gửi nhé!', 'Booking request copied — PASTE it into Messenger and send!'));
+      }
+    }
+
     // === SONG NGỮ VI/EN (phần giao diện tĩnh; tên món giữ tiếng Việt) ===
     const I18N_EN = [
       ['nav .nav-link', 'Home', 0], ['nav .nav-link', 'Our Story', 1], ['nav .nav-link', 'Menu', 2],
@@ -4347,7 +4498,20 @@
       ['.contact-card-btn', 'Directions on Google Maps ➔', 3],
       ['.cta-title', 'Ready for a peaceful <em>vegan feast</em>?'],
       ['.cta-desc', 'Book a table ahead so we can prepare our best for your family — or pick your dishes right here and send the order via Zalo or Messenger.'],
-      ['.cta-actions .btn-primary', '📞 Call to Book a Table'],
+      ['.cta-actions .btn-primary', '🍽️ Book a Table'],
+      ['#datban .section-eyebrow', 'Reserve Ahead'],
+      ['#datban .section-title', 'Book a <em>Table</em>'],
+      ['#datban .section-desc', 'Tell us before you visit — we will have your table ready, and a full feast prepared if you book a party.'],
+      ['.bk-field label', 'Your name *', 0],
+      ['.bk-field label', 'Phone number *', 1],
+      ['.bk-field label', 'Date *', 2],
+      ['.bk-field label', 'Time *', 3],
+      ['.bk-field label', 'Guests *', 4],
+      ['.bk-field label', 'Note', 5],
+      ['.booking-card .order-hint', 'Your booking request will be <strong>auto-copied</strong> — just <strong>paste it into the chat</strong> and send. We confirm within minutes.'],
+      ['.booking-card .send-zalo', '💬 Send via Zalo'],
+      ['.booking-card .send-messenger', '💬 Send via Messenger'],
+      ['.booking-call a', 'Or call us directly: <strong>0917 003 898</strong>'],
       ['.cta-actions .btn-secondary', '🛒 Order Online'],
       ['.footer-title', 'Opening Hours', 0],
       ['.footer-title', 'Restaurant Info', 1],
@@ -4378,6 +4542,8 @@
     ];
     const I18N_ATTR_EN = [
       ['#menu-search', 'placeholder', 'Search dishes...'],
+      ['#bk-name', 'placeholder', 'Your name'],
+      ['#bk-note', 'placeholder', 'Birthday, party, decorations...'],
       ['#order-address', 'placeholder', 'Delivery address...'],
       ['#order-name', 'placeholder', 'Your name'],
       ['#order-phone', 'placeholder', 'Phone number'],
@@ -4437,6 +4603,7 @@
       renderCart();
       buildPostsSection();
       buildReviews();
+      initBooking();
       initReveal();
       initStats();
       initHeroSlides();
