@@ -19,6 +19,7 @@ scratch/
 !posts.js
 !manifest.webmanifest
 !sw.js
+!audit.html
 !.gitignore
 
 # Whitelist the image assets folder and all its contents
